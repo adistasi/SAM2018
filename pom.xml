@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>checkers-Spark</artifactId>
-  <name>Web Checkers a'la Spark/Java8</name>
-  <description>Checkers game with a Spark and raw Java 8 architecture.</description>
+  <artifactId>SAM2018</artifactId>
+  <name>SAM2018 a'la Spark/Java8</name>
+  <description>SAM2018 System with a Spark and raw Java 8 architecture.</description>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
@@ -89,7 +89,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>com.webcheckers.Application</mainClass>
+          <mainClass>com.SAM2018.Application</mainClass>
           <arguments>
           </arguments>
         </configuration>
