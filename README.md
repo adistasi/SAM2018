@@ -1,4 +1,4 @@
-#SAM2018
+# SAM2018
 
 An online Conference file submission management system run in Java 8 and Spark.
 
@@ -13,14 +13,14 @@ An online Conference file submission management system run in Java 8 and Spark.
 - Raseshwari Pulle
 
 
-##Prerequisites
+## Prerequisites
 
 - Java 8
 
 - Maven
 
 
-##How to run it
+## How to run it
 
 1. Clone the repository and go to the root directory.
 
@@ -31,7 +31,7 @@ An online Conference file submission management system run in Java 8 and Spark.
 4. Start a game and begin playing.
 
 
-##License
+## License
 MIT License
 
 See LICENSE for details.
