@@ -5,7 +5,7 @@
   <groupId>com.example</groupId>
   <artifactId>SAM2018</artifactId>
   <name>SAM2018 a'la Spark/Java8</name>
-  <description>SAM2018 System with a Spark and raw Java 8 architecture.</description>
+  <description>SAM2018 with a Spark and raw Java 8 architecture.</description>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
