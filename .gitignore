@@ -1,0 +1,20 @@
+# Build/Maven #
+###############
+**/target/
+**/node_modules/
+
+# Eclipse #
+###########
+.project
+.classpath
+.settings
+**/bin/
+.metadata/
+# Spring #
+############
+**/.springBeans
+
+# IntelliJ #
+############
+.idea/
+*.iml
