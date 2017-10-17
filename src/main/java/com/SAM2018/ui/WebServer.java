@@ -1,6 +1,8 @@
 package com.SAM2018.ui;
 
 import static spark.Spark.*;
+
+import com.SAM2018.appl.PaperManager;
 import spark.TemplateEngine;
 
 
@@ -52,6 +54,7 @@ public class WebServer {
   //
 
   private final TemplateEngine templateEngine;
+  private final PaperManager paperManager;
 
   //
   // Constructor
@@ -60,12 +63,12 @@ public class WebServer {
   /**
    * The constructor for the Web Server.
    *
-   * @param templateEngine
-   *    The default {@link TemplateEngine} to render views.
+   * @param _paperManager The default {@link PaperManager} to manage state)
+   * @param _templateEngine The default {@link TemplateEngine} to render views.
    */
-  public WebServer(
-      final TemplateEngine templateEngine) {
-    this.templateEngine = templateEngine;
+  public WebServer(final PaperManager _paperManager, final TemplateEngine _templateEngine) {
+    this.paperManager = _paperManager;
+    this.templateEngine = _templateEngine;
   }
 
   //
@@ -120,6 +123,12 @@ public class WebServer {
 
     // Shows the SAM game Home page.
     get(HOME_URL, new GetHomeRoute(), templateEngine);
+
+    //Show Submit Paper Page
+    get("/submitPaper", new GetSubmitPaperRoute(), templateEngine);
+
+    //Lets a user submit a paper to the SAM System
+    post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
 
   }
 

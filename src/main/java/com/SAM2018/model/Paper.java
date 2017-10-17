@@ -6,14 +6,14 @@ import java.util.List;
 public class Paper {
 
     //Attributes
-    private List<User> authors;
+    private List<String> authors;
     private User contactAuthor;
     private String title;
     private String format;
     private int version;
     private File paperUpload;
 
-    public Paper(List<User> _authors, User _contactAuthor, String _title, String _format, int _version, File _paperUpload) {
+    public Paper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, File _paperUpload) {
         this.authors = _authors;
         this.contactAuthor = _contactAuthor;
         this.title = _title;
@@ -22,7 +22,7 @@ public class Paper {
         this.paperUpload = _paperUpload;
     }
 
-    public List<User> getAuthors() {
+    public List<String> getAuthors() {
         return authors;
     }
 
