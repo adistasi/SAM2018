@@ -13,7 +13,7 @@ import spark.TemplateViewRoute;
  *
  * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
-public class HomeController implements TemplateViewRoute {
+public class GetHomeRoute implements TemplateViewRoute {
 
   @Override
   public ModelAndView handle(Request request, Response response) {

@@ -119,7 +119,7 @@ public class WebServer {
     //// code clean; using small classes.
 
     // Shows the SAM game Home page.
-    get(HOME_URL, new HomeController(), templateEngine);
+    get(HOME_URL, new GetHomeRoute(), templateEngine);
 
   }
 
