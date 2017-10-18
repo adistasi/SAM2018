@@ -6,6 +6,7 @@ import java.util.List;
 public class Paper {
 
     //Attributes
+    private int paperID;
     private List<String> authors;
     private User contactAuthor;
     private String title;
@@ -13,13 +14,18 @@ public class Paper {
     private int version;
     private File paperUpload;
 
-    public Paper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, File _paperUpload) {
+    public Paper(int _paperID, List<String> _authors, User _contactAuthor, String _title, String _format, int _version, File _paperUpload) {
+        this.paperID = _paperID;
         this.authors = _authors;
         this.contactAuthor = _contactAuthor;
         this.title = _title;
         this.format = _format;
         this.version = _version;
         this.paperUpload = _paperUpload;
+    }
+
+    public int getPaperID() {
+        return paperID;
     }
 
     public List<String> getAuthors() {
