@@ -24,10 +24,10 @@ public class PostRegisterController implements TemplateViewRoute {
         String password = request.queryParams("password");
         String validPassword = request.queryParams("validPassword");
 
-        //TODO - Issue with validation
-        if (password == validPassword) {
+        if (password.equals(validPassword)) {
             User user = new Submitter(username, password, firstName, lastName);
             PaperManager.addUser(user);
+            vm.put("title","Login");
             return new ModelAndView(vm, "login.ftl");
         }
         else{
