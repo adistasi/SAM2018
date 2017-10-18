@@ -25,8 +25,6 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
-        paperManager.initUsersForTest();
-
         Map<String, Object> vm = new HashMap<>();
         Session session = request.session();
         vm.put("title", "Submit Paper");
