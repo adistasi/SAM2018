@@ -10,13 +10,26 @@
 
     <h1>SAM 2018 Home Page</h1>
 
-    <div class="navigation">
-        <a href="/">my home</a>
-    </div>
 
-    <div class="body">
-        <p>Welcome to the world of SAM 2018.</p>
-    </div>
+
+    <form class="form-register" method="POST" action="/login">
+        <div class="form-group">
+            <label for="name">User_Name</label>
+            <input type="text"
+                   class="form-group"
+                   id="name"
+                   name="name"
+                   placeholder="Enter a user name " required>
+
+            <label for="Password">Password</label>
+            <input type="password"
+                   class="form-control"
+                   id="password"
+                   name="password"
+                   placeholder="Enter your password" required>
+
+            <button type="submit" class="btn btn-default"> Login</button>
+    </form>
 
 </div>
 </body>
