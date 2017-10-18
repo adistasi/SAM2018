@@ -23,9 +23,7 @@ public class PostLoginController implements TemplateViewRoute{
         if(PaperManager.userExists(username)){
             User user = PaperManager.getUser(username);
             if (user.getPassword() == password){
-                return null;
-                // TODO- specify which page it will redirect to
-
+                return new ModelAndView(vm, "home.ftl");
             }
             else {
                 vm.put("title","Login");
