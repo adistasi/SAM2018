@@ -12,6 +12,7 @@ public class GetSubmitPaperRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Submit Paper");
         return new ModelAndView(vm , "submitPaper.ftl");

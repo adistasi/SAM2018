@@ -25,12 +25,13 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
-        paperManager.initForTest();
+        paperManager.initUsersForTest();
 
         Map<String, Object> vm = new HashMap<>();
         Session session = request.session();
         vm.put("title", "Submit Paper");
 
+        //TODO: VALIDATION
         String auth1 = request.queryParams("author1");
         String auth2 = request.queryParams("author2");
         String auth3 = request.queryParams("author3");
@@ -42,6 +43,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
 
         paperManager.addPaper(authors, paperManager.getContactAuthorByUsername(auth1), title, format, 1, file);
         paperManager.printPapersData();
+        paperManager.savePapers();
         return new ModelAndView(vm , "submitPaper.ftl");
     }
 }

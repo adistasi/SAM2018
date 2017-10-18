@@ -46,8 +46,12 @@ public abstract class User {
         return permissionLevel;
     }
 
-    public List<Paper> viewSubmissions() {
+    public List<Paper> getSubmissions() {
         return submittedPapers;
+    }
+
+    public void addPaperToSubmissions(Paper _paper) {
+        submittedPapers.add(_paper);
     }
 
     //Not 100% sure these should go here

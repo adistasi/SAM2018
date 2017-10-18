@@ -1,0 +1,4 @@
+=====USERS=====
+add5980|||class com.SAM2018.model.Admin|||pass|||Andy|||DiStasi|||
+microMan|||class com.SAM2018.model.PCM|||pass|||Bill|||Gates|||
+username|||class com.SAM2018.model.Submitter|||pass|||Test|||User|||
