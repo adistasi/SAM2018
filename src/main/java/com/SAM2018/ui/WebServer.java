@@ -127,10 +127,10 @@ public class WebServer {
     get(HOME_URL, new GetHomeRoute(), templateEngine);
 
     //Show Submit Paper Page
-//    get("/submitPaper", new GetSubmitPaperRoute(), templateEngine);
+    get("/submitPaper", new GetSubmitPaperRoute(), templateEngine);
 
     //Lets a user submit a paper to the SAM System
-//    post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
+    post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
 
     // Shows the Login Page
     get(LOGIN_URL, new GetLoginController(), templateEngine);
