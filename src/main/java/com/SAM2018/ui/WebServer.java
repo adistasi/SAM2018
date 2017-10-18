@@ -1,7 +1,6 @@
 package com.SAM2018.ui;
 
 import static spark.Spark.*;
-
 import com.SAM2018.appl.PaperManager;
 import spark.TemplateEngine;
 
@@ -39,7 +38,6 @@ import spark.TemplateEngine;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class WebServer {
-
   //
   // Constants
   //
@@ -69,6 +67,7 @@ public class WebServer {
   public WebServer(final PaperManager _paperManager, final TemplateEngine _templateEngine) {
     this.paperManager = _paperManager;
     this.templateEngine = _templateEngine;
+
   }
 
   //
@@ -88,39 +87,6 @@ public class WebServer {
     // Configuration to serve static files
     staticFileLocation("/public");
 
-    //// Setting any route (or filter) in Spark triggers initialization of the
-    //// embedded Jetty web server.
-
-    //// A route is set for a request verb by specifying the path for the
-    //// request, and the function callback (request, response) -> {} to
-    //// process the request. The order that the routes are defined is
-    //// important. The first route (request-path combination) that matches
-    //// is the one which is invoked. Additional documentation is at
-    //// http://sparkjava.com/documentation.html and in Spark tutorials.
-
-    //// Each route (processing function) will check if the request is valid
-    //// from the client that made the request. If it is valid, the route
-    //// will extract the relevant data from the request and pass it to the
-    //// application object delegated with executing the request. When the
-    //// delegate completes execution of the request, the route will create
-    //// the parameter map that the response template needs. The data will
-    //// either be in the value the delegate returns to the route after
-    //// executing the request, or the route will query other application
-    //// objects for the data needed.
-
-    //// FreeMarker defines the HTML response using templates. Additional
-    //// documentation is at
-    //// http://freemarker.org/docs/dgui_quickstart_template.html.
-    //// The Spark FreeMarkerEngine lets you pass variable values to the
-    //// template via a map. Additional information is in online
-    //// tutorials such as
-    //// http://benjamindparrish.azurewebsites.net/adding-freemarker-to-java-spark/.
-
-    //// These route definitions are examples. You will define the routes
-    //// that are appropriate for the HTTP client interface that you define.
-    //// Create separate Route classes to handle each route; this keeps your
-    //// code clean; using small classes.
-
     // Shows the SAM game Home page.
     get(HOME_URL, new GetHomeRoute(), templateEngine);
 
@@ -129,7 +95,5 @@ public class WebServer {
 
     //Lets a user submit a paper to the SAM System
     post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
-
   }
-
 }

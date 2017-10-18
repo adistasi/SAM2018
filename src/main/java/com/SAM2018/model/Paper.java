@@ -11,9 +11,10 @@ public class Paper {
     private String title;
     private String format;
     private int version;
-    private File paperUpload;
+    //private File paperUpload;
+    private String paperUpload;
 
-    public Paper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, File _paperUpload) {
+    public Paper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
         this.authors = _authors;
         this.contactAuthor = _contactAuthor;
         this.title = _title;
@@ -42,7 +43,7 @@ public class Paper {
         return version;
     }
 
-    public File getPaperUpload() {
+    public String getPaperUpload() {
         return paperUpload;
     }
 }
