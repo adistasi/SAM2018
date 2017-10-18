@@ -3,6 +3,7 @@ package com.SAM2018.appl;
 import com.SAM2018.model.*;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ public class PaperManager {
     private List<Paper> papers = new ArrayList<>();
 
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
-        Paper paper = new Paper(_authors, _contactAuthor, _title, _format, _version, _paperUpload);
+        Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
 
         papers.add(paper);
     }
@@ -40,6 +41,25 @@ public class PaperManager {
         return users.get(_username);
     }
 
+    public void savePapers() {
+        try {
+            FileWriter writer = new FileWriter("output.txt");
+            writer.write("=====PAPERS=====");
+            for(Paper p : papers) {
+                String authors = "";
+                for(String author : p.getAuthors()) {
+                    authors.concat(author + ",");
+                }
+                authors.substring(0, authors.length()-1); //trim off extra comma at end
+                writer.write(authors);
+                writer.write(p.getContactAuthor().getUsername());
+                writer.write(p.getTitle());
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+
     //TEST STUFF!
     public void initForTest() {
         users.put("add5980", new Admin("add5980", "pass", "Andy", "DiStasi"));
@@ -51,6 +71,7 @@ public class PaperManager {
         System.out.println("THERE ARE " + papers.size() + " PAPERS");
         for(Paper pape : papers) {
             System.out.println("----------");
+            System.out.println("Paper ID: " + pape.getPaperID());
             for(String a : pape.getAuthors()) {
                 System.out.println("Author: " + a);
             }
