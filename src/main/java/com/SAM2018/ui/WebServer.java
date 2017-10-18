@@ -48,6 +48,7 @@ public class WebServer {
    * The URL pattern to request the Home page.
    */
   public static final String HOME_URL = "/";
+  public static final String LOGIN_URL = "/login";
 
   //
   // Attributes
@@ -130,6 +131,9 @@ public class WebServer {
     //Lets a user submit a paper to the SAM System
     post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
 
+    // Shows the Login Page
+    get(LOGIN_URL, new GetLoginController(), templateEngine);
+    post(LOGIN_URL, new PostLoginController(), templateEngine);
   }
 
 }

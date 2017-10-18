@@ -9,7 +9,9 @@
 <div class="page">
 
     <h1>SAM 2018 Home Page</h1>
-
+    <#if message??>
+        <div id="message" class="${messageType}">"$(message)"</div>
+    </#if>
 
 
     <form class="form-register" method="POST" action="/login">
@@ -18,7 +20,7 @@
             <input type="text"
                    class="form-group"
                    id="name"
-                   name="name"
+                   name="username"
                    placeholder="Enter a user name " required>
 
             <label for="Password">Password</label>

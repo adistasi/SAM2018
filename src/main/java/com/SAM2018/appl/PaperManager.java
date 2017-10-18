@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class PaperManager {
     //Attributes
-    private Map<String, User> users = new HashMap<>();
+    private static Map<String, User> users = new HashMap<>();
     private List<Paper> papers = new ArrayList<>();
 
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
@@ -64,5 +64,24 @@ public class PaperManager {
             System.out.println("----------\n\n");
         }
 
+    }
+
+    /**
+     * Methods for Login And Register
+     */
+    public static void addUser(User user){
+        users.put(user.getUsername(), user);
+    }
+
+    public static void removeUser(String username){
+        users.remove(username);
+    }
+
+    public static boolean userExists(String username){
+        return users.containsKey(username);
+    }
+
+    public static User getUser(String username){
+        return users.get(username);
     }
 }
