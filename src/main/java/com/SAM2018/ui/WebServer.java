@@ -46,7 +46,8 @@ public class WebServer {
    * The URL pattern to request the Home page.
    */
   public static final String HOME_URL = "/";
-
+  public static final String REQUEST_PAPER_URL = "/reviewPaper";
+  public static final String REQUESTED_PAPER_URL = "/reviewManagement";
   //
   // Attributes
   //
@@ -119,8 +120,9 @@ public class WebServer {
     //// code clean; using small classes.
 
     // Shows the SAM game Home page.
-    get(HOME_URL, new HomeController(), templateEngine);
-
+    get(HOME_URL,new HomeController(), templateEngine);
+    get(REQUEST_PAPER_URL, new RequestPaperReview(), templateEngine);
+    post(REQUESTED_PAPER_URL,new RequestedPaperRoute(),templateEngine);
   }
 
 }
