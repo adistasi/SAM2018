@@ -18,6 +18,15 @@
         <p>Welcome to the world of SAM 2018.</p>
     </div>
 
+    <form action="/reviewManagement" method="POST">
+    <#if paperForReview??>
+    <#list paperForReview as paper>
+      <input type="checkbox" name="requestedPaper" value=${paper}> ${paper}<br>
+      </#list>
+      <input type="submit" value="Submit Request">
+      </#if>
+    </form>
+
 </div>
 </body>
 </html>

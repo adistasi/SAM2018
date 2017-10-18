@@ -18,6 +18,14 @@
         <p>Welcome to the world of SAM 2018.</p>
     </div>
 
+
+        <#if papersRequested??>
+        <#list papersRequested as paper>
+          ${paper}<br>
+          </#list>
+          </#if>
+
+
 </div>
 </body>
 </html>
