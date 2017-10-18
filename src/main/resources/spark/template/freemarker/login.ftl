@@ -10,7 +10,7 @@
 
     <h1>SAM 2018 Home Page</h1>
     <#if message??>
-        <div id="message" class="${messageType}">"$(message)"</div>
+        <div id="message" class="${messageType}">"${message}"</div>
     </#if>
 
 

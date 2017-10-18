@@ -12,6 +12,9 @@ import java.util.Map;
 
 public class PostLoginController implements TemplateViewRoute{
 
+    String WRONG_PASSWORD = "Incorrect Password!";
+    String WRONG_USERNAME = "Incorrect Username!";
+
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
@@ -27,14 +30,14 @@ public class PostLoginController implements TemplateViewRoute{
             else {
                 vm.put("title","Login");
                 vm.put("messageType", "error");
-                vm.put("message", "Wrong Password!");
+                vm.put("message", WRONG_PASSWORD);
                 return new ModelAndView(vm, "login.ftl");
             }
         }
         else {
             vm.put("title","Login");
             vm.put("messageType", "error");
-            vm.put("message", "Wrong Username!");
+            vm.put("message", WRONG_USERNAME);
             return new ModelAndView(vm, "login.ftl");
         }
     }

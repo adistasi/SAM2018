@@ -18,7 +18,7 @@
       <p>Welcome to the world of SAM 2018.</p>
     </div>
       <div class="navigation">
-          <a href="/Login">Login</a>
+          <a href="/login">Login</a>
       </div>
       <div class="navigation">
           <a href="/register">Register</a>

@@ -14,11 +14,11 @@ public class PaperManager {
     private static Map<String, User> users = new HashMap<>();
     private List<Paper> papers = new ArrayList<>();
 
-    public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
-        Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
-
-        papers.add(paper);
-    }
+//    public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
+//        Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
+//
+//        papers.add(paper);
+//    }
 
     public List<String> getAllAuthors(String authorLine1, String authorLine2, String authorLine3) {
         List<String> authors = new ArrayList<>();
