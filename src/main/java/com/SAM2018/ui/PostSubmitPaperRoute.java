@@ -30,18 +30,37 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
         vm.put("title", "Submit Paper");
 
         //TODO: VALIDATION
+
         String auth1 = request.queryParams("author1");
         String auth2 = request.queryParams("author2");
         String auth3 = request.queryParams("author3");
+        if(auth1.equals("")) {
+            return error(vm, "A paper must have an author");
+        } else if(auth1.contains("|||") || auth2.contains("|||") || auth3.contains("|||")) {
+            return error(vm, "An author may not contain the characters '|||'");
+        }
+
         List<String> authors = paperManager.getAllAuthors(auth1, auth2, auth3);
 
         String title = request.queryParams("title");
         String format = request.queryParams("format");
         String file = request.queryParams("paperFile");
 
-        paperManager.addPaper(authors, paperManager.getContactAuthorByUsername(auth1), title, format, 1, file);
-        paperManager.printPapersData();
-        paperManager.savePapers();
+        if (title.contains("|||") || format.contains("|||") || file.contains("|||")) {
+            return error(vm, "Paper information may not contain the characters '|||");
+        }
+
+        if(title.equals("") || format.equals("") || file.equals("")) {
+            return error(vm, "Paper information cannot be blank");
+        }
+        System.out.println("Double check that we aren't adding papers");
+        paperManager.addPaper(authors, paperManager.getContactAuthorByUsername("add5980"), title, format, 1, file);
         return new ModelAndView(vm , "submitPaper.ftl");
+    }
+
+    private ModelAndView error(final Map<String, Object> vm, final String message) {
+        vm.put("message", message);
+        vm.put("messageType", "error");
+        return new ModelAndView(vm, "submitPaper.ftl");
     }
 }
