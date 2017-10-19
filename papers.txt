@@ -1,3 +1,5 @@
 =====PAPERS=====
 0|||add5980,Tolk,Rowl|||add5980|||books|||form|||1|||asdf
 1|||microMan,Auth1,Auth2|||microMan|||technology!|||formatText|||1|||fdsa
+2|||Andy DiStasi,Testy McTesterson,Test Author 3|||testReg2|||Testing Everything|||Please Work|||1|||Final Test
+3|||Bill Gates,Andy DiStasi,JK Rowling|||microMan|||Title!|||Format!|||1|||Upload!

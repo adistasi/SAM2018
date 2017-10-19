@@ -40,7 +40,6 @@ public final class Application {
     paperManager.loadApplication();
     paperManager.printUsersData();
     paperManager.printPapersData();
-    paperManager.saveUsers();
 
     // The application uses FreeMarker templates to generate the HTML
     // responses sent back to the client. This will be the engine processing

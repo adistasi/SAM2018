@@ -46,6 +46,8 @@ public class WebServer {
    * The URL pattern to request the Home page.
    */
   public static final String HOME_URL = "/";
+  public static final String LOGIN_URL = "/login";
+  public static final String REGISTER_URL = "/register";
 
   //
   // Attributes
@@ -95,5 +97,16 @@ public class WebServer {
 
     //Lets a user submit a paper to the SAM System
     post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
+
+    // Shows the Login Page
+    get(LOGIN_URL, new GetLoginRoute(), templateEngine);
+    post(LOGIN_URL, new PostLoginRoute(paperManager), templateEngine);
+
+    // Shows the Registration Page
+    get(REGISTER_URL, new GetRegisterRoute(), templateEngine);
+    post(REGISTER_URL, new PostRegisterRoute(paperManager),templateEngine);
+
+    //Shows logout Route
+    get("/logout", new GetLogoutRoute(), templateEngine);
   }
 }

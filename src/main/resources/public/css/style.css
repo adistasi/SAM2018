@@ -25,6 +25,7 @@ input[type="password"] {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     color: #1057FF;
+    text-align: left
 }
 
 input[type="submit"] {
@@ -121,4 +122,19 @@ div.info {
     -webkit-border-radius: 2px;
     padding: 4px;
     font-size: 13px;
+}
+
+.inputForm label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+.inputForm input {
+    margin-bottom: 15px;
+}
+
+.form-group {
+    text-align: center;
+    margin: 15px;
 }

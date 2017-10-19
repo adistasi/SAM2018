@@ -8,14 +8,23 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
+import com.SAM2018.model.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PaperManager {
     //Attributes
-    private Map<String, User> users = new HashMap<>();
+    private static Map<String, User> users = new HashMap<>();
     private List<Paper> papers = new ArrayList<>();
 
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
         Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
+
         papers.add(paper);
         savePapers();
         //_contactAuthor.addPaperToSubmissions(paper);
@@ -168,7 +177,6 @@ public class PaperManager {
         loadPapers();
     }
 
-    //TEST STUFF!
     public void printPapersData() {
         System.out.println("THERE ARE " + papers.size() + " PAPERS");
         for(Paper pape : papers) {
@@ -189,7 +197,7 @@ public class PaperManager {
 
     public void printUsersData() {
         System.out.println("THERE ARE " + users.size() + " USERS");
-        for(User u : users.values()) {
+        for (User u : users.values()) {
             System.out.println("----------");
             System.out.println("Username: " + u.getUsername());
             System.out.println("Type: " + u.getClass().toString());
@@ -198,5 +206,25 @@ public class PaperManager {
             System.out.println("Last name: " + u.getLastName());
             System.out.println("----------\n\n");
         }
+    }
+
+    /**
+     * Methods for Login And Register
+     */
+    public void addUser(User user){
+        users.put(user.getUsername(), user);
+        saveUsers();
+    }
+
+    public void removeUser(String username){
+        users.remove(username);
+    }
+
+    public boolean userExists(String username){
+        return users.containsKey(username);
+    }
+
+    public User getUser(String username){
+        return users.get(username);
     }
 }
