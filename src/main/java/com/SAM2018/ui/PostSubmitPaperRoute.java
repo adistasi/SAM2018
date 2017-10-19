@@ -28,8 +28,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
         Map<String, Object> vm = new HashMap<>();
         Session session = request.session();
         vm.put("title", "Submit Paper");
-
-        //TODO: VALIDATION
+        vm.put("username", session.attribute("username"));
 
         String auth1 = request.queryParams("author1");
         String auth2 = request.queryParams("author2");
@@ -54,8 +53,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
         if(title.equals("") || format.equals("") || file.equals("")) {
             return error(vm, "Paper information cannot be blank");
         }
-        System.out.println(contactAuthor);
-        System.out.println(paperManager.getContactAuthorByUsername(contactAuthor).getFirstName());
+
         paperManager.addPaper(authors, paperManager.getContactAuthorByUsername(contactAuthor), title, format, 1, file);
         return new ModelAndView(vm , "submitPaper.ftl");
     }
