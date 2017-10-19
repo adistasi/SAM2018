@@ -33,6 +33,17 @@ public class Paper {
         return authors;
     }
 
+    public String getAuthorsAsString() {
+        String authorString = "";
+        for(String auth : authors) {
+            authorString = authorString.concat(auth + ", ");
+        }
+
+        authorString = authorString.substring(0, authorString.length() - 2);
+
+        return authorString;
+    }
+
     public User getContactAuthor() {
         return contactAuthor;
     }

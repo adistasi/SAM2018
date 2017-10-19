@@ -19,8 +19,9 @@ import java.util.Map;
 
 public class PaperManager {
     //Attributes
-    private static Map<String, User> users = new HashMap<>();
+    private  Map<String, User> users = new HashMap<>();
     private List<Paper> papers = new ArrayList<>();
+    private Map<String, List<User>> requestedReviews = new HashMap();
 
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
         Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
@@ -56,8 +57,12 @@ public class PaperManager {
         return users.get(_username);
     }
 
-    public Paper getPaperbyID(int _id) {
-        return papers.get((_id - 1));
+    public Paper getPaperbyID(int id) {
+        return papers.get((id));
+    }
+
+    public List<Paper> getPapers() {
+        return papers;
     }
 
     public void savePapers() {
@@ -226,5 +231,45 @@ public class PaperManager {
 
     public User getUser(String username){
         return users.get(username);
+    }
+
+    /**
+     * Methods for requesting papers
+     */
+    public void addRequest(Paper paper, User user) {
+        String paperID = Integer.toString(paper.getPaperID());
+        if(requestedReviews.get(paperID) != null) {
+            List<User> reqUsers = requestedReviews.get(paperID);
+            reqUsers.add(user);
+            requestedReviews.put(paperID, reqUsers);
+        } else {
+            List<User> reqUsers = new ArrayList<>();
+            reqUsers.add(user);
+            requestedReviews.put(paperID, reqUsers);
+        }
+    }
+
+    public List<ReviewRequestDisplay> getRequestedReviews() {
+        List<ReviewRequestDisplay> rrds = new ArrayList<>();
+        for(String s : requestedReviews.keySet()) {
+            Paper p = getPaperbyID(Integer.parseInt(s));
+            ReviewRequestDisplay rrd = new ReviewRequestDisplay(p, requestedReviews.get(s));
+            rrds.add(rrd);
+        }
+        return rrds;
+    }
+
+    public void printReviewData() {
+        System.out.println("-----REQUEST REVIEWS-----");
+        for(String s : requestedReviews.keySet()) {
+            System.out.println("----------");
+            Paper p = getPaperbyID(Integer.parseInt(s));
+            System.out.println(p.getTitle());
+
+            for(User u : requestedReviews.get(s)) {
+                System.out.println("     " + u.getFirstName() + " " + u.getLastName());
+            }
+            System.out.println("----------");
+        }
     }
 }

@@ -11,13 +11,31 @@
     <h1>SAM 2018 Home Page</h1>
 
     <div class="navigation">
-        <a href="/">my home</a>
+    <#if username??>
+        <a href="/">Home</a> |
+        <a href="/submitPaper">Submit a Paper</a> |
+        <a href="/requestPaper">Request Reviews</a> |
+        <a href="/logout">Logout</a> |
+    <#else>
+        <a href="/login">Login</a> |
+        <a href="/register">Register</a> |
+    </#if>
     </div>
 
     <div class="body">
-        <p>Welcome to the world of SAM 2018.</p>
+        <p>Submitted Review Requests:</p>
+        <#if papersRequested??>
+            <#list papersRequested as p>
+                <p style="text-decoration: underline">"<em>${p.getPaper().getTitle()}</em>" - ${p.getPaper().getAuthorsAsString()}</p>
+                <div class="reviews">
+                    <#list p.getUsers() as u>
+                        <input type="checkbox" name="requests" />
+                        <label for="requests">${u.getFirstName()} ${u.getLastName()}</label><br />
+                    </#list>
+                </div>
+             </#list>
+        </#if>
     </div>
-
 </div>
 </body>
 </html>

@@ -48,6 +48,7 @@ public class WebServer {
   public static final String HOME_URL = "/";
   public static final String LOGIN_URL = "/login";
   public static final String REGISTER_URL = "/register";
+  public static final String REQUEST_PAPER_URL = "/requestPaper";
 
   //
   // Attributes
@@ -108,5 +109,12 @@ public class WebServer {
 
     //Shows logout Route
     get("/logout", new GetLogoutRoute(), templateEngine);
+
+    //Get & Submit Requests
+    get(REQUEST_PAPER_URL, new GetRequestPaperRoute(paperManager), templateEngine);
+    post(REQUEST_PAPER_URL,new PostRequestPaperRoute(paperManager),templateEngine);
+
+    //Manage requests
+    get("/manageRequests", new GetManageRequestsRoute(paperManager), templateEngine);
   }
 }

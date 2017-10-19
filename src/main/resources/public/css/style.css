@@ -138,3 +138,17 @@ div.info {
     text-align: center;
     margin: 15px;
 }
+
+.paperRequestForm {
+    margin-left: 50px;
+    margin-bottom: 25px;
+}
+
+#requestFormSubmitButton {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.reviews {
+    margin-left: 25px;
+}

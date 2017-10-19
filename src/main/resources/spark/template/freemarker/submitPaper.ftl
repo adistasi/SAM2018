@@ -13,6 +13,7 @@
         <#if username??>
             <a href="/">Home</a> |
             <a href="/submitPaper">Submit a Paper</a> |
+            <a href="/requestPaper">Request Reviews</a> |
             <a href="/logout">Logout</a> |
         <#else>
             <a href="/login">Login</a> |
