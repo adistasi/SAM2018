@@ -10,7 +10,7 @@
     <h1>SAM 2018 Login Page</h1>
     <div class="navigation">
             <a href="/">Home</a> |
-            <a href="/register">Register</a> |
+            <a href="/register">Register</a>
     </div>
 
     <#if message??>
