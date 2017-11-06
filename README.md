@@ -1,37 +1,29 @@
 # SAM2018
 
-An online Conference file submission management system run in Java 8 and Spark.
+An online SAM2018 Conference Paper Submission Management System built in Java 8 and Spark, a web microframework.
 
 ## Team
 
-- Fasaiel Alanazi
+- Alanazi, Fasaiel
+- Dalal, Niharika
+- DiStasi, Andrew
+- Pulle, Raseshwari
 
-- Niharika Dalal
-
-- Andrew DiStasi
-
-- Raseshwari Pulle
 
 
 ## Prerequisites
 
 - Java 8
-
 - Maven
-
 
 ## How to run it
 
 1. Clone the repository and go to the root directory.
-
 2. Execute `mvn compile exec:java`
-
 3. Open in your browser `http://localhost:4567/`
-
-4. Start a game and begin playing.
-
+4. Access the application and browse through the tabs to explore different functionality, including submitting a paper (note that a text upload is currently in place of a file upload), viewing papers, viewing papers available for review, and requesting a paper to review.  Note that user accounts and paper submissions are saved when created.
+5. Note that you must open tabs in multiple browsers if you want to have two instances running on one computer
 
 ## License
-MIT License
-
+MIT License.
 See LICENSE for details.
