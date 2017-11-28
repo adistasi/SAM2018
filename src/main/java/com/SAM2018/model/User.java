@@ -1,5 +1,6 @@
 package com.SAM2018.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class User {
@@ -16,6 +17,7 @@ public abstract class User {
         this.password = _password;
         this.firstName = _firstName;
         this.lastName = _lastName;
+        this.submittedPapers = new ArrayList<Paper>();
     }
 
     public void submitPaper(Paper _paper) {

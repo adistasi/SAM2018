@@ -8,13 +8,12 @@
 <body>
   <div class="page">
   
-    <h1>SAM 2018 Home Page</h1>
+    <h1>SAM 2018 Paper Management</h1>
     
     <div class="navigation">
         <#if username??>
+            <a href="/">Home</a> |
             <a href="/managePapers">Manage Papers</a> |
-            <a href="/accountManagement">Manage Accounts</a> |
-            <a href="/createNotification">Create Notification</a> |
             <a href="/logout">Logout</a>
         <#else>
             <a href="/login">Login</a> |
@@ -25,7 +24,18 @@
 
     <div class="body">
         <#if username??>
-            <p>Welcome to the world of SAM 2018.</p>
+            <#if papers??>
+                <#list papers as p>
+                    <div>
+                        <p>${p.getTitle()}</p>
+                        <p>${p.getVersion()}</p>
+                        <a href="/editPaper?pid=${p.getPaperID()}">Edit Paper</a>
+                        <hr />
+                    </div>
+                </#list>
+            <#else>
+                <p>You haven't uploaded any papers yet!</p>
+            </#if>
         </#if>
     </div>
   </div>

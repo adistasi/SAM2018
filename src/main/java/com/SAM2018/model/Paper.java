@@ -33,6 +33,10 @@ public class Paper {
         return authors;
     }
 
+    public void setAuthors(List<String> _authors) {
+        this.authors = _authors;
+    }
+
     public String getAuthorsAsString() {
         String authorString = "";
         for(String auth : authors) {
@@ -52,15 +56,39 @@ public class Paper {
         return title;
     }
 
+    public void setTitle(String _title) {
+        this.title = _title;
+    }
+
     public String getFormat() {
         return format;
+    }
+
+    public void setFormat(String _format) {
+        this.format = _format;
     }
 
     public int getVersion() {
         return version;
     }
 
+    public void setVersion(int _version) {
+        this.version = _version;
+    }
+
     public String getPaperUpload() {
         return paperUpload;
+    }
+
+    public void setPaperUpload(String _paperUpload) {
+        this.paperUpload = _paperUpload;
+    }
+
+    public void updatePaper(List<String> _authors, String _title, String _format, String _paperUpload) {
+        setAuthors(_authors);
+        setTitle(_title);
+        setFormat(_format);
+        setVersion(this.version + 1);
+        setPaperUpload(_paperUpload);
     }
 }

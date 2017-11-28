@@ -8,13 +8,17 @@
 <body>
   <div class="page">
   
-    <h1>SAM 2018 Home Page</h1>
+    <h1>SAM 2018 Paper Management</h1>
     
     <div class="navigation">
         <#if username??>
-            <a href="/managePapers">Manage Papers</a> |
-            <a href="/accountManagement">Manage Accounts</a> |
-            <a href="/createNotification">Create Notification</a> |
+            <a href="/">Home</a> |
+            <a href="/submitPaper">Submit Paper</a> |
+            <a href="/manageSubmissions">Manage Submissions</a> |
+            <a href="/requestPaper">Request Reviews</a> |
+            <a href="reviewPaper">Review Papers</a>
+            <a href="/assignPaper">Manage Assignments</a> |
+            <a href="ratePapers">Rate Papers</a> |
             <a href="/logout">Logout</a>
         <#else>
             <a href="/login">Login</a> |

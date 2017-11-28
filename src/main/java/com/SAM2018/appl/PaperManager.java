@@ -27,8 +27,8 @@ public class PaperManager {
         Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
 
         papers.add(paper);
+        _contactAuthor.addPaperToSubmissions(paper);
         savePapers();
-        //_contactAuthor.addPaperToSubmissions(paper);
     }
 
     //TODO: ACTUAL AUTHOR RETRIEVAL
@@ -96,6 +96,7 @@ public class PaperManager {
             try (BufferedReader br = new BufferedReader(new FileReader("papers.txt"))) {
                 String header = br.readLine();
                 String line = br.readLine();
+                System.out.println(line);
                 while (line != null) {
                     String[] paperLine = line.split("\\|\\|\\|");
                     int id = Integer.parseInt(paperLine[0]);
@@ -105,12 +106,16 @@ public class PaperManager {
                     String format = paperLine[4];
                     int version = Integer.parseInt(paperLine[5]);
                     String paperUpload = paperLine[6];
-                    addPaper(authors, contactAuthor, title, format, version, paperUpload);
+
+                    Paper p = new Paper(papers.size(), authors, contactAuthor, title, format, version, paperUpload);
+                    papers.add(p);
+                    contactAuthor.addPaperToSubmissions(p);
+
                     line = br.readLine();
                 }
             }
         } catch(Exception e) {
-            System.out.println("ERROR: " + e);
+            System.out.println(e.getStackTrace());
         }
     }
 

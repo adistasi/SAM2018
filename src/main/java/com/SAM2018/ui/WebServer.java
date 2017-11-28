@@ -38,83 +38,75 @@ import spark.TemplateEngine;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class WebServer {
-  //
-  // Constants
-  //
+    // Constants
+    public static final String HOME_URL = "/";
+    public static final String LOGIN_URL = "/login";
+    public static final String REGISTER_URL = "/register";
+    public static final String REQUEST_PAPER_URL = "/requestPaper";
 
-  /**
-   * The URL pattern to request the Home page.
-   */
-  public static final String HOME_URL = "/";
-  public static final String LOGIN_URL = "/login";
-  public static final String REGISTER_URL = "/register";
-  public static final String REQUEST_PAPER_URL = "/requestPaper";
+    // Attributes
+    private final TemplateEngine templateEngine;
+    private final PaperManager paperManager;
 
-  //
-  // Attributes
-  //
+    /**
+    * The constructor for the Web Server.
+    *
+    * @param _paperManager The default {@link PaperManager} to manage state)
+    * @param _templateEngine The default {@link TemplateEngine} to render views.
+    */
+    public WebServer(final PaperManager _paperManager, final TemplateEngine _templateEngine) {
+        this.paperManager = _paperManager;
+        this.templateEngine = _templateEngine;
 
-  private final TemplateEngine templateEngine;
-  private final PaperManager paperManager;
+    }
 
-  //
-  // Constructor
-  //
+    /**
+    * Initialize all of the HTTP routes that make up this web application.
+    *
+    * <p>
+    * Initialization of the web server includes defining the location for static
+    * files, and defining all routes for processing client requests. The method
+    * returns after the web server finishes its initialization.
+    * </p>
+    */
+    public void initialize() {
+        // Configuration to serve static files
+        staticFileLocation("/public");
 
-  /**
-   * The constructor for the Web Server.
-   *
-   * @param _paperManager The default {@link PaperManager} to manage state)
-   * @param _templateEngine The default {@link TemplateEngine} to render views.
-   */
-  public WebServer(final PaperManager _paperManager, final TemplateEngine _templateEngine) {
-    this.paperManager = _paperManager;
-    this.templateEngine = _templateEngine;
+        // Shows the SAM game Home page.
+        get(HOME_URL, new GetHomeRoute(), templateEngine);
 
-  }
+        //Show Submit Paper Page
+        get("/submitPaper", new GetSubmitPaperRoute(), templateEngine);
 
-  //
-  // Public methods
-  //
+        // Shows the Login Page
+        get(LOGIN_URL, new GetLoginRoute(), templateEngine);
+        post(LOGIN_URL, new PostLoginRoute(paperManager), templateEngine);
 
-  /**
-   * Initialize all of the HTTP routes that make up this web application.
-   *
-   * <p>
-   * Initialization of the web server includes defining the location for static
-   * files, and defining all routes for processing client requests. The method
-   * returns after the web server finishes its initialization.
-   * </p>
-   */
-  public void initialize() {
-    // Configuration to serve static files
-    staticFileLocation("/public");
+        // Shows the Registration Page
+        get(REGISTER_URL, new GetRegisterRoute(), templateEngine);
+        post(REGISTER_URL, new PostRegisterRoute(paperManager),templateEngine);
 
-    // Shows the SAM game Home page.
-    get(HOME_URL, new GetHomeRoute(), templateEngine);
+        //Shows logout Route
+        get("/logout", new GetLogoutRoute(), templateEngine);
 
-    //Show Submit Paper Page
-    get("/submitPaper", new GetSubmitPaperRoute(), templateEngine);
+        //Get & Submit Requests
+        get(REQUEST_PAPER_URL, new GetRequestPaperRoute(paperManager), templateEngine);
+        post(REQUEST_PAPER_URL,new PostRequestPaperRoute(paperManager),templateEngine);
 
-    //Lets a user submit a paper to the SAM System
-    post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
+        //Manage requests
+        get("/manageRequests", new GetManageRequestsRoute(paperManager), templateEngine);
 
-    // Shows the Login Page
-    get(LOGIN_URL, new GetLoginRoute(), templateEngine);
-    post(LOGIN_URL, new PostLoginRoute(paperManager), templateEngine);
+        get("/managePapers", new GetManagePapersRoute(paperManager), templateEngine);
 
-    // Shows the Registration Page
-    get(REGISTER_URL, new GetRegisterRoute(), templateEngine);
-    post(REGISTER_URL, new PostRegisterRoute(paperManager),templateEngine);
+        get("/manageSubmissions", new GetManageSubmissionsRoute(paperManager), templateEngine);
 
-    //Shows logout Route
-    get("/logout", new GetLogoutRoute(), templateEngine);
+        get("/editPaper", new GetEditPaperRoute(paperManager), templateEngine);
 
-    //Get & Submit Requests
-    get(REQUEST_PAPER_URL, new GetRequestPaperRoute(paperManager), templateEngine);
-    post(REQUEST_PAPER_URL,new PostRequestPaperRoute(paperManager),templateEngine);
+        //Lets a user edit a paper in the SAM System
+        post("/editPaper", new PostEditPaperRoute(paperManager), templateEngine);
 
-    //Manage requests
-    get("/manageRequests", new GetManageRequestsRoute(paperManager), templateEngine);
-  }
+        //Lets a user submit a paper to the SAM System
+        post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
+    }
 }
