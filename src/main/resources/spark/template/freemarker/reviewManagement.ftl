@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="10">
     <title>${title} | SAM 2018</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -25,15 +24,25 @@
     <div class="body">
         <p>Submitted Review Requests:</p>
         <#if papersRequested??>
-            <#list papersRequested as p>
-                <p style="text-decoration: underline">"<em>${p.getPaper().getTitle()}</em>" - ${p.getPaper().getAuthorsAsString()}</p>
-                <div class="reviews">
-                    <#list p.getUsers() as u>
-                        <input type="checkbox" name="requests" />
-                        <label for="requests">${u.getFirstName()} ${u.getLastName()}</label><br />
-                    </#list>
-                </div>
-             </#list>
+            <form action="/manageRequests" method="POST" class="inputForm">
+                <#list papersRequested as p>
+                    <p style="text-decoration: underline">"<em>${p.getPaper().getTitle()}</em>" - ${p.getPaper().getAuthorsAsString()}</p>
+                    <div class="reviews">
+                        <#if p.getUsers()??>
+                            <#list p.getUsers() as u>
+                                <input type="checkbox" name="requests" value="${u.getUsername()}|||${p.getPaper().getPaperID()}"/>
+                                <label for="requests">${u.getFirstName()} ${u.getLastName()}</label><br />
+                            </#list>
+                        <#else>
+                            <p>No PCMs have requested to review this paper</p>
+                        </#if>
+                    </div>
+                 </#list>
+
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        <#else>
+            <p>No requests have been submitted.</p>
         </#if>
     </div>
 </div>

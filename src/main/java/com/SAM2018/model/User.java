@@ -55,13 +55,4 @@ public abstract class User {
     public void addPaperToSubmissions(Paper _paper) {
         submittedPapers.add(_paper);
     }
-
-    //Not 100% sure these should go here
-    public void login() {
-
-    }
-
-    public void logout() {
-
-    }
 }

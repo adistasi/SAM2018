@@ -16,8 +16,8 @@
             <a href="/submitPaper">Submit Paper</a> |
             <a href="/manageSubmissions">Manage Submissions</a> |
             <a href="/requestPaper">Request Reviews</a> |
-            <a href="reviewPaper">Review Papers</a>
-            <a href="/assignPaper">Manage Assignments</a> |
+            <a href="reviewPaper">Review Papers</a> |
+            <a href="/manageRequests">Manage Assignments</a> |
             <a href="ratePapers">Rate Papers</a> |
             <a href="/logout">Logout</a>
         <#else>

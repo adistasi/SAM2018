@@ -15,8 +15,11 @@ public class PCC extends User {
         //TODO: Report generation
     }
 
-    public void assignReview(PCM _pcm, Paper _paper) {
-        //TODO: assign functionality
+    public Review assignReview(PCM _pcm, Paper _paper) {
+        Review review = new Review(_pcm, _paper);
+        _pcm.addReview(review);
+
+        return review;
     }
 
     public void ratePaper(Paper _paper) {

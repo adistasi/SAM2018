@@ -39,10 +39,6 @@ import spark.TemplateEngine;
  */
 public class WebServer {
     // Constants
-    public static final String HOME_URL = "/";
-    public static final String LOGIN_URL = "/login";
-    public static final String REGISTER_URL = "/register";
-    public static final String REQUEST_PAPER_URL = "/requestPaper";
 
     // Attributes
     private final TemplateEngine templateEngine;
@@ -74,39 +70,38 @@ public class WebServer {
         staticFileLocation("/public");
 
         // Shows the SAM game Home page.
-        get(HOME_URL, new GetHomeRoute(), templateEngine);
+        get("/", new GetHomeRoute(), templateEngine);
 
         //Show Submit Paper Page
         get("/submitPaper", new GetSubmitPaperRoute(), templateEngine);
+        post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
 
         // Shows the Login Page
-        get(LOGIN_URL, new GetLoginRoute(), templateEngine);
-        post(LOGIN_URL, new PostLoginRoute(paperManager), templateEngine);
+        get("/login", new GetLoginRoute(), templateEngine);
+        post("/login", new PostLoginRoute(paperManager), templateEngine);
 
         // Shows the Registration Page
-        get(REGISTER_URL, new GetRegisterRoute(), templateEngine);
-        post(REGISTER_URL, new PostRegisterRoute(paperManager),templateEngine);
+        get("/register", new GetRegisterRoute(), templateEngine);
+        post("/register", new PostRegisterRoute(paperManager),templateEngine);
 
         //Shows logout Route
         get("/logout", new GetLogoutRoute(), templateEngine);
 
         //Get & Submit Requests
-        get(REQUEST_PAPER_URL, new GetRequestPaperRoute(paperManager), templateEngine);
-        post(REQUEST_PAPER_URL,new PostRequestPaperRoute(paperManager),templateEngine);
+        get("/requestPaper", new GetRequestPaperRoute(paperManager), templateEngine);
+        post("/requestPaper",new PostRequestPaperRoute(paperManager),templateEngine);
 
         //Manage requests
         get("/manageRequests", new GetManageRequestsRoute(paperManager), templateEngine);
+        post("/manageRequests", new PostManageRequestsRoute(paperManager), templateEngine);
 
         get("/managePapers", new GetManagePapersRoute(paperManager), templateEngine);
 
         get("/manageSubmissions", new GetManageSubmissionsRoute(paperManager), templateEngine);
 
-        get("/editPaper", new GetEditPaperRoute(paperManager), templateEngine);
-
         //Lets a user edit a paper in the SAM System
+        get("/editPaper", new GetEditPaperRoute(paperManager), templateEngine);
         post("/editPaper", new PostEditPaperRoute(paperManager), templateEngine);
 
-        //Lets a user submit a paper to the SAM System
-        post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
   }
 }

@@ -31,9 +31,9 @@ public class GetRequestPaperRoute implements TemplateViewRoute {
   @Override
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();
-
-    if(request.session().attribute("username") != null) {
-      vm.put("username", request.session().attribute("username"));
+    String username = request.session().attribute("username");
+    if(username != null) {
+      vm.put("username", username);
     } else {
       response.redirect("/login");
       halt();
@@ -41,7 +41,7 @@ public class GetRequestPaperRoute implements TemplateViewRoute {
     }
 
     vm.put("title", "Request a Paper");
-    vm.put(PAPERS_FOR_REVIEW, paperManager.getPapers());
+    vm.put(PAPERS_FOR_REVIEW, paperManager.getPapersForReview(username));
     return new ModelAndView(vm , "reviewPaper.ftl");
   }
 }

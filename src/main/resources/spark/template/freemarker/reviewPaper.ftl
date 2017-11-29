@@ -23,21 +23,20 @@
 
     <div class="body">
         <p>Papers Available for Review:</p>
+
+        <form action="/requestPaper" method="POST" class="inputForm">
+            <#if paperForReview??>
+                <div class="paperRequestForm">
+                    <#list paperForReview as paper>
+                        <input type="checkbox" name="requestedPaper" value=${paper.getPaperID()}> "<em>${paper.getTitle()}</em>" - ${paper.getAuthorsAsString()}<br>
+                    </#list>
+                </div>
+                <div id="requestFormSubmitButton">
+                    <button type="submit" class="btn btn-default">Submit Request</button>
+                </div>
+            </#if>
+        </form>
     </div>
-
-
-    <form action="/requestPaper" method="POST" class="inputForm">
-        <#if paperForReview??>
-            <div class="paperRequestForm">
-                <#list paperForReview as paper>
-                    <input type="checkbox" name="requestedPaper" value=${paper.getPaperID()}> "<em>${paper.getTitle()}</em>" - ${paper.getAuthorsAsString()}<br>
-                </#list>
-            </div>
-            <div id="requestFormSubmitButton">
-                <button type="submit" class="btn btn-default">Submit Request</button>
-            </div>
-        </#if>
-    </form>
 
 </div>
 </body>

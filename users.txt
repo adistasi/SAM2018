@@ -1,7 +1,10 @@
 =====USERS=====
 testReg|||class com.SAM2018.model.Submitter|||pass|||test|||Register|||
 testReg2|||class com.SAM2018.model.Submitter|||pass|||Testy|||McTesterson|||
-add5980|||class com.SAM2018.model.Admin|||pass|||Andy|||DiStasi|||
+add5980|||class com.SAM2018.model.PCC|||pass|||Andy|||DiStasi|||
 user|||class com.SAM2018.model.Submitter|||2|||h|||j|||
 microMan|||class com.SAM2018.model.PCM|||pass|||Bill|||Gates|||
 username|||class com.SAM2018.model.Submitter|||pass|||Test|||User|||
+pcm2|||class com.SAM2018.model.PCM|||pass|||Satya|||Nadella|||
+pcm3|||class com.SAM2018.model.PCM|||pass|||Steve|||Ballmer|||
+pcm4|||class com.SAM2018.model.PCM|||pass|||Paul|||Allen|||
