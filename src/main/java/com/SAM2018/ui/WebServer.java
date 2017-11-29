@@ -108,5 +108,5 @@ public class WebServer {
 
         //Lets a user submit a paper to the SAM System
         post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
-    }
+  }
 }

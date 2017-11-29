@@ -34,17 +34,15 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         String pid = request.queryParams("pid");
 
         Paper paper = paperManager.getPaperbyID(Integer.parseInt(pid));
-        String auth1 = request.queryParams("author1");
-        String auth2 = request.queryParams("author2");
-        String auth3 = request.queryParams("author3");
 
-        if(auth1.equals("")) {
+        String rawAuthors = request.queryParams("authors");
+        List<String> authors = paperManager.validateAuthors(rawAuthors);
+
+        if(authors.size() == 0) {
             return error(vm, "A paper must have an author");
-        } else if(auth1.contains("|||") || auth2.contains("|||") || auth3.contains("|||")) {
+        } else if(rawAuthors.contains("|||")) {
             return error(vm, "An author may not contain the characters '|||'");
         }
-
-        List<String> authors = paperManager.getAllAuthors(auth1, auth2, auth3);
 
         String contactAuthor = request.session().attribute("username");
         String title = request.queryParams("title");

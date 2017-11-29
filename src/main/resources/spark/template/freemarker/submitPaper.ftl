@@ -3,6 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
     <title>${title} | SAM 2018</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div class="page">
@@ -33,12 +35,12 @@
 
         <form method="POST" action="./submitPaper" id="submitPaper" class="inputForm">
             <div class="form-group">
-                <label>Authors</label>
-                <input type="text" name="author1" /><br />
-                <label></label>
-                <input type="text" name="author2" /><br />
-                <label></label>
-                <input style="margin-bottom: 35px;" type="text" name="author3" /><br />
+                <div style="margin-bottom: 35px;" id="authorsDiv">
+                    <label>Authors</label>
+                    <input type="text" class="authorField" name="author" /><br />
+                </div>
+                <input type="hidden" id="authInput" name="authors" />
+                <a href="#" onclick="addAuthor()">Add Author</a><br />
 
                 <label>Paper Title</label>
                 <input type="text" name="title" /><br />

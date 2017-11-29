@@ -40,10 +40,10 @@ public class Paper {
     public String getAuthorsAsString() {
         String authorString = "";
         for(String auth : authors) {
-            authorString = authorString.concat(auth + ", ");
+            authorString = authorString.concat(auth + "/");
         }
 
-        authorString = authorString.substring(0, authorString.length() - 2);
+        authorString = authorString.substring(0, authorString.length() - 1);
 
         return authorString;
     }

@@ -3,6 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
     <title>${title} | SAM 2018</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div class="page">
@@ -25,14 +27,18 @@
             <h3 style="text-align:center">Edit your paper: ${paper.getTitle()}</h3>
 
             <form method="POST" action="./editPaper" id="submitPaper" class="inputForm">
-                <div class="form-group">'
+                <div class="form-group">
                     <input type="hidden" name="pid" value="${paper.getPaperID()}" />
-                    <label>Authors</label>
-                    <input type="text" name="author1" value="${auth1}" /><br />
-                    <label></label>
-                    <input type="text" name="author2" value="${auth2}" /><br />
-                    <label></label>
-                    <input style="margin-bottom: 35px;" type="text" name="author3" value="${auth3}" /><br />
+
+                    <div style="margin-bottom: 35px;" id="authorsDiv">
+                        <label>Authors</label>
+                        <#list paper.getAuthors() as a>
+                            <input type="text" class="authorField" name="author" value="${a}"/><br />
+                        </#list>
+                    </div>
+
+                    <input type="hidden" id="authInput" name="authors" value="${paper.getAuthorsAsString()}"/>
+                    <a href="#" onclick="addAuthor()">Add Author</a><br />
 
                     <label>Paper Title</label>
                     <input type="text" name="title" value="${paper.getTitle()}" /><br />

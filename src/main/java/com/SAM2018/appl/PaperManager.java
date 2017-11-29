@@ -32,18 +32,16 @@ public class PaperManager {
     }
 
     //TODO: ACTUAL AUTHOR RETRIEVAL
-    public List<String> getAllAuthors(String authorLine1, String authorLine2, String authorLine3) {
+    public List<String> validateAuthors(String _authors) {
         List<String> authors = new ArrayList<>();
-        if(authorLine1 != null || !authorLine1.equals("")) {
-            authors.add(authorLine1);
-        }
+        String[] authorsArr = _authors.split("/");
+        List<String> authorsRaw = Arrays.asList(authorsArr);
 
-        if(authorLine2 != null || !authorLine2.equals("")) {
-            authors.add(authorLine2);
-        }
-
-        if(authorLine2 != null || !authorLine2.equals("")) {
-            authors.add(authorLine3);
+        for(String auth : authorsRaw) {
+            System.out.println(auth);
+            if(auth != null && !auth.equals("")) {
+                authors.add(auth);
+            }
         }
 
         return authors;
@@ -87,7 +85,7 @@ public class PaperManager {
 
             writer.close();
         } catch(Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -115,7 +113,7 @@ public class PaperManager {
                 }
             }
         } catch(Exception e) {
-            System.out.println(e.getStackTrace());
+            e.getStackTrace();
         }
     }
 
