@@ -33,7 +33,7 @@
         </#if>
         <h3 style="text-align:center">Upload a Paper to be considered for the conference</h3>
 
-        <form method="POST" action="./submitPaper" id="submitPaper" class="inputForm">
+        <form method="POST" action="/submitPaper" id="submitPaper" class="inputForm">
             <div class="form-group">
                 <div style="margin-bottom: 35px;" id="authorsDiv">
                     <label>Authors</label>

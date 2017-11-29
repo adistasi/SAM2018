@@ -24,18 +24,25 @@
     <div class="body">
         <p>Papers Available for Review:</p>
 
-        <form action="/requestPaper" method="POST" class="inputForm">
-            <#if paperForReview??>
-                <div class="paperRequestForm">
-                    <#list paperForReview as paper>
-                        <input type="checkbox" name="requestedPaper" value=${paper.getPaperID()}> "<em>${paper.getTitle()}</em>" - ${paper.getAuthorsAsString()}<br>
-                    </#list>
+        <#if paper??>
+            <p>Submit a Review for ${paper.getTitle()}</p>
+            <p>By ${paper.getAuthorsAsString()}</p>
+            <p>Paper: ${paper.getPaperUpload()}</p>
+            <p><em>THIS WILL BE REPLACED WITH DOWNLOAD LINK</em></p>
+            <form method="POST" action="/reviewPaper" id="submitPaper" class="inputForm">
+                <div class="form-group">
+                    <input type="hidden" name="pid" value="${paper.getPaperID()}"
+
+                    <label>Score</label>
+                    <input type="number" name="score" min="0" max="10" step="0.1" /><br />
+
+                    <label>Comments</label>
+                    <textarea name="comment" placeholder="Enter Comments Here"/></textarea>
+
+                    <button type="submit">Submit</button>
                 </div>
-                <div id="requestFormSubmitButton">
-                    <button type="submit" class="btn btn-default">Submit Request</button>
-                </div>
-            </#if>
-        </form>
+            </form>
+        </#if>
     </div>
 
 </div>

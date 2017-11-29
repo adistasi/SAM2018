@@ -21,19 +21,43 @@ public class PaperManager {
     //Attributes
     private  Map<String, User> users = new HashMap<>();
     private List<Paper> papers = new ArrayList<>();
-    private List<Review> reviews = new ArrayList<>();
+    private Map<String, List<Review>> reviews = new HashMap<>();
     private Map<String, List<User>> requestedReviews = new HashMap();
 
+    //USER FUNCTIONALITY
+    public Set<String> getUsernames() {
+        return users.keySet();
+    }
+
+    public User getContactAuthorByUsername(String _username) {
+        return users.get(_username);
+    }
+
+    public void addUser(User user){
+        users.put(user.getUsername(), user);
+        saveUsers();
+    }
+
+    public void removeUser(String username){
+        users.remove(username);
+    }
+
+    public boolean userExists(String username){
+        return users.containsKey(username);
+    }
+
+    public User getUser(String username){
+        return users.get(username);
+    }
+
+
+    //PAPER FUNCTIONALITY
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
         Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
 
         papers.add(paper);
         _contactAuthor.addPaperToSubmissions(paper);
         savePapers();
-    }
-
-    public void addReview(Review review) {
-        reviews.add(review);
     }
 
     public List<String> validateAuthors(String _authors) {
@@ -49,14 +73,6 @@ public class PaperManager {
         }
 
         return authors;
-    }
-
-    public Set<String> getUsernames() {
-        return users.keySet();
-    }
-
-    public User getContactAuthorByUsername(String _username) {
-        return users.get(_username);
     }
 
     public Paper getPaperbyID(int id) {
@@ -78,6 +94,72 @@ public class PaperManager {
         return reviewPapers;
     }
 
+
+    //REQUEST FUNCTIONALITY
+    public void addRequest(Paper paper, User user) {
+        String paperID = Integer.toString(paper.getPaperID());
+        if(requestedReviews.get(paperID) != null) {
+            List<User> reqUsers = requestedReviews.get(paperID);
+            reqUsers.add(user);
+            requestedReviews.put(paperID, reqUsers);
+        } else {
+            List<User> reqUsers = new ArrayList<>();
+            reqUsers.add(user);
+            requestedReviews.put(paperID, reqUsers);
+        }
+
+        savePapers();
+    }
+
+    public List<ReviewRequestDisplay> getRequestedReviews() {
+        List<ReviewRequestDisplay> rrds = new ArrayList<>();
+
+        for(Paper p : papers) {
+            String paperID = Integer.toString(p.getPaperID());
+            ReviewRequestDisplay rrd = new ReviewRequestDisplay(p, requestedReviews.get(paperID));
+            rrds.add(rrd);
+        }
+        return rrds;
+    }
+
+
+    //REVIEW FUNCTIONALITY
+    public void addReview(String paperID, Review review) {
+        if(reviews.get(paperID) != null) {
+            List<Review> paperReviews = reviews.get(paperID);
+            paperReviews.add(review);
+            reviews.put(paperID, paperReviews);
+        } else {
+            List<Review> paperReviews = new ArrayList<>();
+            paperReviews.add(review);
+            reviews.put(paperID, paperReviews);
+        }
+    }
+
+    public List<Review> getReviewsForUser(String username) {
+        List<Review> userReviews = new ArrayList<>();
+
+        for(List<Review> revs : reviews.values()) {
+            for(Review r : revs) {
+                if (r.getReviewer().getUsername().equals(username)) {
+                    userReviews.add(r);
+                }
+            }
+        }
+
+        return userReviews;
+    }
+
+    public Review getReview(int id, String username) {
+        for(Review r : reviews.get(Integer.toString(id))) {
+            if(r.getSubject().getPaperID() == id && r.getReviewer().getUsername().equals(username))
+                return r;
+        }
+
+        return null;
+    }
+
+    //SAVING FUNCTIONALITY
     public void savePapers() {
         try {
             FileWriter writer = new FileWriter("papers.txt");
@@ -220,11 +302,13 @@ public class PaperManager {
         try {
             FileWriter writer = new FileWriter("reviews.txt");
             writer.write("=====REVIEWS=====\n");
-            for(Review r : reviews) {
-                writer.write(Integer.toString(r.getSubject().getPaperID()) + "|||");
-                writer.write(r.getReviewer().getUsername() + "|||");
-                writer.write(Double.toString(r.getRating()) + "|||");
-                writer.write(r.getReviewerComments() + "\n");
+            for(List<Review> rev : reviews.values()) {
+                for(Review r : rev) {
+                    writer.write(Integer.toString(r.getSubject().getPaperID()) + "|||");
+                    writer.write(r.getReviewer().getUsername() + "|||");
+                    writer.write(Double.toString(r.getRating()) + "|||");
+                    writer.write(r.getReviewerComments() + "\n");
+                }
             }
 
             writer.close();
@@ -249,7 +333,16 @@ public class PaperManager {
                     User reviewer = getUser(reviewerUsername);
 
                     Review review = new Review(reviewer, paper, score, comments);
-                    reviews.add(review);
+
+                    if(reviews.get(Integer.toString(paperID)) != null) {
+                        List<Review> paperReviews = reviews.get(Integer.toString(paperID));
+                        paperReviews.add(review);
+                        reviews.put(Integer.toString(paperID), paperReviews);
+                    } else {
+                        List<Review> paperReviews = new ArrayList<>();
+                        paperReviews.add(review);
+                        reviews.put(Integer.toString(paperID), paperReviews);
+                    }
 
                     line = br.readLine();
                 }
@@ -294,55 +387,6 @@ public class PaperManager {
             System.out.println("Last name: " + u.getLastName());
             System.out.println("----------\n\n");
         }
-    }
-
-    /**
-     * Methods for Login And Register
-     */
-    public void addUser(User user){
-        users.put(user.getUsername(), user);
-        saveUsers();
-    }
-
-    public void removeUser(String username){
-        users.remove(username);
-    }
-
-    public boolean userExists(String username){
-        return users.containsKey(username);
-    }
-
-    public User getUser(String username){
-        return users.get(username);
-    }
-
-    /**
-     * Methods for requesting papers
-     */
-    public void addRequest(Paper paper, User user) {
-        String paperID = Integer.toString(paper.getPaperID());
-        if(requestedReviews.get(paperID) != null) {
-            List<User> reqUsers = requestedReviews.get(paperID);
-            reqUsers.add(user);
-            requestedReviews.put(paperID, reqUsers);
-        } else {
-            List<User> reqUsers = new ArrayList<>();
-            reqUsers.add(user);
-            requestedReviews.put(paperID, reqUsers);
-        }
-
-        savePapers();
-    }
-
-    public List<ReviewRequestDisplay> getRequestedReviews() {
-        List<ReviewRequestDisplay> rrds = new ArrayList<>();
-
-        for(Paper p : papers) {
-            String paperID = Integer.toString(p.getPaperID());
-            ReviewRequestDisplay rrd = new ReviewRequestDisplay(p, requestedReviews.get(paperID));
-            rrds.add(rrd);
-        }
-        return rrds;
     }
 
     public void printReviewData() {

@@ -49,7 +49,7 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
             Paper p = paperManager.getPaperbyID(Integer.parseInt(pcmAndPaper[1]));
 
             Review review = pcc.assignReview(pcm, p);
-            paperManager.addReview(review);
+            paperManager.addReview(Integer.toString(p.getPaperID()), review);
         }
         //TODO: CLEAR OUT PENDING REVIEWS?
         paperManager.saveReviews();

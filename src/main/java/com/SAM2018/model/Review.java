@@ -41,4 +41,12 @@ public class Review {
     public String getReviewerComments() {
         return reviewerComments;
     }
+
+    public void setRating(double _rating) {
+        this.rating = _rating;
+    }
+
+    public void setReviewerComments(String _reviewerComments) {
+        this.reviewerComments = _reviewerComments;
+    }
 }
