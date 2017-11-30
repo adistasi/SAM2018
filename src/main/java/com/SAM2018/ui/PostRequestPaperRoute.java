@@ -37,7 +37,14 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
 
         final Session session = request.session();
-        vm.put("userType", paperManager.getUserType(session.attribute("username")));
+        String userType = paperManager.getUserType(session.attribute("username"));
+        vm.put("userType", userType);
+
+        if(!(userType.equals("PCM") || userType.equals("Admin"))) {
+            response.redirect("/managePapers");
+            halt();
+            return null;
+        }
 
         PCM user = (PCM)paperManager.getUser(session.attribute("username"));
         QueryParamsMap paperRequests = request.queryMap("requestedPaper");

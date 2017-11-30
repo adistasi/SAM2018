@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static spark.Spark.halt;
+
 public class GetReviewPaperRoute implements TemplateViewRoute{
     //Attributes
     private final PaperManager paperManager;
@@ -31,6 +33,14 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
+        String userType = paperManager.getUserType(request.session().attribute("username"));
+        vm.put("userType", userType);
+
+        if(!(userType.equals("PCM") || userType.equals("Admin"))) {
+            response.redirect("/managePapers");
+            halt();
+            return null;
+        }
 
         String username = request.session().attribute("username");
         int pid = Integer.parseInt(request.queryParams("pid"));
@@ -38,7 +48,6 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
         vm.put("title", "Review Paper");
         vm.put("username", username);
         vm.put("paper", paperManager.getPaperbyID(pid));
-        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         Review thisReview = paperManager.getReview(pid, username);
 

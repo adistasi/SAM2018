@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static spark.Spark.halt;
+
 public class PostRereviewPaperRoute implements Route {
     //Attributes
     private final PaperManager paperManager;
@@ -31,8 +33,16 @@ public class PostRereviewPaperRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
+        String userType = paperManager.getUserType(request.session().attribute("username"));
+        vm.put("userType", userType);
 
-        String username = request.session().attribute("username");
+        if(!(userType.equals("PCC") || userType.equals("Admin"))) {
+            response.redirect("/managePapers");
+            halt();
+            return null;
+        }
+
+
         String rawPid = request.body();
         int pid = Integer.parseInt(rawPid);
         Report report = paperManager.getReportByID(pid);

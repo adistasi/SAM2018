@@ -33,8 +33,15 @@ public class GetReviewPapersRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
 
         String username = request.session().attribute("username");
-        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
-        
+        String userType = paperManager.getUserType(request.session().attribute("username"));
+        vm.put("userType", userType);
+
+        if(!(userType.equals("PCM") || userType.equals("Admin"))) {
+            response.redirect("/managePapers");
+            halt();
+            return null;
+        }
+
         vm.put("title", "Your Reviews");
         vm.put("username", username);
         vm.put("reviews", paperManager.getPendingReviewsForUser(username));

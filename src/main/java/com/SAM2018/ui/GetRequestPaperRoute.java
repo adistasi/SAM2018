@@ -35,7 +35,16 @@ public class GetRequestPaperRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
 
         String username = request.session().attribute("username");
-        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
+        String userType = paperManager.getUserType(request.session().attribute("username"));
+        vm.put("userType", userType);
+
+
+        if(!(userType.equals("PCM") || userType.equals("Admin"))) {
+            response.redirect("/managePapers");
+            halt();
+            return null;
+        }
+
 
         vm.put("title", "Request a Paper");
         vm.put(PAPERS_FOR_REVIEW, paperManager.getPapersForReview(username));
