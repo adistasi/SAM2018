@@ -39,26 +39,18 @@ public class GetManageSubmissionsRoute implements TemplateViewRoute {
         vm.put("title", "Manage Submissions");
 
         String username = request.session().attribute("username");
-        if(username != null) {
+        vm.put("username", username);
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
-            vm.put("username", username);
+        User user = paperManager.getUser(username);
 
-            User user = paperManager.getUser(username);
-
-            List<SubmissionReportDisplay> srd = new ArrayList<>();
-            for(Paper p : user.getSubmissions()) {
-                Report r = paperManager.getReportByID(p.getPaperID());
-                srd.add(new SubmissionReportDisplay(p, r));
-            }
-
-            vm.put("papers", srd);
-
-        } else {
-            response.redirect("/login");
-            halt();
-            return null;
+        List<SubmissionReportDisplay> srd = new ArrayList<>();
+        for(Paper p : user.getSubmissions()) {
+            Report r = paperManager.getReportByID(p.getPaperID());
+            srd.add(new SubmissionReportDisplay(p, r));
         }
 
+        vm.put("papers", srd);
         return new ModelAndView(vm , "manageSubmissions.ftl");
     }
 }

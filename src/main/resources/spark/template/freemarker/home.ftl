@@ -13,8 +13,10 @@
     <div class="navigation">
         <#if username??>
             <a href="/managePapers">Manage Papers</a> |
-            <a href="/accountManagement">Manage Accounts</a> |
-            <a href="/createNotification">Create Notification</a> |
+            <#if userType == "Admin">
+                <a href="/accountManagement">Manage Accounts</a> |
+                <a href="/createNotification">Create Notification</a> |
+            </#if>
             <a href="/logout">Logout</a>
         <#else>
             <a href="/login">Login</a> |

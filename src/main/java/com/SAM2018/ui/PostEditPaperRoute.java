@@ -32,6 +32,7 @@ public class PostEditPaperRoute implements TemplateViewRoute {
 
         vm.put("title", "Submit Paper");
         vm.put("username", session.attribute("username"));
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         String pid = request.queryParams("pid");
         Paper paper = paperManager.getPaperbyID(Integer.parseInt(pid));

@@ -38,6 +38,7 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
         vm.put("title", "Review Paper");
         vm.put("username", username);
         vm.put("paper", paperManager.getPaperbyID(pid));
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         Review thisReview = paperManager.getReview(pid, username);
 

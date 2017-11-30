@@ -35,7 +35,7 @@ public class GetManagePapersRoute implements TemplateViewRoute {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Paper Management");
-
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         return new ModelAndView(vm , "managePapers.ftl");
     }

@@ -64,6 +64,19 @@ public class PaperManager {
         return pcms;
     }
 
+    public String getUserType(String username) {
+        User u = getUser(username);
+
+        if(u instanceof Admin)
+            return "Admin";
+        else if(u instanceof PCC)
+            return "PCC";
+        else if(u instanceof PCM)
+            return "PCM";
+        else
+            return "Submitter";
+    }
+
 
     //PAPER FUNCTIONALITY
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {

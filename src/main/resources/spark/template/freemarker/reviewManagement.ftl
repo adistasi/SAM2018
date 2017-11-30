@@ -13,10 +13,23 @@
 
     <div class="navigation">
     <#if username??>
-        <a href="/">Home</a> |
-        <a href="/submitPaper">Submit a Paper</a> |
-        <a href="/requestPaper">Request Reviews</a> |
-        <a href="/logout">Logout</a> |
+        <#if username??>
+            <a href="/">Home</a> |
+            <a href="/submitPaper">Submit Paper</a> |
+            <a href="/manageSubmissions">Manage Submissions</a> |
+            <#if userType == "PCM" || userType == "Admin">
+                <a href="/requestPaper">Request Reviews</a> |
+                <a href="reviewPapers">Review Papers</a> |
+            </#if>
+            <#if userType == "PCC" || userType == "Admin">
+                <a href="/manageRequests">Manage Assignments</a> |
+                <a href="ratePapers">Rate Papers</a> |
+            </#if>
+            <a href="/logout">Logout</a>
+        <#else>
+            <a href="/login">Login</a> |
+            <a href="/register">Register</a>
+        </#if>
     <#else>
         <a href="/login">Login</a> |
         <a href="/register">Register</a> |

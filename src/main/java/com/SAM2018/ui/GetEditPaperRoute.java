@@ -38,6 +38,7 @@ public class GetEditPaperRoute implements TemplateViewRoute {
 
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Edit Paper");
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         String username = request.session().attribute("username");
         String paperID = request.queryParams("pid");

@@ -8,4 +8,4 @@ user|||class com.SAM2018.model.Submitter|||2|||h|||j|||
 pcm3|||class com.SAM2018.model.PCM|||pass|||Steve|||Ballmer|||
 microMan|||class com.SAM2018.model.PCM|||pass|||Bill|||Gates|||
 pcm4|||class com.SAM2018.model.PCM|||pass|||Paul|||Allen|||
-username|||class com.SAM2018.model.Submitter|||pass|||Test|||User|||
+username|||class com.SAM2018.model.Admin|||pass|||Test|||User|||

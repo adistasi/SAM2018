@@ -70,10 +70,10 @@ public class WebServer {
         staticFileLocation("/public");
 
         // Shows the SAM game Home page.
-        get("/", new GetHomeRoute(), templateEngine);
+        get("/", new GetHomeRoute(paperManager), templateEngine);
 
         //Show Submit Paper Page
-        get("/submitPaper", new GetSubmitPaperRoute(), templateEngine);
+        get("/submitPaper", new GetSubmitPaperRoute(paperManager), templateEngine);
         post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
 
         // Shows the Login Page

@@ -37,6 +37,7 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
 
         final Session session = request.session();
+        vm.put("userType", paperManager.getUserType(session.attribute("username")));
 
         PCM user = (PCM)paperManager.getUser(session.attribute("username"));
         QueryParamsMap paperRequests = request.queryMap("requestedPaper");
@@ -55,9 +56,5 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
         response.redirect("/manageRequests");
         halt();
         return null;
-
-        //vm.put(REQUESTED_PAPERS, paperManager.getRequestedReviews());
-        //vm.put("title", "Manage Paper Requests");
-        //return new ModelAndView(vm , "reviewManagement.ftl");
     }
 }

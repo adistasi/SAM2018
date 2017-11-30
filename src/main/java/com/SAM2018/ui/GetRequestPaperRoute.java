@@ -14,29 +14,31 @@ import static spark.Spark.halt;
  */
 
 public class GetRequestPaperRoute implements TemplateViewRoute {
-  public static final String PAPERS_FOR_REVIEW= "paperForReview";
+    public static final String PAPERS_FOR_REVIEW= "paperForReview";
 
-  //Attributes
-  private final PaperManager paperManager;
+    //Attributes
+    private final PaperManager paperManager;
 
-  /**
-   * The constructor for the {@code POST /submitPaper} route handler
-   * @param _paperManager The {@link PaperManager} for the application.
-   */
-  GetRequestPaperRoute(final PaperManager _paperManager) {
-    Objects.requireNonNull(_paperManager, "PaperManager must not be null");
+    /**
+    * The constructor for the {@code POST /submitPaper} route handler
+    * @param _paperManager The {@link PaperManager} for the application.
+    */
+    GetRequestPaperRoute(final PaperManager _paperManager) {
+        Objects.requireNonNull(_paperManager, "PaperManager must not be null");
 
-    this.paperManager = _paperManager;
-  }
-  @Override
-  public ModelAndView handle(Request request, Response response) {
-    Map<String, Object> vm = new HashMap<>();
-    vm = UIUtils.validateLoggedIn(request, response, vm);
+        this.paperManager = _paperManager;
+    }
 
-    String username = request.session().attribute("username");
+    @Override
+        public ModelAndView handle(Request request, Response response) {
+        Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
 
-    vm.put("title", "Request a Paper");
-    vm.put(PAPERS_FOR_REVIEW, paperManager.getPapersForReview(username));
-    return new ModelAndView(vm , "requestPaper.ftl");
-  }
+        String username = request.session().attribute("username");
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
+
+        vm.put("title", "Request a Paper");
+        vm.put(PAPERS_FOR_REVIEW, paperManager.getPapersForReview(username));
+        return new ModelAndView(vm , "requestPaper.ftl");
+    }
 }

@@ -31,6 +31,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
 
         vm.put("title", "Submit Paper");
         vm.put("username", session.attribute("username"));
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         String rawAuthors = request.queryParams("authors");
         List<String> authors = paperManager.validateAuthors(rawAuthors);

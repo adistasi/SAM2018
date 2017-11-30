@@ -27,6 +27,7 @@ public class GetRatePapersRoute implements TemplateViewRoute {
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         Session session = request.session();
         vm.put("title", "Manage Paper Ratings");

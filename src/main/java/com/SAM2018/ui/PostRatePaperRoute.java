@@ -31,6 +31,7 @@ public class PostRatePaperRoute implements TemplateViewRoute {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         Session session = request.session();
+        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         int pid = Integer.parseInt(request.queryParams("pid"));
         Paper p = paperManager.getPaperbyID(pid);
