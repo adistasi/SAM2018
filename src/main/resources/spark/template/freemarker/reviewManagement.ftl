@@ -3,6 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
     <title>${title} | SAM 2018</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div class="page">
@@ -27,7 +29,7 @@
             <form action="/manageRequests" method="POST" class="inputForm">
                 <#list papersRequested as p>
                     <p style="text-decoration: underline">"<em>${p.getPaper().getTitle()}</em>" - ${p.getPaper().getAuthorsAsString()}</p>
-                    <div class="reviews">
+                    <div class="reviews" data-pid="${p.getPaper().getPaperID()}">
                         <#if p.getUsers()??>
                             <#list p.getUsers() as u>
                                 <input type="checkbox" name="requests" value="${u.getUsername()}|||${p.getPaper().getPaperID()}"/>
@@ -35,6 +37,15 @@
                             </#list>
                         <#else>
                             <p>No PCMs have requested to review this paper</p>
+                        </#if>
+
+                        <#if pcmUsers??>
+                            <select class="addPCMSToPaper" onchange="addPCM($(this))">
+                                <option selected disabled>Add a PCM to this paper</option>
+                                <#list pcmUsers as pcm>
+                                    <option value="${pcm.getUsername()}">${pcm.getFirstName()} ${pcm.getLastName()}</option>
+                                </#list>
+                            </select>
                         </#if>
                     </div>
                  </#list>

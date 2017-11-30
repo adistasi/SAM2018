@@ -54,6 +54,16 @@ public class PaperManager {
         return users.get(username);
     }
 
+    public List<User> getAllPCMs() {
+        List<User> pcms = new ArrayList<>();
+        for(User u : users.values()) {
+            if(u instanceof PCM)
+                pcms.add(u);
+        }
+
+        return pcms;
+    }
+
 
     //PAPER FUNCTIONALITY
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {

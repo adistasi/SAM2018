@@ -36,6 +36,7 @@ public class GetManageRequestsRoute implements TemplateViewRoute {
             return null;
         }
 
+        vm.put("pcmUsers", paperManager.getAllPCMs());
         vm.put("papersRequested", paperManager.getRequestedReviews());
         vm.put("title", "Manage Paper Requests");
         return new ModelAndView(vm , "reviewManagement.ftl");

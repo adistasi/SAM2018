@@ -44,27 +44,38 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
             return new ModelAndView(vm , "reviewManagement.ftl"); //return with no paper requested message
         }
 
-        Map<String, Integer> potentialReviews = new HashMap<>();
+        Map<String, List<String>> potentialReviews = new HashMap<>();
 
         for(String potentialReq : approvedRequests.values()) {
-            String pid = potentialReq.split("\\|\\|\\|")[1];
+            String[] pcmAndPaper = potentialReq.split("\\|\\|\\|");
+            String username = pcmAndPaper[0];
+            String pid = pcmAndPaper[1];
 
             if(potentialReviews.get(pid) != null) {
-                int count = potentialReviews.get(pid);
-                count++;
-                potentialReviews.put(pid, count);
+                List<String> reviewerUsernames = potentialReviews.get(pid);
+                reviewerUsernames.add(username);
+                potentialReviews.put(pid, reviewerUsernames);
             } else {
-                potentialReviews.put(pid, 1);
+                List<String> reviewerUsernames = new ArrayList<>();
+                reviewerUsernames.add(username);
+                potentialReviews.put(pid, reviewerUsernames);
             }
         }
 
-        /*for(int count : potentialReviews.values()) {
-            if(count != 3) {
+        for(List<String> prs : potentialReviews.values()) {
+            if(prs.size() != 3) {
                 //TODO: CREATE ACTUAL ERROR MESSAGE
                 vm.put("title", "Not all papers have 3 Assigned PCMs");
                 return new ModelAndView(vm , "reviewManagement.ftl"); //return with no paper requested message
+            } else {
+                Set<String> prSet = new HashSet<String>(prs);
+                if(prSet.size() != 3) {
+                    //TODO: CREATE ACTUAL ERROR MESSAGE
+                    vm.put("title", "You cannot assign the same PCM to a paper twice");
+                    return new ModelAndView(vm, "reviewManagement.ftl");
+                }
             }
-        }*/
+        }
 
         for(String req : approvedRequests.values()) {
             String[] pcmAndPaper = req.split("\\|\\|\\|");
