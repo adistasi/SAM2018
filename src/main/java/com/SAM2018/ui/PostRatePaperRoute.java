@@ -38,7 +38,7 @@ public class PostRatePaperRoute implements TemplateViewRoute {
         String approval = request.queryParams("approval");
         AcceptanceStatus as = AcceptanceStatus.valueOf(approval);
 
-        Review pccReview = new Review(user, p, pccRating, pccComment);
+        Review pccReview = new Review(user, p, pccRating, pccComment, false);
         List<Review> pcmReviews = paperManager.getReviewsForPaper(request.queryParams("pid"));
         Report report = new Report(p, user, pcmReviews, pccReview, as);
         paperManager.addReport(report);

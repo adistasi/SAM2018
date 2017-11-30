@@ -42,6 +42,7 @@ public class PostReviewPaperRoute implements TemplateViewRoute{
         if(review != null) {
             review.setRating(score);
             review.setReviewerComments(comments);
+            review.setNeedsRereviewed(false);
             paperManager.saveReviews();
         }
 

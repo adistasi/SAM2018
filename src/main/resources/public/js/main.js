@@ -26,3 +26,18 @@ function addPCM(selectList) {
     var htmlString = '<input type="checkbox" name="requests" value="' + username + '|||' + pid + '" checked><label for="requests">' + name + '</label><br />';
     selectList.before(htmlString);
 }
+
+function rereviewPaper(paperID) {
+    jQuery.post('/rereviewPaper', JSON.stringify(paperID), handleMessageResponse, 'json');
+}
+
+function handleMessageResponse(message, textStatus, jqXHR) {
+    displayMessage(message);
+}
+
+function displayMessage(message) {
+    console.log("HMR");
+    console.log(message.type);
+    console.log(message.text);
+    $('#message').attr('class', message.type).html(message.text).slideDown(400);
+}

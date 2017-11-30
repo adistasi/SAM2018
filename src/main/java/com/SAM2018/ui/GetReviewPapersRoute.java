@@ -34,7 +34,7 @@ public class GetReviewPapersRoute implements TemplateViewRoute {
 
         vm.put("title", "Your Reviews");
         vm.put("username", username);
-        vm.put("reviews", paperManager.getReviewsForUser(username));
+        vm.put("reviews", paperManager.getPendingReviewsForUser(username));
         return new ModelAndView(vm , "manageReviews.ftl");
     }
 }

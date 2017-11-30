@@ -3,6 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
     <title>${title} | SAM 2018</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div class="page">
@@ -22,6 +24,13 @@
     </div>
 
     <div class="body">
+        <#if message??>
+            <div id="message" class="${message.type}">${message.text}</div>
+        <#else>
+            <div id="message" class="info" style="display:none">
+                <!-- keep here for Client-side messages -->
+            </div>
+        </#if>
         <p>Papers Available for Review:</p>
 
         <#if paper??>
@@ -46,6 +55,9 @@
                     <button type="submit">Submit</button>
                 </div>
             </form>
+
+            <button onclick="rereviewPaper(${paper.getPaperID()})">Have PCMs Re-Review this paper</button>
+            <!--<a href="/rereviewPaper?pid=${paper.getPaperID()}">Have PCMs Re-Review this paper</a>-->
         </#if>
     </div>
 

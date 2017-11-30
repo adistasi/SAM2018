@@ -1,12 +1,15 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Report;
+import com.SAM2018.model.Review;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,10 +33,18 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
         String username = request.session().attribute("username");
         int pid = Integer.parseInt(request.queryParams("pid"));
 
-
         vm.put("title", "Review Paper");
         vm.put("username", username);
         vm.put("paper", paperManager.getPaperbyID(pid));
+
+        Review thisReview = paperManager.getReview(pid, username);
+
+        if(thisReview != null && thisReview.getNeedsRereviewed()) {
+            Report report = paperManager.getReportByID(pid);
+            List<Review> otherReviews = report.getPcmReviews();
+
+            vm.put("otherReviews", otherReviews);
+        }
         return new ModelAndView(vm , "reviewPaper.ftl");
     }
 }

@@ -115,5 +115,7 @@ public class WebServer {
 
         get("/reviewRating", new GetReviewRatingRoute(paperManager), templateEngine);
 
+        post("/rereviewPaper", new PostRereviewPaperRoute(paperManager), JsonUtils.json());
+
   }
 }

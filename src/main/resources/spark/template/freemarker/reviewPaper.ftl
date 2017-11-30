@@ -43,6 +43,16 @@
                 </div>
             </form>
         </#if>
+
+        <#if otherReviews??>
+            <p>A PCM has requested these papers be re-reviewed.  Here are the reviews that were submitted:</p>
+
+            <#list otherReviews as or>
+                <p>Rating: ${or.getRating()}</p>
+                <p>Comments: ${or.getReviewerComments()}</p>
+                <hr />
+            </#list>
+        </#if>
     </div>
 
 </div>

@@ -168,9 +168,23 @@ public class PaperManager {
         return userReviews;
     }
 
-    public Review getReview(int id, String username) {
-        for(Review r : reviews.get(Integer.toString(id))) {
-            if(r.getSubject().getPaperID() == id && r.getReviewer().getUsername().equals(username))
+    public List<Review> getPendingReviewsForUser(String username) {
+        List<Review> userReviews = new ArrayList<>();
+
+        for(List<Review> revs : reviews.values()) {
+            for(Review r : revs) {
+                if (r.getReviewer().getUsername().equals(username) && (r.getNeedsRereviewed() || r.getRating() == -1)) {
+                    userReviews.add(r);
+                }
+            }
+        }
+
+        return userReviews;
+    }
+
+    public Review getReview(int paperID, String username) {
+        for(Review r : reviews.get(Integer.toString(paperID))) {
+            if(r.getSubject().getPaperID() == paperID && r.getReviewer().getUsername().equals(username))
                 return r;
         }
 
@@ -189,7 +203,7 @@ public class PaperManager {
                 boolean allReviewsComplete = true;
 
                 for(int i=0; i < REVIEWS_PER_PAPER; i++) {
-                    if(revs.get(i).getRating() == -1) {
+                    if(revs.get(i).getRating() == -1 || revs.get(i).getNeedsRereviewed()) {
                         allReviewsComplete = false;
                         break;
                     }
@@ -366,7 +380,8 @@ public class PaperManager {
                     writer.write(Integer.toString(r.getSubject().getPaperID()) + "|||");
                     writer.write(r.getReviewer().getUsername() + "|||");
                     writer.write(Double.toString(r.getRating()) + "|||");
-                    writer.write(r.getReviewerComments() + "\n");
+                    writer.write(r.getReviewerComments() + "|||");
+                    writer.write(r.getNeedsRereviewed() + "\n");
                 }
             }
 
@@ -387,11 +402,12 @@ public class PaperManager {
                     String reviewerUsername = reviewLine[1];
                     double score = Double.parseDouble(reviewLine[2]);
                     String comments = reviewLine[3];
+                    boolean needsReReviewed = Boolean.valueOf(reviewLine[4]);
 
                     Paper paper = getPaperbyID(paperID);
                     User reviewer = getUser(reviewerUsername);
 
-                    Review review = new Review(reviewer, paper, score, comments);
+                    Review review = new Review(reviewer, paper, score, comments, needsReReviewed);
 
                     if(reviews.get(Integer.toString(paperID)) != null) {
                         List<Review> paperReviews = reviews.get(Integer.toString(paperID));
@@ -446,7 +462,7 @@ public class PaperManager {
                     PCC pcc = (PCC)getUser(pccUsername);
                     List<Review> pcmReviews = reviews.get(Integer.toString(paperID));
 
-                    Review pccReview = new Review(pcc, paper, pccScore, pccComments);
+                    Review pccReview = new Review(pcc, paper, pccScore, pccComments, false);
                     Report report = new Report(paper, pcc, pcmReviews, pccReview, acceptanceStatus);
                     reports.add(report);
                     line = br.readLine();
