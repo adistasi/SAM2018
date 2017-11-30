@@ -11,7 +11,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.8</jdk.version>
-    <spark.version>2.2</spark.version>
+    <spark.version>2.3</spark.version>
     <spark.freemarker.version>2.0.0</spark.freemarker.version>
     <freemarker.version>2.3.23</freemarker.version>
   </properties>
@@ -61,7 +61,6 @@
       <version>2.3.5</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>

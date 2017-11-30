@@ -18,11 +18,15 @@ import java.util.List;
 import java.util.Map;
 
 public class PaperManager {
+    //Constants
+    private final int REVIEWS_PER_PAPER = 3;
+
     //Attributes
     private  Map<String, User> users = new HashMap<>();
     private List<Paper> papers = new ArrayList<>();
     private Map<String, List<Review>> reviews = new HashMap<>();
     private Map<String, List<User>> requestedReviews = new HashMap();
+    private List<Report> reports = new ArrayList<>();
 
     //USER FUNCTIONALITY
     public Set<String> getUsernames() {
@@ -157,6 +161,37 @@ public class PaperManager {
         }
 
         return null;
+    }
+
+    public List<Review> getReviewsForPaper(String paperID) {
+        return reviews.get(paperID);
+    }
+
+    public List<Paper> getRatablePapers() {
+        List<Paper> ratablePapers = new ArrayList<>();
+
+        for(List<Review> revs: reviews.values()) {
+            if(revs.size() == REVIEWS_PER_PAPER) {
+                boolean allReviewsComplete = true;
+
+                for(int i=0; i < REVIEWS_PER_PAPER; i++) {
+                    if(revs.get(i).getRating() == -1) {
+                        allReviewsComplete = false;
+                        break;
+                    }
+                }
+
+                if(allReviewsComplete)
+                    ratablePapers.add(revs.get(0).getSubject());
+            }
+        }
+
+        return ratablePapers;
+    }
+
+    //REPORTS FUNCTIONALITY
+    public void addReport(Report _report) {
+        reports.add(_report);
     }
 
     //SAVING FUNCTIONALITY
@@ -352,10 +387,57 @@ public class PaperManager {
         }
     }
 
+    public void saveReports() {
+        try {
+            FileWriter writer = new FileWriter("reports.txt");
+            writer.write("=====REPORTS=====\n");
+            for(Report r : reports) {
+                writer.write(Integer.toString(r.getSubject().getPaperID()) + "|||");
+                writer.write(r.getGenerator().getUsername() + "|||");
+                writer.write(Double.toString(r.getPccReview().getRating()) + "|||");
+                writer.write(r.getPccReview().getReviewerComments() + "|||");
+                writer.write(r.getAcceptanceStatus() + "\n");
+            }
+
+            writer.close();
+        } catch(Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+    }
+
+    public void loadReports() {
+        try {
+            try (BufferedReader br = new BufferedReader(new FileReader("reports.txt"))) {
+                String header = br.readLine();
+                String line = br.readLine();
+                while (line != null) {
+                    String[] ratingLine = line.split("\\|\\|\\|");
+                    int paperID = Integer.parseInt(ratingLine[0]);
+                    String pccUsername = ratingLine[1];
+                    double pccScore = Double.parseDouble(ratingLine[2]);
+                    String pccComments = ratingLine[3];
+                    AcceptanceStatus acceptanceStatus = AcceptanceStatus.valueOf(ratingLine[4]);
+
+                    Paper paper = getPaperbyID(paperID);
+                    PCC pcc = (PCC)getUser(pccUsername);
+                    List<Review> pcmReviews = reviews.get(Integer.toString(paperID));
+
+                    Review pccReview = new Review(pcc, paper, pccScore, pccComments);
+                    Report report = new Report(paper, pcc, pcmReviews, pccReview, acceptanceStatus);
+                    reports.add(report);
+                    line = br.readLine();
+                }
+            }
+        } catch(Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+    }
+
     public void loadApplication() {
         loadUsers();
         loadPapers();
         loadReviews();
+        loadReports();
     }
 
     public void printPapersData() {

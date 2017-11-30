@@ -108,5 +108,10 @@ public class WebServer {
         get("/reviewPaper", new GetReviewPaperRoute(paperManager), templateEngine);
         post("/reviewPaper", new PostReviewPaperRoute(paperManager), templateEngine);
 
+        get("/ratePapers", new GetRatePapersRoute(paperManager), templateEngine);
+
+        get("/ratePaper", new GetRatePaperRoute(paperManager), templateEngine);
+        post("/ratePaper", new PostRatePaperRoute(paperManager), templateEngine);
+
   }
 }
