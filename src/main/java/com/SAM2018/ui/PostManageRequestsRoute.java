@@ -39,21 +39,45 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
         QueryParamsMap approvedRequests = request.queryMap("requests");
 
         if(approvedRequests.booleanValue()== null) {
+            //TODO: CREATE ACTUAL ERROR MESSAGE
             vm.put("title", "You have not approved any requests");
             return new ModelAndView(vm , "reviewManagement.ftl"); //return with no paper requested message
         }
+
+        Map<String, Integer> potentialReviews = new HashMap<>();
+
+        for(String potentialReq : approvedRequests.values()) {
+            String pid = potentialReq.split("\\|\\|\\|")[1];
+
+            if(potentialReviews.get(pid) != null) {
+                int count = potentialReviews.get(pid);
+                count++;
+                potentialReviews.put(pid, count);
+            } else {
+                potentialReviews.put(pid, 1);
+            }
+        }
+
+        /*for(int count : potentialReviews.values()) {
+            if(count != 3) {
+                //TODO: CREATE ACTUAL ERROR MESSAGE
+                vm.put("title", "Not all papers have 3 Assigned PCMs");
+                return new ModelAndView(vm , "reviewManagement.ftl"); //return with no paper requested message
+            }
+        }*/
 
         for(String req : approvedRequests.values()) {
             String[] pcmAndPaper = req.split("\\|\\|\\|");
             PCM pcm = (PCM)paperManager.getUser(pcmAndPaper[0]);
             Paper p = paperManager.getPaperbyID(Integer.parseInt(pcmAndPaper[1]));
 
+
             Review review = pcc.assignReview(pcm, p);
             paperManager.addReview(Integer.toString(p.getPaperID()), review);
         }
-        //TODO: CLEAR OUT PENDING REVIEWS?
         paperManager.saveReviews();
-
+        paperManager.clearRequests();
+        paperManager.savePapers();
         response.redirect("/manageRequests");
         halt();
         return null;

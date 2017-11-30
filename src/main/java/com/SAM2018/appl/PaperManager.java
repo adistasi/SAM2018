@@ -115,6 +115,10 @@ public class PaperManager {
         savePapers();
     }
 
+    public void clearRequests() {
+        requestedReviews.clear();
+    }
+
     public List<ReviewRequestDisplay> getRequestedReviews() {
         List<ReviewRequestDisplay> rrds = new ArrayList<>();
 
@@ -221,7 +225,7 @@ public class PaperManager {
                         reqRevString += u.getUsername() + "/";
                     }
                 }
-                writer.write(reqRevString);
+                writer.write(reqRevString + "\n");
 
 
             }
