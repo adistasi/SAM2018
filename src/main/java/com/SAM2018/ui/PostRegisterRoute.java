@@ -17,8 +17,6 @@ import static spark.Spark.halt;
 public class PostRegisterRoute implements TemplateViewRoute {
     private final PaperManager paperManager;
 
-    String PASSWORD_NO_MATCH = "The password is not the same!";
-
     /**
      * The constructor for the {@code POST /login} route handler
      * @param _paperManager The {@link PaperManager} for the application.
@@ -32,6 +30,7 @@ public class PostRegisterRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        vm.put("title","Register");
 
         String firstName = request.queryParams("fName");
         String lastName = request.queryParams("lName");
@@ -40,11 +39,8 @@ public class PostRegisterRoute implements TemplateViewRoute {
         String validPassword = request.queryParams("validPassword");
 
         if (password.equals(validPassword)) {
-            if(username.contains("|||") || password.contains("|||") || firstName.contains("|||") || lastName.contains("|||")) {
-                vm.put("title","Register");
-                vm.put("messageType","error");
-                vm.put("message", "Account information cannot include the string '|||'");
-                return new ModelAndView(vm, "register.ftl");
+            if(UIUtils.validateInputText(username) || UIUtils.validateInputText(password) || UIUtils.validateInputText(firstName) || UIUtils.validateInputText(lastName)) {
+                return UIUtils.error(vm, "Account information cannot include the string '|||'", "register.ftl");
             } else {
                 User user = new Submitter(username, password, firstName, lastName);
                 paperManager.addUser(user);
@@ -55,10 +51,7 @@ public class PostRegisterRoute implements TemplateViewRoute {
             }
         }
         else{
-            vm.put("title","Register");
-            vm.put("messageType","error");
-            vm.put("message",PASSWORD_NO_MATCH);
-            return new ModelAndView(vm, "register.ftl");
+            return UIUtils.error(vm, "Invalid Password", "register.ftl");
         }
     }
 }

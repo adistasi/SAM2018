@@ -30,6 +30,8 @@ public class GetReviewPapersRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
+
         String username = request.session().attribute("username");
 
         vm.put("title", "Your Reviews");

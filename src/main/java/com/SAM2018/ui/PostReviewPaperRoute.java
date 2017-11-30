@@ -30,12 +30,20 @@ public class PostReviewPaperRoute implements TemplateViewRoute{
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
+
         String username = request.session().attribute("username");
 
         int pid = Integer.parseInt(request.queryParams("pid"));
         double score = Double.parseDouble(request.queryParams("score"));
         String comments = request.queryParams("comment");
 
+        if(UIUtils.validateInputText(comments)) {
+            vm.put("title", "Review Paper");
+            vm.put("username", username);
+            vm.put("paper", paperManager.getPaperbyID(pid));
+            return UIUtils.error(vm, "Review information cannot be blank or contain the characters '|||'", "reviewPaper.ftl");
+        }
 
         Review review = paperManager.getReview(pid, username);
 
@@ -47,7 +55,6 @@ public class PostReviewPaperRoute implements TemplateViewRoute{
         }
 
         //we'll also need to differentiate between completed and uncompleted reviews (maybe for score = -1)
-
         response.redirect("/reviewPapers");
         halt();
         return null;

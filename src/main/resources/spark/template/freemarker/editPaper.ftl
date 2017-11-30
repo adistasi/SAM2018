@@ -41,13 +41,13 @@
                     <a href="#" onclick="addAuthor()">Add Author</a><br />
 
                     <label>Paper Title</label>
-                    <input type="text" name="title" value="${paper.getTitle()}" /><br />
+                    <input type="text" name="title" value="${paper.getTitle()}" required /><br />
 
                     <label>Paper Format</label>
-                    <input type="text" name="format" value="${paper.getFormat()}" /><br />
+                    <input type="text" name="format" value="${paper.getFormat()}" required /><br />
 
                     <label>Upload Paper</label>
-                    <input type="text" name="paperFile" value="${paper.getPaperUpload()}"/><br />
+                    <input type="text" name="paperFile" value="${paper.getPaperUpload()}" required /><br />
                     <!--<input type="file" name="paperFile" /><br />-->
                     <button type="submit">Edit</button>
                 </div>

@@ -37,19 +37,19 @@
             <div class="form-group">
                 <div style="margin-bottom: 35px;" id="authorsDiv">
                     <label>Authors</label>
-                    <input type="text" class="authorField" name="author" /><br />
+                    <input type="text" class="authorField" name="author"/><br />
                 </div>
                 <input type="hidden" id="authInput" name="authors" />
                 <a href="#" onclick="addAuthor()">Add Author</a><br />
 
                 <label>Paper Title</label>
-                <input type="text" name="title" /><br />
+                <input type="text" name="title" required /><br />
 
                 <label>Paper Format</label>
-                <input type="text" name="format" /><br />
+                <input type="text" name="format" required /><br />
 
                 <label>Upload Paper</label>
-                <input type="text" name="paperFile" /><br />
+                <input type="text" name="paperFile" required /><br />
                 <!--<input type="file" name="paperFile" /><br />-->
                 <button type="submit">Upload</button>
             </div>

@@ -22,6 +22,9 @@
     </div>
 
     <div class="body">
+        <#if message??>
+            <div id="message" class="${messageType}">"${message}"</div>
+        </#if>
         <p>Papers Available for Review:</p>
 
         <#if paper??>
@@ -34,10 +37,10 @@
                     <input type="hidden" name="pid" value="${paper.getPaperID()}"
 
                     <label>Score</label>
-                    <input type="number" name="score" min="0" max="10" step="0.1" /><br />
+                    <input type="number" name="score" min="0" max="10" step="0.1" required /><br />
 
                     <label>Comments</label>
-                    <textarea name="comment" placeholder="Enter Comments Here"/></textarea>
+                    <textarea name="comment" placeholder="Enter Comments Here" required /></textarea>
 
                     <button type="submit">Submit</button>
                 </div>

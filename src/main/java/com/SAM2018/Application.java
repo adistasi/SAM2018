@@ -38,8 +38,6 @@ public final class Application {
     final PaperManager paperManager = new PaperManager();
 
     paperManager.loadApplication();
-    paperManager.printUsersData();
-    paperManager.printPapersData();
 
     // The application uses FreeMarker templates to generate the HTML
     // responses sent back to the client. This will be the engine processing

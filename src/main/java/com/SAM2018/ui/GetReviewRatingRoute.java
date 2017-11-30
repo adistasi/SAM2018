@@ -24,6 +24,8 @@ public class GetReviewRatingRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
+        
         Session session = request.session();
         String paperID = request.queryParams("pid");
 

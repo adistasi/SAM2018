@@ -34,6 +34,8 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
+
         final Session session = request.session();
 
         PCM user = (PCM)paperManager.getUser(session.attribute("username"));

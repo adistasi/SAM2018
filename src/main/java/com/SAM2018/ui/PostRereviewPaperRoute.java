@@ -30,6 +30,8 @@ public class PostRereviewPaperRoute implements Route {
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
+
         String username = request.session().attribute("username");
         String rawPid = request.body();
         int pid = Integer.parseInt(rawPid);

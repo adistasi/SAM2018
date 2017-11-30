@@ -20,15 +20,9 @@ public class GetHomeRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Welcome!");
 
-        if(request.session().attribute("username") != null) {
-            vm.put("username", request.session().attribute("username"));
-        } else {
-            response.redirect("/login");
-            halt();
-            return null;
-        }
+        vm = UIUtils.validateLoggedIn(request, response, vm);
+        vm.put("title", "Welcome!");
 
         return new ModelAndView(vm , "home.ftl");
     }

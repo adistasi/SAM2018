@@ -80,7 +80,6 @@ public class PaperManager {
         List<String> authorsRaw = Arrays.asList(authorsArr);
 
         for(String auth : authorsRaw) {
-            System.out.println(auth);
             if(auth != null && !auth.equals("")) {
                 authors.add(auth);
             }
@@ -238,19 +237,7 @@ public class PaperManager {
             FileWriter writer = new FileWriter("papers.txt");
             writer.write("=====PAPERS=====\n");
             for(Paper p : papers) {
-                writer.write(p.getPaperID() + "|||");
-                String authors = "";
-                for(String author : p.getAuthors()) {
-                    authors = authors.concat(author + ",");
-                }
-                if(authors.length() > 0)
-                    authors = authors.substring(0, authors.length()-1); //trim off extra comma at end
-                writer.write(authors + "|||");
-                writer.write(p.getContactAuthor().getUsername() + "|||");
-                writer.write(p.getTitle() + "|||");
-                writer.write(p.getFormat() + "|||");
-                writer.write(Integer.toString(p.getVersion()) + "|||");
-                writer.write(p.getPaperUpload() + "|||");
+                writer.write(p.savePaper());
 
                 List<User> requestedReviewers = requestedReviews.get(Integer.toString(p.getPaperID()));
                 String reqRevString = " ";
@@ -260,8 +247,6 @@ public class PaperManager {
                     }
                 }
                 writer.write(reqRevString + "\n");
-
-
             }
 
             writer.close();
@@ -275,7 +260,6 @@ public class PaperManager {
             try (BufferedReader br = new BufferedReader(new FileReader("papers.txt"))) {
                 String header = br.readLine();
                 String line = br.readLine();
-                System.out.println(line);
                 while (line != null) {
                     String[] paperLine = line.split("\\|\\|\\|");
                     int id = Integer.parseInt(paperLine[0]);
@@ -324,11 +308,7 @@ public class PaperManager {
             FileWriter writer = new FileWriter("users.txt");
             writer.write("=====USERS=====\n");
             for(User u : users.values()) {
-                writer.write(u.getUsername() + "|||");
-                writer.write(u.getClass().toString() + "|||");
-                writer.write(u.getPassword() + "|||");
-                writer.write(u.getFirstName() + "|||");
-                writer.write(u.getLastName() + "|||\n");
+                writer.write(u.saveUser());
             }
 
             writer.close();
@@ -377,11 +357,7 @@ public class PaperManager {
             writer.write("=====REVIEWS=====\n");
             for(List<Review> rev : reviews.values()) {
                 for(Review r : rev) {
-                    writer.write(Integer.toString(r.getSubject().getPaperID()) + "|||");
-                    writer.write(r.getReviewer().getUsername() + "|||");
-                    writer.write(Double.toString(r.getRating()) + "|||");
-                    writer.write(r.getReviewerComments() + "|||");
-                    writer.write(r.getNeedsRereviewed() + "\n");
+                    writer.write(r.saveReview());
                 }
             }
 
@@ -432,11 +408,7 @@ public class PaperManager {
             FileWriter writer = new FileWriter("reports.txt");
             writer.write("=====REPORTS=====\n");
             for(Report r : reports) {
-                writer.write(Integer.toString(r.getSubject().getPaperID()) + "|||");
-                writer.write(r.getGenerator().getUsername() + "|||");
-                writer.write(Double.toString(r.getPccReview().getRating()) + "|||");
-                writer.write(r.getPccReview().getReviewerComments() + "|||");
-                writer.write(r.getAcceptanceStatus() + "\n");
+                writer.write(r.saveReport());
             }
 
             writer.close();
@@ -478,50 +450,5 @@ public class PaperManager {
         loadPapers();
         loadReviews();
         loadReports();
-    }
-
-    public void printPapersData() {
-        System.out.println("THERE ARE " + papers.size() + " PAPERS");
-        for(Paper paper : papers) {
-            System.out.println("----------");
-            System.out.println("Paper ID: " + paper.getPaperID());
-            for(String a : paper.getAuthors()) {
-                System.out.println("Author: " + a);
-            }
-            System.out.println("Contact Author: " + paper.getContactAuthor().getFirstName() + " " + paper.getContactAuthor().getLastName());
-            System.out.println("Title: " + paper.getTitle());
-            System.out.println("Format: " + paper.getFormat());
-            System.out.println("Version: " + paper.getVersion());
-            System.out.println("File Upload: " + paper.getPaperUpload());
-            System.out.println("----------\n\n");
-        }
-
-    }
-
-    public void printUsersData() {
-        System.out.println("THERE ARE " + users.size() + " USERS");
-        for (User u : users.values()) {
-            System.out.println("----------");
-            System.out.println("Username: " + u.getUsername());
-            System.out.println("Type: " + u.getClass().toString());
-            System.out.println("Password: " + u.getPassword());
-            System.out.println("First name: " + u.getFirstName());
-            System.out.println("Last name: " + u.getLastName());
-            System.out.println("----------\n\n");
-        }
-    }
-
-    public void printReviewData() {
-        System.out.println("-----REQUEST REVIEWS-----");
-        for(String s : requestedReviews.keySet()) {
-            System.out.println("----------");
-            Paper p = getPaperbyID(Integer.parseInt(s));
-            System.out.println(p.getTitle());
-
-            for(User u : requestedReviews.get(s)) {
-                System.out.println("     " + u.getFirstName() + " " + u.getLastName());
-            }
-            System.out.println("----------");
-        }
     }
 }

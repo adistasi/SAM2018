@@ -60,4 +60,9 @@ public class Review {
     public void setNeedsRereviewed(boolean _needsRereviewed) {
         this.needsRereviewed = _needsRereviewed;
     }
+
+    public String saveReview() {
+        String saveString = subject.getPaperID() + "|||" + reviewer.getUsername() + "|||" + rating + "|||" + reviewerComments + "|||" + needsRereviewed + "\n";
+        return saveString;
+    }
 }

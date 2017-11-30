@@ -55,4 +55,9 @@ public abstract class User {
     public void addPaperToSubmissions(Paper _paper) {
         submittedPapers.add(_paper);
     }
+
+    public String saveUser() {
+        String saveString = username + "|||" + getClass().toString() + "|||" + password + "|||" + firstName + "|||" + lastName + "|||\n";
+        return saveString;
+    }
 }

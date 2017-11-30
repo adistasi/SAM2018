@@ -35,6 +35,8 @@ public class GetEditPaperRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+
+        vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Edit Paper");
 
         String username = request.session().attribute("username");

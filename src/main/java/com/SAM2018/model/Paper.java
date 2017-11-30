@@ -91,4 +91,16 @@ public class Paper {
         setVersion(this.version + 1);
         setPaperUpload(_paperUpload);
     }
+
+    public String savePaper() {
+        String authorsString = "";
+        for(String auth : authors)
+            authorsString = authorsString.concat(auth + ",");
+        if(authorsString.length() > 0)
+            authorsString = authorsString.substring(0, authorsString.length() - 1); //trim off trailing comma
+
+        String saveString = paperID + "|||" + authorsString + "|||" + contactAuthor.getUsername() + "|||" + title + "|||" + format + "|||" + version + "|||" + paperUpload + "|||";
+
+        return saveString;
+    }
 }

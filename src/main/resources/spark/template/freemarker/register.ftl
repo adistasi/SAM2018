@@ -9,10 +9,6 @@
 
     <h1>SAM 2018 Home Page</h1>
 
-    <#if message??>
-        <div id="message" class="${messageType}">"${message}"</div>
-    </#if>
-
     <div class="navigation">
         <#if username??>
             <a href="/">Home</a> |
@@ -24,6 +20,10 @@
             <a href="/login">Login</a>
         </#if>
     </div>
+
+    <#if message??>
+        <div id="message" class="${messageType}">"${message}"</div>
+    </#if>
 
     <form class="inputForm" method="POST" action="/register">
         <div class="form-group">

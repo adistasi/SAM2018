@@ -35,10 +35,10 @@ public class GetManageSubmissionsRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Manage Submissions");
 
         String username = request.session().attribute("username");
-
         if(username != null) {
 
             vm.put("username", username);

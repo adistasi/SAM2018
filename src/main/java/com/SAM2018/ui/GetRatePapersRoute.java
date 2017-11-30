@@ -26,6 +26,8 @@ public class GetRatePapersRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
+
         Session session = request.session();
         vm.put("title", "Submit Paper");
         vm.put("username", session.attribute("username"));

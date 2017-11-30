@@ -26,15 +26,7 @@ public class GetManageRequestsRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
-        final Session session = request.session();
-
-        if(request.session().attribute("username") != null) {
-            vm.put("username", request.session().attribute("username"));
-        } else {
-            response.redirect("/login");
-            halt();
-            return null;
-        }
+        vm = UIUtils.validateLoggedIn(request, response, vm);
 
         vm.put("pcmUsers", paperManager.getAllPCMs());
         vm.put("papersRequested", paperManager.getRequestedReviews());

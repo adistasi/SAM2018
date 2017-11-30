@@ -28,15 +28,26 @@ public class PostRatePaperRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
         Session session = request.session();
 
         int pid = Integer.parseInt(request.queryParams("pid"));
         Paper p = paperManager.getPaperbyID(pid);
         PCC user = (PCC)paperManager.getUser(session.attribute("username"));
+
         Double pccRating = Double.parseDouble(request.queryParams("score"));
         String pccComment = request.queryParams("comment");
         String approval = request.queryParams("approval");
         AcceptanceStatus as = AcceptanceStatus.valueOf(approval);
+
+        if(UIUtils.validateInputText(pccComment)) {
+            vm.put("title", "Rate Papers");
+            vm.put("username", session.attribute("username"));
+            vm.put("paper", p);
+            vm.put("reviews", paperManager.getReviewsForPaper(request.queryParams("pid")));
+            return UIUtils.error(vm, "Review information cannot be blank or contain the characters '|||'", "ratePaper.ftl");
+        }
 
         Review pccReview = new Review(user, p, pccRating, pccComment, false);
         List<Review> pcmReviews = paperManager.getReviewsForPaper(request.queryParams("pid"));

@@ -16,15 +16,8 @@ public class GetSubmitPaperRoute implements TemplateViewRoute {
     public ModelAndView handle(Request request, Response response) {
 
         Map<String, Object> vm = new HashMap<>();
+        vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Submit Paper");
-
-        if(request.session().attribute("username") != null) {
-            vm.put("username", request.session().attribute("username"));
-        } else {
-            response.redirect("/login");
-            halt();
-            return null;
-        }
 
         return new ModelAndView(vm , "submitPaper.ftl");
     }

@@ -38,4 +38,9 @@ public class Report {
     public AcceptanceStatus getAcceptanceStatus() {
         return acceptanceStatus;
     }
+
+    public String saveReport() {
+        String saveString = subject.getPaperID() + "|||" + generator.getUsername() + "|||" + pccReview.getRating() + "|||" + pccReview.getReviewerComments() + "|||" + acceptanceStatus + "\n";
+        return saveString;
+    }
 }

@@ -25,13 +25,13 @@
 
     <div class="body">
         <#if message??>
-            <div id="message" class="${message.type}">${message.text}</div>
+            <div id="message" class="${messageType}">${message}</div>
         <#else>
             <div id="message" class="info" style="display:none">
                 <!-- keep here for Client-side messages -->
             </div>
         </#if>
-        <p>Papers Available for Review:</p>
+        <p>Papers Available for Rating:</p>
 
         <#if paper??>
             <p>Submit a Review for ${paper.getTitle()}</p>
@@ -43,21 +43,31 @@
                     <input type="hidden" name="pid" value="${paper.getPaperID()}" />
 
                     <label>Score</label>
-                    <input type="number" name="score" min="0" max="10" step="0.1" /><br />
+                    <input type="number" name="score" min="0" max="10" step="0.1" required/><br />
 
                     <label>Comments</label>
-                    <textarea name="comment" placeholder="Enter Comments Here"/></textarea><br />
+                    <textarea name="comment" placeholder="Enter Comments Here" required/></textarea><br />
 
                     <label>Accepted?</label><br />
-                    <input type="radio" name="approval" value="Accepted">Accepted<br />
-                    <input type="radio" name="approval" value="Denied">Denied<br />
-                    <input type="radio" name="approval" value="Modify">Accepted with Modifications<br />
+                    <input type="radio" name="approval" value="Accepted" required>Accepted<br />
+                    <input type="radio" name="approval" value="Denied" required>Denied<br />
+                    <input type="radio" name="approval" value="Modify" required>Accepted with Modifications<br />
                     <button type="submit">Submit</button>
                 </div>
             </form>
 
             <button onclick="rereviewPaper(${paper.getPaperID()})">Have PCMs Re-Review this paper</button>
-            <!--<a href="/rereviewPaper?pid=${paper.getPaperID()}">Have PCMs Re-Review this paper</a>-->
+        </#if>
+
+        <#if reviews??>
+            <p>PCM Reviews for this paper:</p>
+
+            <#list reviews as r>
+                <p>Reviewer: ${r.getReviewer().getFirstName()} ${r.getReviewer().getLastName()}</p>
+                <p>Rating: ${r.getRating()}</p>
+                <p>Comments: ${r.getReviewerComments()}</p>
+                <hr />
+            </#list>
         </#if>
     </div>
 
