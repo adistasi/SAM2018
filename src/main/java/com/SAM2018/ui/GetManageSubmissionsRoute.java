@@ -1,11 +1,11 @@
 package com.SAM2018.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Paper;
+import com.SAM2018.model.Report;
+import com.SAM2018.model.SubmissionReportDisplay;
 import com.SAM2018.model.User;
 import spark.ModelAndView;
 import spark.Request;
@@ -44,7 +44,14 @@ public class GetManageSubmissionsRoute implements TemplateViewRoute {
             vm.put("username", username);
 
             User user = paperManager.getUser(username);
-            vm.put("papers", user.getSubmissions());
+
+            List<SubmissionReportDisplay> srd = new ArrayList<>();
+            for(Paper p : user.getSubmissions()) {
+                Report r = paperManager.getReportByID(p.getPaperID());
+                srd.add(new SubmissionReportDisplay(p, r));
+            }
+
+            vm.put("papers", srd);
 
         } else {
             response.redirect("/login");

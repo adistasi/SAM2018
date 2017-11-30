@@ -198,6 +198,16 @@ public class PaperManager {
         reports.add(_report);
     }
 
+    public Report getReportByID(int paperID) {
+        for(Report r : reports) {
+            if(r.getSubject().getPaperID() == paperID) {
+                return r;
+            }
+        }
+
+        return null;
+    }
+
     //SAVING FUNCTIONALITY
     public void savePapers() {
         try {

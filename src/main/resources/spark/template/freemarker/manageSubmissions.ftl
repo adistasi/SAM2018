@@ -27,9 +27,23 @@
             <#if papers??>
                 <#list papers as p>
                     <div>
-                        <p>${p.getTitle()}</p>
-                        <p>${p.getVersion()}</p>
-                        <a href="/editPaper?pid=${p.getPaperID()}">Edit Paper</a>
+                        <p>${p.getPaper().getTitle()}</p>
+                        <p>${p.getPaper().getVersion()}</p>
+                        <a href="/editPaper?pid=${p.getPaper().getPaperID()}">Edit Paper</a>
+                        <p>
+                            STATUS:
+                            <#if p.getReport()??>
+                                <#if p.getReport().getAcceptanceStatus() == "Modify">
+                                    Accepted with Modifications
+                                <#else>
+                                    ${p.getReport().getAcceptanceStatus()}
+                                </#if>
+
+                                <a href="/reviewRating?pid=${p.getPaper().getPaperID()}">View Report</a>
+                            <#else>
+                                Pending
+                            </#if>
+                        </p>
                         <hr />
                     </div>
                 </#list>
