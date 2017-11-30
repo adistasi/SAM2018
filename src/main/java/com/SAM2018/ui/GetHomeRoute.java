@@ -24,6 +24,7 @@ public class GetHomeRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Welcome!");
 
+
         return new ModelAndView(vm , "home.ftl");
     }
 }

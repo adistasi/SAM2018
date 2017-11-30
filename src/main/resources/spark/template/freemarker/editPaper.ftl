@@ -23,6 +23,14 @@
     </div>
 
     <div class="body">
+        <#if message??>
+            <div id="message" class="${messageType}">${message}</div>
+        <#else>
+            <div id="message" class="info" style="display:none">
+
+            </div>
+        </#if>
+
         <#if paper??>
             <h3 style="text-align:center">Edit your paper: ${paper.getTitle()}</h3>
 

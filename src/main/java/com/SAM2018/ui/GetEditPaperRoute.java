@@ -41,24 +41,16 @@ public class GetEditPaperRoute implements TemplateViewRoute {
 
         String username = request.session().attribute("username");
         String paperID = request.queryParams("pid");
-        if(username != null) {
-            vm.put("username", username);
+        vm.put("username", username);
 
-            Paper paper = paperManager.getPaperbyID(Integer.parseInt(paperID));
+        Paper paper = paperManager.getPaperbyID(Integer.parseInt(paperID));
 
-            if(!paper.getContactAuthor().getUsername().equals(username)) {
-                //return error
-            } else {
-                vm.put("auth1", paper.getAuthors().get(0));
-                vm.put("auth2", paper.getAuthors().get(1));
-                vm.put("auth3", paper.getAuthors().get(2));
-
-                vm.put("paper", paper);
-            }
-        } else {
-            response.redirect("/login");
+        if(!paper.getContactAuthor().getUsername().equals(username)) {
+            response.redirect("/manageSubmissions");
             halt();
             return null;
+        } else {
+            vm.put("paper", paper);
         }
 
         return new ModelAndView(vm , "editPaper.ftl");

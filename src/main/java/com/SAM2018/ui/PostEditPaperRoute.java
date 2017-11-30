@@ -40,9 +40,11 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         List<String> authors = paperManager.validateAuthors(rawAuthors);
 
         if(authors.size() == 0) {
+            vm.put("paper", paper);
             return UIUtils.error(vm, "A paper must have an author", "submitPaper.ftl");
         } else if(rawAuthors.contains("|||")) {
-            return UIUtils.error(vm, "An author may not contain the characters '|||'", "submitPaper.ftl");
+            vm.put("paper", paper);
+            return UIUtils.error(vm, "An author may not contain the characters '|||'", "editPaper.ftl");
         }
 
         String title = request.queryParams("title");
@@ -50,12 +52,13 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         String file = request.queryParams("paperFile");
 
         if (UIUtils.validateInputText(title) || UIUtils.validateInputText(format) || UIUtils.validateInputText(file)) {
-            return UIUtils.error(vm, "Paper information cannot be blank or contain the characters '|||", "submitPaper.ftl");
+            vm.put("paper", paper);
+            return UIUtils.error(vm, "Paper information cannot be blank or contain the characters '|||", "editPaper.ftl");
         }
 
         paper.updatePaper(authors, title, format, file);
         paperManager.savePapers();
 
-        return new ModelAndView(vm , "submitPaper.ftl");
+        return new ModelAndView(vm , "editPaper.ftl");
     }
 }

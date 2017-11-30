@@ -29,7 +29,7 @@ public class GetRatePapersRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
 
         Session session = request.session();
-        vm.put("title", "Submit Paper");
+        vm.put("title", "Manage Paper Ratings");
         vm.put("username", session.attribute("username"));
         vm.put("ratablePapers", paperManager.getRatablePapers());
 
