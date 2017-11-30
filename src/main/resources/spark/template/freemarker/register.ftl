@@ -20,7 +20,7 @@
     </div>
 
     <#if message??>
-        <div id="message" class="${messageType}">"${message}"</div>
+        <div id="message" class="${messageType}">${message}</div>
     </#if>
 
     <form class="inputForm" method="POST" action="/register">

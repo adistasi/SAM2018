@@ -42,9 +42,15 @@ public class PostReviewPaperRoute implements TemplateViewRoute{
 
         String username = request.session().attribute("username");
 
-        int pid = Integer.parseInt(request.queryParams("pid"));
-        double score = Double.parseDouble(request.queryParams("score"));
+        int pid = UIUtils.parseIntInput(request.queryParams("pid"));
+        double score = UIUtils.parseDoubleInput(request.queryParams("score"));
         String comments = request.queryParams("comment");
+
+        if(pid == -2 || score == -2.0) {
+            response.redirect("/reviewPapers");
+            halt();
+            return null;
+        }
 
         if(UIUtils.validateInputText(comments)) {
             vm.put("title", "Review Paper");

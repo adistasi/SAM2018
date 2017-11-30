@@ -44,7 +44,13 @@ public class PostRereviewPaperRoute implements Route {
 
 
         String rawPid = request.body();
-        int pid = Integer.parseInt(rawPid);
+        int pid = UIUtils.parseIntInput(rawPid);
+        if(pid == -2) {
+            response.redirect("/ratePapers");
+            halt();
+            return null;
+        }
+
         Report report = paperManager.getReportByID(pid);
 
         List<Review> rereviews = report.getPcmReviews();
@@ -55,6 +61,6 @@ public class PostRereviewPaperRoute implements Route {
 
         paperManager.saveReviews();
 
-        return new Message("INSERT ACTUAL MESSAGE TEXT HERE", "info");
+        return new Message("PCMs have been asked to review the paper again", "info");
     }
 }

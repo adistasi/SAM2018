@@ -74,6 +74,8 @@
                     <button type="submit">Edit</button>
                 </div>
             </form>
+        <#else>
+            <p>Please select a valid paper for editing</p>
         </#if>
     </div>
 

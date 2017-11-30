@@ -102,7 +102,11 @@ public class PaperManager {
     }
 
     public Paper getPaperbyID(int id) {
-        return papers.get((id));
+        try {
+            return papers.get((id));
+        } catch(Exception e) {
+            return null;
+        }
     }
 
     public List<Paper> getPapers() {
@@ -195,9 +199,11 @@ public class PaperManager {
     }
 
     public Review getReview(int paperID, String username) {
-        for(Review r : reviews.get(Integer.toString(paperID))) {
-            if(r.getSubject().getPaperID() == paperID && r.getReviewer().getUsername().equals(username))
-                return r;
+        if(getPaperbyID(paperID) != null) {
+            for (Review r : reviews.get(Integer.toString(paperID))) {
+                if (r.getSubject().getPaperID() == paperID && r.getReviewer().getUsername().equals(username))
+                    return r;
+            }
         }
 
         return null;
@@ -221,7 +227,7 @@ public class PaperManager {
                     }
                 }
 
-                if(allReviewsComplete)
+                if(allReviewsComplete && !reports.contains(getReportByID(revs.get(0).getSubject().getPaperID())))
                     ratablePapers.add(revs.get(0).getSubject());
             }
         }

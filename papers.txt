@@ -1,9 +1,9 @@
 =====PAPERS=====
 0|||add5980,Tolk,Rowl|||add5980|||books|||form|||1|||asdf||| pcm2/pcm3/pcm4/
-1|||microMan,Andy DiStasi,Steve Harrington|||microMan|||technology the sequel!|||newFormat|||2|||updated!||| pcm3/
+1|||microMan,Andy DiStasi,Steve Harrington|||microMan|||technology the sequel!|||newFormat|||2|||updated!||| pcm3/pcm2/
 2|||Andy DiStasi,Testy McTesterson,Test Author 3|||testReg2|||Testing Everything|||Please Work|||1|||Final Test||| pcm2/pcm3/pcm4/
-3|||Bill Gates,Andy DiStasi,JK Rowling|||microMan|||Title!|||Format!|||1|||Upload!||| 
-4|||auth1,auth2,auth3,auth4,fifth Auth!|||add5980|||asda|||fdsa|||2|||ada||| pcm2/pcm4/
+3|||Bill Gates,Andy DiStasi,JK Rowling|||microMan|||Title!|||Format!|||1|||Upload!||| pcm2/
+4|||auth1, auth2, auth3, auth4, fifth Auth!|||add5980|||asda!|||hey ho!|||3|||fda!||| pcm2/pcm4/pcm2/
 5|||auth1,auth2,auth3|||add5980|||No Review|||asdf|||1|||fda||| 
 6|||Andy DiStasi,Paul Allen,Bill Gates|||add5980|||Testing New Save|||pdf|||1|||paper body||| 
-7|||Andy DiStasi,Paul Allen,Bill Gates|||pcm4|||Account Testing Stuff|||pdf|||1|||paper body|||
+7|||Andy DiStasi,Paul Allen,Bill Gates|||pcm4|||Account Testing Stuff|||pdf|||1|||paper body||| 

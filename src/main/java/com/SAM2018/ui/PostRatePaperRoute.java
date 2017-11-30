@@ -39,15 +39,35 @@ public class PostRatePaperRoute implements TemplateViewRoute {
             halt();
             return null;
         }
+        String pid = request.queryParams("pid");
+        int paperID = UIUtils.parseIntInput(pid);
+        if(paperID == -2) {
+            response.redirect("/ratePapers");
+            halt();
+            return null;
+        }
 
-        int pid = Integer.parseInt(request.queryParams("pid"));
-        Paper p = paperManager.getPaperbyID(pid);
+
+        Paper p = paperManager.getPaperbyID(paperID);
         PCC user = (PCC)paperManager.getUser(session.attribute("username"));
 
-        Double pccRating = Double.parseDouble(request.queryParams("score"));
+        if(!p.getContactAuthor().getUsername().equals(user.getUsername())) {
+            response.redirect("/ratePapers");
+            halt();
+            return null;
+        }
+
+        String pccRatingString = request.queryParams("score");
         String pccComment = request.queryParams("comment");
         String approval = request.queryParams("approval");
         AcceptanceStatus as = AcceptanceStatus.valueOf(approval);
+
+        Double pccRating = UIUtils.parseDoubleInput(pccRatingString);
+        if(pccRating == -2.0) {
+            response.redirect("/ratePapers");
+            halt();
+            return null;
+        }
 
         if(UIUtils.validateInputText(pccComment)) {
             vm.put("title", "Rate Papers");
@@ -58,7 +78,7 @@ public class PostRatePaperRoute implements TemplateViewRoute {
         }
 
         Review pccReview = new Review(user, p, pccRating, pccComment, false);
-        List<Review> pcmReviews = paperManager.getReviewsForPaper(request.queryParams("pid"));
+        List<Review> pcmReviews = paperManager.getReviewsForPaper(pid);
         Report report = new Report(p, user, pcmReviews, pccReview, as);
         paperManager.addReport(report);
         paperManager.saveReports();

@@ -37,8 +37,12 @@
     </div>
 
     <div class="body">
-        <p>Submitted Review Requests:</p>
-        <#if papersRequested??>
+        <#if message??>
+            <div id="message" class="${messageType}">${message}</div>
+        </#if>
+
+        <#if papersRequested?size != 0>
+            <p>Submitted Review Requests:</p>
             <form action="/manageRequests" method="POST" class="inputForm">
                 <#list papersRequested as p>
                     <p style="text-decoration: underline">"<em>${p.getPaper().getTitle()}</em>" - ${p.getPaper().getAuthorsAsString()}</p>

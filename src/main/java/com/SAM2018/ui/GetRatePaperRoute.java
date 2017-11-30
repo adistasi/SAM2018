@@ -28,9 +28,13 @@ public class GetRatePaperRoute implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
+        Session session = request.session();
+
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String userType = paperManager.getUserType(request.session().attribute("username"));
         vm.put("userType", userType);
+        vm.put("title", "Rate Paper");
+        vm.put("username", session.attribute("username"));
 
         if(!(userType.equals("PCC") || userType.equals("Admin"))) {
             response.redirect("/managePapers");
@@ -38,15 +42,24 @@ public class GetRatePaperRoute implements TemplateViewRoute {
             return null;
         }
 
-        Session session = request.session();
+        String paperIDString = request.queryParams("pid");
+        int paperID = UIUtils.parseIntInput(paperIDString);
+        if(paperID == -2) {
+            response.redirect("/ratePapers");
+            halt();
+            return null;
+        }
 
-        String paperID = request.queryParams("pid");
+        List<Review> reviews = paperManager.getReviewsForPaper(paperIDString);
 
-        vm.put("title", "Rate Paper");
-        vm.put("username", session.attribute("username"));
-        vm.put("paper", paperManager.getPaperbyID(Integer.parseInt(paperID)));
-        vm.put("reviews", paperManager.getReviewsForPaper(paperID));
+        if(reviews.size() < 3) {
+            response.redirect("/ratePapers");
+            halt();
+            return null;
+        }
 
+        vm.put("paper", paperManager.getPaperbyID(paperID));
+        vm.put("reviews", reviews);
         return new ModelAndView(vm , "ratePaper.ftl");
     }
 }

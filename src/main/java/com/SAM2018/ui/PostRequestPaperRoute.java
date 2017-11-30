@@ -37,7 +37,8 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
 
         final Session session = request.session();
-        String userType = paperManager.getUserType(session.attribute("username"));
+        String username = session.attribute("username");
+        String userType = paperManager.getUserType(username);
         vm.put("userType", userType);
 
         if(!(userType.equals("PCM") || userType.equals("Admin"))) {
@@ -46,7 +47,7 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
             return null;
         }
 
-        PCM user = (PCM)paperManager.getUser(session.attribute("username"));
+        PCM user = (PCM)paperManager.getUser(username);
         QueryParamsMap paperRequests = request.queryMap("requestedPaper");
 
         if(paperRequests.booleanValue()== null) {
@@ -55,9 +56,18 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
         }
 
         for(String id : paperRequests.values()) {
-            Paper p = paperManager.getPaperbyID(Integer.parseInt(id));
-            user.requestReview(p);
-            paperManager.addRequest(p, paperManager.getUser(session.attribute("username")));
+            int paperID = UIUtils.parseIntInput(id);
+            if(paperID == -2) {
+                response.redirect("/managePapers");
+                halt();
+                return null;
+            }
+
+            Paper p = paperManager.getPaperbyID(paperID);
+            if(p != null) {
+                user.requestReview(p);
+                paperManager.addRequest(p, paperManager.getUser(username));
+            }
         }
 
         response.redirect("/manageRequests");

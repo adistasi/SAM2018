@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static spark.Spark.halt;
+
 public class PostEditPaperRoute implements TemplateViewRoute {
     //Attributes
     private final PaperManager paperManager;
@@ -35,7 +37,20 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         String pid = request.queryParams("pid");
-        Paper paper = paperManager.getPaperbyID(Integer.parseInt(pid));
+        int paperID = UIUtils.parseIntInput(pid);
+        if(paperID == -2) {
+            response.redirect("/manageSubmissions");
+            halt();
+            return null;
+        }
+
+        Paper paper = paperManager.getPaperbyID(paperID);
+        if(paper.getContactAuthor().getUsername().equals(session.attribute("username"))) {
+            response.redirect("/manageSubmissions");
+            halt();
+            return null;
+        }
+
 
         String rawAuthors = request.queryParams("authors");
         List<String> authors = paperManager.validateAuthors(rawAuthors);

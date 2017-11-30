@@ -38,7 +38,6 @@
         <#if message??>
             <div id="message" class="${messageType}">"${message}"</div>
         </#if>
-        <p>Papers Available for Review:</p>
 
         <#if paper??>
             <p>Submit a Review for ${paper.getTitle()}</p>
@@ -58,17 +57,21 @@
                     <button type="submit">Submit</button>
                 </div>
             </form>
+
+            <#if otherReviews??>
+                <p>A PCM has requested these papers be re-reviewed.  Here are the reviews that were submitted:</p>
+
+                <#list otherReviews as or>
+                    <p>Rating: ${or.getRating()}</p>
+                    <p>Comments: ${or.getReviewerComments()}</p>
+                    <hr />
+                </#list>
+            </#if>
+        <#else>
+            <p style="text-align:center">Please select a valid paper for Review</p>
         </#if>
 
-        <#if otherReviews??>
-            <p>A PCM has requested these papers be re-reviewed.  Here are the reviews that were submitted:</p>
 
-            <#list otherReviews as or>
-                <p>Rating: ${or.getRating()}</p>
-                <p>Comments: ${or.getReviewerComments()}</p>
-                <hr />
-            </#list>
-        </#if>
     </div>
 
 </div>

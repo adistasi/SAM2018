@@ -38,7 +38,7 @@
 
     <div class="body">
     <#if username??>
-        <#if ratablePapers??>
+        <#if ratablePapers?size != 0>
             <#list ratablePapers as p>
                 <div>
                     <a href="/ratePaper?pid=${p.getPaperID()}">${p.getTitle()} - ${p.getAuthorsAsString()}</a>
@@ -46,7 +46,7 @@
                 </div>
             </#list>
         <#else>
-            <p>You have no pending reviews!</p>
+            <p style="text-align:center">There are no papers in need of being rated.</p>
         </#if>
     </#if>
     </div>

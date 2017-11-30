@@ -35,10 +35,9 @@
     </div>
 
     <div class="body">
-        <p>Papers Available for Review:</p>
-
         <form action="/requestPaper" method="POST" class="inputForm">
-            <#if paperForReview??>
+            <#if paperForReview?size != 0>
+                <p>Papers Available for Review:</p>
                 <div class="paperRequestForm">
                     <#list paperForReview as paper>
                         <input type="checkbox" name="requestedPaper" value=${paper.getPaperID()}> "<em>${paper.getTitle()}</em>" - ${paper.getAuthorsAsString()}<br>
@@ -47,6 +46,8 @@
                 <div id="requestFormSubmitButton">
                     <button type="submit" class="btn btn-default">Submit Request</button>
                 </div>
+            <#else>
+                <p style="text-align:center">No papers have been submitted for review.</p>
             </#if>
         </form>
     </div>

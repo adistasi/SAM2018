@@ -38,7 +38,7 @@
 
     <div class="body">
         <#if username??>
-            <#if papers??>
+            <#if papers?size != 0>
                 <#list papers as p>
                     <div>
                         <p>${p.getPaper().getTitle()}</p>
@@ -62,7 +62,7 @@
                     </div>
                 </#list>
             <#else>
-                <p>You haven't uploaded any papers yet!</p>
+                <p style="text-align:center">You haven't uploaded any papers yet!</p>
             </#if>
         </#if>
     </div>

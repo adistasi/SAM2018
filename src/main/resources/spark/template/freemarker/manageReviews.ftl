@@ -38,7 +38,7 @@
 
     <div class="body">
     <#if username??>
-        <#if reviews??>
+        <#if reviews?size != 0>
             <#list reviews as r>
                 <div>
                     <a href="/reviewPaper?pid=${r.getSubject().getPaperID()}">${r.getSubject().getTitle()} - ${r.getSubject().getAuthorsAsString()}</a>
@@ -46,7 +46,7 @@
                 </div>
             </#list>
         <#else>
-            <p>You have no pending reviews!</p>
+            <p style="text-align:center">You have no pending reviews!</p>
         </#if>
     </#if>
     </div>

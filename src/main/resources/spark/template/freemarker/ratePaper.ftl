@@ -44,7 +44,6 @@
                 <!-- keep here for Client-side messages -->
             </div>
         </#if>
-        <p>Papers Available for Rating:</p>
 
         <#if paper??>
             <p>Submit a Review for ${paper.getTitle()}</p>
@@ -70,17 +69,19 @@
             </form>
 
             <button onclick="rereviewPaper(${paper.getPaperID()})">Have PCMs Re-Review this paper</button>
-        </#if>
 
-        <#if reviews??>
-            <p>PCM Reviews for this paper:</p>
+            <#if reviews??>
+                <p>PCM Reviews for this paper:</p>
 
-            <#list reviews as r>
-                <p>Reviewer: ${r.getReviewer().getFirstName()} ${r.getReviewer().getLastName()}</p>
-                <p>Rating: ${r.getRating()}</p>
-                <p>Comments: ${r.getReviewerComments()}</p>
-                <hr />
-            </#list>
+                <#list reviews as r>
+                    <p>Reviewer: ${r.getReviewer().getFirstName()} ${r.getReviewer().getLastName()}</p>
+                    <p>Rating: ${r.getRating()}</p>
+                    <p>Comments: ${r.getReviewerComments()}</p>
+                    <hr />
+                </#list>
+            </#if>
+        <#else>
+            <p style="text-align:center">Please select a valid paper to rate</p>
         </#if>
     </div>
 

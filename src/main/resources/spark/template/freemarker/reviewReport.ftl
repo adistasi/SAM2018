@@ -48,6 +48,8 @@
                 <p>Comments: ${r.getReviewerComments()}</p>
                 <hr />
             </#list>
+        <#else>
+            <p style="text-align:center">Please select a valid report</p>
         </#if>
     </div>
 

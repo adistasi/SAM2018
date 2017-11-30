@@ -36,6 +36,8 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String userType = paperManager.getUserType(request.session().attribute("username"));
         vm.put("userType", userType);
+        vm.put("title", "Manage Requests");
+
 
         if(!(userType.equals("PCC") || userType.equals("Admin"))) {
             response.redirect("/managePapers");
@@ -49,9 +51,9 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
         QueryParamsMap approvedRequests = request.queryMap("requests");
 
         if(approvedRequests.booleanValue()== null) {
-            //TODO: CREATE ACTUAL ERROR MESSAGE
-            vm.put("title", "You have not approved any requests");
-            return new ModelAndView(vm , "reviewManagement.ftl"); //return with no paper requested message
+            vm.put("pcmUsers", paperManager.getAllPCMs());
+            vm.put("papersRequested", paperManager.getRequestedReviews());
+            return UIUtils.error(vm, "You have not approved any requests", "reviewManagement.ftl");
         }
 
         Map<String, List<String>> potentialReviews = new HashMap<>();
@@ -74,15 +76,15 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
 
         for(List<String> prs : potentialReviews.values()) {
             if(prs.size() != 3) {
-                //TODO: CREATE ACTUAL ERROR MESSAGE
-                vm.put("title", "Not all papers have 3 Assigned PCMs");
-                return new ModelAndView(vm , "reviewManagement.ftl"); //return with no paper requested message
+                vm.put("pcmUsers", paperManager.getAllPCMs());
+                vm.put("papersRequested", paperManager.getRequestedReviews());
+                return UIUtils.error(vm, "Not all papers have 3 Assigned PCMs", "reviewManagement.ftl");
             } else {
                 Set<String> prSet = new HashSet<String>(prs);
                 if(prSet.size() != 3) {
-                    //TODO: CREATE ACTUAL ERROR MESSAGE
-                    vm.put("title", "You cannot assign the same PCM to a paper twice");
-                    return new ModelAndView(vm, "reviewManagement.ftl");
+                    vm.put("pcmUsers", paperManager.getAllPCMs());
+                    vm.put("papersRequested", paperManager.getRequestedReviews());
+                    return UIUtils.error(vm, "You cannot assign a PCM to the same paper twice", "reviewManagement.ftl");
                 }
             }
         }
@@ -96,9 +98,11 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
             Review review = pcc.assignReview(pcm, p);
             paperManager.addReview(Integer.toString(p.getPaperID()), review);
         }
+
         paperManager.saveReviews();
         paperManager.clearRequests();
         paperManager.savePapers();
+
         response.redirect("/manageRequests");
         halt();
         return null;

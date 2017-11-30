@@ -43,20 +43,34 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
         }
 
         String username = request.session().attribute("username");
-        int pid = Integer.parseInt(request.queryParams("pid"));
+        String pid = request.queryParams("pid");
+        int paperID = UIUtils.parseIntInput(pid);
+        if(paperID == -2) {
+            response.redirect("/reviewPapers");
+            halt();
+            return null;
+        }
 
         vm.put("title", "Review Paper");
         vm.put("username", username);
-        vm.put("paper", paperManager.getPaperbyID(pid));
 
-        Review thisReview = paperManager.getReview(pid, username);
+        Review thisReview = paperManager.getReview(paperID, username);
+
+        if(thisReview != null && !thisReview.getReviewer().getUsername().equals(username)) {
+            response.redirect("/reviewPapers");
+            halt();
+            return null;
+        }
+
+        vm.put("paper", paperManager.getPaperbyID(paperID));
 
         if(thisReview != null && thisReview.getNeedsRereviewed()) {
-            Report report = paperManager.getReportByID(pid);
+            Report report = paperManager.getReportByID(paperID);
             List<Review> otherReviews = report.getPcmReviews();
 
             vm.put("otherReviews", otherReviews);
         }
+
         return new ModelAndView(vm , "reviewPaper.ftl");
     }
 }

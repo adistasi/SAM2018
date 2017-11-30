@@ -27,4 +27,20 @@ public class UIUtils {
     public static boolean validateInputText(String input) {
         return (input.contains("|||") || input.equals(""));
     }
+
+    public static int parseIntInput(String valueToParse) {
+        try {
+            return Integer.parseInt(valueToParse);
+        } catch (Exception e) {
+            return -2;
+        }
+    }
+
+    public static double parseDoubleInput(String valueToParse) {
+        try {
+            return Double.parseDouble(valueToParse);
+        } catch (Exception e) {
+            return -2.0;
+        }
+    }
 }
