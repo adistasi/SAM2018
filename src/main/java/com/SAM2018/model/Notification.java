@@ -61,7 +61,11 @@ public class Notification {
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm");
         String dateStr = sdf.format(dateGenerated);
 
-        String saveString = id + "|||" + creator.getUsername() + "|||" + recipient.getUsername() + "|||" + message + "|||" + isRead + "|||" + dateStr + "|||\n";
+        String creatorString = "System";
+        if(creator != null)
+            creatorString = creator.getUsername();
+
+        String saveString = id + "|||" + creatorString + "|||" + recipient.getUsername() + "|||" + message + "|||" + isRead + "|||" + dateStr + "|||\n";
         return saveString;
     }
 }

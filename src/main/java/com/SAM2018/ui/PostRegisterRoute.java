@@ -42,7 +42,7 @@ public class PostRegisterRoute implements TemplateViewRoute {
             if(UIUtils.validateInputText(username) || UIUtils.validateInputText(password) || UIUtils.validateInputText(firstName) || UIUtils.validateInputText(lastName)) {
                 return UIUtils.error(vm, "Account information cannot include the string '|||'", "register.ftl");
             } else {
-                if(paperManager.getUser(username) != null)
+                if(paperManager.getUser(username) != null || username.equals("System"))
                     return UIUtils.error(vm, "That username is already taken", "register.ftl");
 
                 User user = new Submitter(username, password, firstName, lastName);

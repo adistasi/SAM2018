@@ -558,7 +558,13 @@ public class PaperManager {
                 while (line != null) {
                     String[] notificationLine = line.split("\\|\\|\\|");
                     int id = Integer.parseInt(notificationLine[0]);
-                    User generator = getUser(notificationLine[1]);
+
+                    User generator;
+                    if(notificationLine[1].equals("System"))
+                        generator = null;
+                    else
+                        generator = getUser(notificationLine[1]);
+
                     User recipient = getUser(notificationLine[2]);
                     String message = notificationLine[3];
                     boolean isRead = Boolean.valueOf(notificationLine[4]);
