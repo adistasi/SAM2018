@@ -117,7 +117,8 @@ public class PaperManager {
         List<Paper> reviewPapers = new ArrayList<>();
 
         for(Paper p : papers) {
-            if(!p.getAuthors().contains(username) && !p.getContactAuthor().getUsername().equals(username))
+            List<Review> paperReviews = getReviewsForPaper(Integer.toString(p.getPaperID()));
+            if(!p.getAuthors().contains(username) && !p.getContactAuthor().getUsername().equals(username) && paperReviews.size() == 0)
                 reviewPapers.add(p);
         }
 
@@ -150,7 +151,8 @@ public class PaperManager {
 
         for(Paper p : papers) {
             String paperID = Integer.toString(p.getPaperID());
-            ReviewRequestDisplay rrd = new ReviewRequestDisplay(p, requestedReviews.get(paperID));
+            List<Review> reviews = getReviewsForPaper(paperID);
+            ReviewRequestDisplay rrd = new ReviewRequestDisplay(p, requestedReviews.get(paperID), reviews.size() == 0);
             rrds.add(rrd);
         }
         return rrds;
@@ -189,13 +191,28 @@ public class PaperManager {
 
         for(List<Review> revs : reviews.values()) {
             for(Review r : revs) {
-                if (r.getReviewer().getUsername().equals(username) && (r.getNeedsRereviewed() || r.getRating() == -1)) {
+                if (r.getReviewer().getUsername().equals(username) && (r.getNeedsRereviewed() || r.getRating() == -1))
                     userReviews.add(r);
-                }
             }
         }
 
         return userReviews;
+    }
+
+    public List<Review> getCompletedReviewsForUser(String username) {
+        List<Review> completedReviews = new ArrayList<>();
+
+        for(List<Review> revs : reviews.values()) {
+            for(Review r : revs) {
+                boolean gnr = r.getNeedsRereviewed();
+                boolean gr = r.getRating() >= 0;
+                boolean gr2 = r.getRating() != -1;
+                if(r.getReviewer().getUsername().equals(username) && (r.getNeedsRereviewed() || r.getRating() >= 0))
+                    completedReviews.add(r);
+            }
+        }
+
+        return completedReviews;
     }
 
     public Review getReview(int paperID, String username) {
@@ -239,6 +256,8 @@ public class PaperManager {
     public void addReport(Report _report) {
         reports.add(_report);
     }
+
+    public List<Report> getReports() {return reports; }
 
     public Report getReportByID(int paperID) {
         for(Report r : reports) {

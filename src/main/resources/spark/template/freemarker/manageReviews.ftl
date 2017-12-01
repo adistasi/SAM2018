@@ -39,6 +39,7 @@
     <div class="body">
     <#if username??>
         <#if reviews?size != 0>
+            <p>You have been assigned the following reviews:</p>
             <#list reviews as r>
                 <div>
                     <a href="/reviewPaper?pid=${r.getSubject().getPaperID()}">${r.getSubject().getTitle()} - ${r.getSubject().getAuthorsAsString()}</a>
@@ -47,6 +48,17 @@
             </#list>
         <#else>
             <p style="text-align:center">You have no pending reviews!</p>
+        </#if>
+
+        <hr />
+
+        <#if completedReviews?size != 0>
+            <p>You have completed the following reviews:</p>
+            <#list completedReviews as cr>
+                <div>
+                    <p>${cr.getSubject().getTitle()} - ${cr.getSubject().getAuthorsAsString()} <em>(Score: ${cr.getRating()})</em></p>
+                </div>
+            </#list>
         </#if>
     </#if>
     </div>

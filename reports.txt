@@ -1,2 +1,4 @@
 =====REPORTS=====
-0|||add5980|||1.0|||GARBAGE!|||Denied
+0|||add5980|||3.1|||NOT GOOD ENOUGH|||Denied
+1|||add5980|||5.0|||meh|||Modify
+2|||add5980|||8.0|||YES!|||Accepted

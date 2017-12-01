@@ -47,7 +47,7 @@
                     <button type="submit" class="btn btn-default">Submit Request</button>
                 </div>
             <#else>
-                <p style="text-align:center">No papers have been submitted for review.</p>
+                <p style="text-align:center">No papers are available for review.</p>
             </#if>
         </form>
     </div>

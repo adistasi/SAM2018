@@ -39,6 +39,7 @@
     <div class="body">
     <#if username??>
         <#if ratablePapers?size != 0>
+            <p>The following Papers need rated:</p>
             <#list ratablePapers as p>
                 <div>
                     <a href="/ratePaper?pid=${p.getPaperID()}">${p.getTitle()} - ${p.getAuthorsAsString()}</a>
@@ -47,6 +48,13 @@
             </#list>
         <#else>
             <p style="text-align:center">There are no papers in need of being rated.</p>
+        </#if>
+
+        <#if generatedReports?size != 0>
+            <p>Reports have been generated for the following papers:</p>
+            <#list generatedReports as gr>
+                <p>${gr.getSubject().getTitle()} - ${gr.getSubject().getAuthorsAsString()} <em>(Rated ${gr.getPccReview().getRating()} and ${gr.getAcceptanceStatus()})</em></p>
+            </#list>
         </#if>
     </#if>
     </div>

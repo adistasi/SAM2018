@@ -51,12 +51,6 @@ public class PostRatePaperRoute implements TemplateViewRoute {
         Paper p = paperManager.getPaperbyID(paperID);
         PCC user = (PCC)paperManager.getUser(session.attribute("username"));
 
-        if(!p.getContactAuthor().getUsername().equals(user.getUsername())) {
-            response.redirect("/ratePapers");
-            halt();
-            return null;
-        }
-
         String pccRatingString = request.queryParams("score");
         String pccComment = request.queryParams("comment");
         String approval = request.queryParams("approval");

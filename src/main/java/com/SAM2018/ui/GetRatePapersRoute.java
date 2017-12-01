@@ -42,6 +42,7 @@ public class GetRatePapersRoute implements TemplateViewRoute {
         vm.put("title", "Manage Paper Ratings");
         vm.put("username", session.attribute("username"));
         vm.put("ratablePapers", paperManager.getRatablePapers());
+        vm.put("generatedReports", paperManager.getReports());
 
         return new ModelAndView(vm , "manageRatings.ftl");
     }

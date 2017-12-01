@@ -45,26 +45,28 @@
             <p>Submitted Review Requests:</p>
             <form action="/manageRequests" method="POST" class="inputForm">
                 <#list papersRequested as p>
-                    <p style="text-decoration: underline">"<em>${p.getPaper().getTitle()}</em>" - ${p.getPaper().getAuthorsAsString()}</p>
-                    <div class="reviews" data-pid="${p.getPaper().getPaperID()}">
-                        <#if p.getUsers()??>
-                            <#list p.getUsers() as u>
-                                <input type="checkbox" name="requests" value="${u.getUsername()}|||${p.getPaper().getPaperID()}"/>
-                                <label for="requests">${u.getFirstName()} ${u.getLastName()}</label><br />
-                            </#list>
-                        <#else>
-                            <p>No PCMs have requested to review this paper</p>
-                        </#if>
-
-                        <#if pcmUsers??>
-                            <select class="addPCMSToPaper" onchange="addPCM($(this))">
-                                <option selected disabled>Add a PCM to this paper</option>
-                                <#list pcmUsers as pcm>
-                                    <option value="${pcm.getUsername()}">${pcm.getFirstName()} ${pcm.getLastName()}</option>
+                    <#if p.getReviewExists()>
+                        <p style="text-decoration: underline">"<em>${p.getPaper().getTitle()}</em>" - ${p.getPaper().getAuthorsAsString()}</p>
+                        <div class="reviews" data-pid="${p.getPaper().getPaperID()}">
+                            <#if p.getUsers()??>
+                                <#list p.getUsers() as u>
+                                    <input type="checkbox" name="requests" value="${u.getUsername()}|||${p.getPaper().getPaperID()}"/>
+                                    <label for="requests">${u.getFirstName()} ${u.getLastName()}</label><br />
                                 </#list>
-                            </select>
-                        </#if>
-                    </div>
+                            <#else>
+                                <p>No PCMs have requested to review this paper</p>
+                            </#if>
+
+                            <#if pcmUsers??>
+                                <select class="addPCMSToPaper" onchange="addPCM($(this))">
+                                    <option selected disabled>Add a PCM to this paper</option>
+                                    <#list pcmUsers as pcm>
+                                        <option value="${pcm.getUsername()}">${pcm.getFirstName()} ${pcm.getLastName()}</option>
+                                    </#list>
+                                </select>
+                            </#if>
+                        </div>
+                    </#if>
                  </#list>
 
                 <button type="submit" class="btn btn-default">Submit</button>
