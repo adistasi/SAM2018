@@ -85,6 +85,24 @@ public class PaperManager {
         return userList;
     }
 
+    public User getPCC() {
+        for(User u : users.values()) {
+            if(u instanceof PCC)
+                return u;
+        }
+
+        return null;
+    }
+
+    public User getAdmin() {
+        for(User u : users.values()) {
+            if(u instanceof Admin)
+                return u;
+        }
+
+        return null;
+    }
+
 
     //PAPER FUNCTIONALITY
     public void addPaper(List<String> _authors, User _contactAuthor, String _title, String _format, int _version, String _paperUpload) {
@@ -93,6 +111,14 @@ public class PaperManager {
         papers.add(paper);
         _contactAuthor.addPaperToSubmissions(paper);
         savePapers();
+    }
+
+    public void addPaper(Paper _paper) {
+        papers.add(_paper);
+    }
+
+    public int getPaperCount() {
+        return papers.size();
     }
 
     public List<String> validateAuthors(String _authors) {
@@ -126,7 +152,7 @@ public class PaperManager {
 
         for(Paper p : papers) {
             List<Review> paperReviews = getReviewsForPaper(Integer.toString(p.getPaperID()));
-            if(!p.getAuthors().contains(username) && !p.getContactAuthor().getUsername().equals(username) && paperReviews.size() == 0)
+            if(!p.getAuthors().contains(username) && !p.getContactAuthor().getUsername().equals(username) && paperReviews == null)
                 reviewPapers.add(p);
         }
 
@@ -160,7 +186,7 @@ public class PaperManager {
         for(Paper p : papers) {
             String paperID = Integer.toString(p.getPaperID());
             List<Review> reviews = getReviewsForPaper(paperID);
-            ReviewRequestDisplay rrd = new ReviewRequestDisplay(p, requestedReviews.get(paperID), reviews.size() == 0);
+            ReviewRequestDisplay rrd = new ReviewRequestDisplay(p, requestedReviews.get(paperID), reviews == null);
             rrds.add(rrd);
         }
         return rrds;
@@ -255,6 +281,17 @@ public class PaperManager {
         }
 
         return ratablePapers;
+    }
+
+    public int getReviewsLeftForPaper(String _paperID) {
+        List<Review> paperReviews = reviews.get(_paperID);
+        int countCompleted = 0;
+
+        for(Review r : paperReviews) {
+            if(r.getRating() != -1 && !r.getNeedsRereviewed())
+                countCompleted++;
+        }
+        return REVIEWS_PER_PAPER - countCompleted;
     }
 
     //REPORTS FUNCTIONALITY

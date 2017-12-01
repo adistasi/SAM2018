@@ -1,14 +1,12 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Notification;
 import com.SAM2018.model.Paper;
 import spark.*;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static spark.Spark.halt;
 
@@ -45,7 +43,7 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         }
 
         Paper paper = paperManager.getPaperbyID(paperID);
-        if(paper.getContactAuthor().getUsername().equals(session.attribute("username"))) {
+        if(!paper.getContactAuthor().getUsername().equals(session.attribute("username"))) {
             response.redirect("/manageSubmissions");
             halt();
             return null;
@@ -73,7 +71,12 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         }
 
         paper.updatePaper(authors, title, format, file);
+
+        String messageString = "A User (" + paper.getContactAuthor().getFullName() + ") has edited their paper entitled '" + paper.getTitle() + "'.";
+        Notification notification = new Notification(paperManager.getNotificationsSize(), paper.getContactAuthor(), paperManager.getPCC(), messageString, false, new Date());
+        paperManager.addNotification(notification);
         paperManager.savePapers();
+        paperManager.saveNotifications();
 
         return new ModelAndView(vm , "editPaper.ftl");
     }

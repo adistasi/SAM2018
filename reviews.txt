@@ -23,3 +23,9 @@
 7|||pcm3|||6.0|||asdf|||false
 7|||pcm2|||0.0|||You tried|||false
 7|||microMan|||8.1|||Not good enough|||false
+8|||pcm2|||5.5|||Not enough Waluigi|||true
+8|||pcm3|||10.0|||A true classic|||true
+8|||pcm4|||9.8|||Nice!|||true
+9|||pcm2|||-1.0|||null|||false
+9|||pcm3|||-1.0|||null|||false
+9|||pcm4|||-1.0|||null|||false

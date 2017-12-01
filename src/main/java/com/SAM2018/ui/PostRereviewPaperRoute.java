@@ -2,16 +2,14 @@ package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Message;
+import com.SAM2018.model.Notification;
 import com.SAM2018.model.Report;
 import com.SAM2018.model.Review;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static spark.Spark.halt;
 
@@ -51,15 +49,17 @@ public class PostRereviewPaperRoute implements Route {
             return null;
         }
 
-        Report report = paperManager.getReportByID(pid);
-
-        List<Review> rereviews = report.getPcmReviews();
+        List<Review> rereviews = paperManager.getReviewsForPaper(rawPid);
 
         for(Review r : rereviews) {
             r.setNeedsRereviewed(true);
+            String messageString = "The Reviews for '" + r.getSubject().getTitle() + "' need to be redone.  Please read each other's comments and then re-submit an updated Review";
+            Notification notification = new Notification(paperManager.getNotificationsSize(), null, r.getReviewer(), messageString, false, new Date());
+            paperManager.addNotification(notification);
         }
 
         paperManager.saveReviews();
+        paperManager.saveNotifications();
 
         return new Message("PCMs have been asked to review the paper again", "info");
     }

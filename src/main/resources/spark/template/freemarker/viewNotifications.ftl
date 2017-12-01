@@ -37,7 +37,7 @@
         <#if notifications?size != 0>
             <p>Your Unread Notifications:</p>
             <#list notifications as n>
-                <p>FROM: <#if n.getCreator()??>${n.getCreator().getFirstName()} ${n.getCreator().getLastName()}<#else>System</#if></p>
+                <p><#if n.getCreator()??>FROM: ${n.getCreator().getFirstName()} ${n.getCreator().getLastName()}<#else>SYSTEM GENERATED MESSAGE</#if></p>
                 <p>DATE: ${n.getDateGenerated()?string('MM/dd/yyyy HH:mm')}</p>
                 <p>MESSAGE: ${n.getMessage()}</p>
                 <button onclick="markAsRead(${n.getID()})">Mark as Read</button>

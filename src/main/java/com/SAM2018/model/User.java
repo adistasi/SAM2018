@@ -56,6 +56,10 @@ public abstract class User {
         submittedPapers.add(_paper);
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public String saveUser() {
         String saveString = username + "|||" + getClass().toString() + "|||" + password + "|||" + firstName + "|||" + lastName + "|||\n";
         return saveString;

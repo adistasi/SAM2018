@@ -5,10 +5,7 @@ import com.SAM2018.model.*;
 import spark.*;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static spark.Spark.halt;
 
@@ -76,6 +73,16 @@ public class PostRatePaperRoute implements TemplateViewRoute {
         Report report = new Report(p, user, pcmReviews, pccReview, as);
         paperManager.addReport(report);
         paperManager.saveReports();
+
+        String acceptanceString = report.getAcceptanceStatus().toString();
+
+        if(acceptanceString.equals("Modify"))
+            acceptanceString = "Accepted with modifications";
+
+        String messageString = "Your paper '" + report.getSubject().getTitle() + "' has been rated by the SAM2018 Review Committee and has been " + acceptanceString + ".";
+        Notification notification = new Notification(paperManager.getNotificationsSize(), null, report.getSubject().getContactAuthor(), messageString, false, new Date());
+        paperManager.addNotification(notification);
+        paperManager.saveNotifications();
 
         response.redirect("/ratePapers");
         halt();

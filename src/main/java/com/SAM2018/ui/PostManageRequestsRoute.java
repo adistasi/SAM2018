@@ -1,10 +1,7 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
-import com.SAM2018.model.PCC;
-import com.SAM2018.model.PCM;
-import com.SAM2018.model.Paper;
-import com.SAM2018.model.Review;
+import com.SAM2018.model.*;
 import spark.*;
 
 import java.util.*;
@@ -74,7 +71,7 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
             }
         }
 
-        for(List<String> prs : potentialReviews.values()) {
+        /*for(List<String> prs : potentialReviews.values()) {
             if(prs.size() != 3) {
                 vm.put("pcmUsers", paperManager.getAllPCMs());
                 vm.put("papersRequested", paperManager.getRequestedReviews());
@@ -87,7 +84,7 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
                     return UIUtils.error(vm, "You cannot assign a PCM to the same paper twice", "reviewManagement.ftl");
                 }
             }
-        }
+        }*/
 
         for(String req : approvedRequests.values()) {
             String[] pcmAndPaper = req.split("\\|\\|\\|");
@@ -97,11 +94,16 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
 
             Review review = pcc.assignReview(pcm, p);
             paperManager.addReview(Integer.toString(p.getPaperID()), review);
+
+            String messageString = "You have been assigned '" + p.getTitle() + "' for Review";
+            Notification notification = new Notification(paperManager.getNotificationsSize(), null, review.getReviewer(), messageString, false, new Date());
+            paperManager.addNotification(notification);
         }
 
         paperManager.saveReviews();
         paperManager.clearRequests();
         paperManager.savePapers();
+        paperManager.saveNotifications();
 
         response.redirect("/manageRequests");
         halt();

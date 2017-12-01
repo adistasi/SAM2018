@@ -65,8 +65,7 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
         vm.put("paper", paperManager.getPaperbyID(paperID));
 
         if(thisReview != null && thisReview.getNeedsRereviewed()) {
-            Report report = paperManager.getReportByID(paperID);
-            List<Review> otherReviews = report.getPcmReviews();
+            List<Review> otherReviews = paperManager.getReviewsForPaper(pid);
 
             vm.put("otherReviews", otherReviews);
         }

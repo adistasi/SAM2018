@@ -1,13 +1,13 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Notification;
+import com.SAM2018.model.Paper;
+import com.SAM2018.model.User;
 import spark.*;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class PostSubmitPaperRoute implements TemplateViewRoute {
     //Attributes
@@ -42,7 +42,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
             return UIUtils.error(vm, "An author may not contain the characters '|||'", "submitPaper.ftl");
         }
 
-        String contactAuthor = session.attribute("username");
+        String contactAuthorString = session.attribute("username");
         String title = request.queryParams("title");
         String format = request.queryParams("format");
         String file = request.queryParams("paperFile");
@@ -51,7 +51,17 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
             return UIUtils.error(vm, "Paper information cannot be blank or contain the characters '|||", "submitPaper.ftl");
         }
 
-        paperManager.addPaper(authors, paperManager.getContactAuthorByUsername(contactAuthor), title, format, 1, file);
+        User contactAuthor = paperManager.getContactAuthorByUsername(contactAuthorString);
+        Paper paper = new Paper(paperManager.getPaperCount(), authors, contactAuthor, title, format, 1, file);
+        paperManager.addPaper(paper);
+        contactAuthor.addPaperToSubmissions(paper);
+
+        String messageString = "A User (" + contactAuthor.getFullName() + ") has submitted a Paper entitled '" + paper.getTitle() + "'.";
+        Notification notification = new Notification(paperManager.getNotificationsSize(), contactAuthor, paperManager.getPCC(), messageString, false, new Date());
+        paperManager.addNotification(notification);
+        paperManager.savePapers();
+        paperManager.saveNotifications();
+        
         return new ModelAndView(vm , "submitPaper.ftl");
     }
 }

@@ -1,12 +1,14 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Notification;
 import com.SAM2018.model.Review;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -66,9 +68,16 @@ public class PostReviewPaperRoute implements TemplateViewRoute{
             review.setReviewerComments(comments);
             review.setNeedsRereviewed(false);
             paperManager.saveReviews();
+
+            int remainingReviews = paperManager.getReviewsLeftForPaper(Integer.toString(pid));
+            if(remainingReviews == 0) {
+                String messageString = "All PCMs have submitted their Review for '" + review.getSubject().getTitle() + "'.";
+                Notification notification = new Notification(paperManager.getNotificationsSize(), null, paperManager.getPCC(), messageString, false, new Date());
+                paperManager.addNotification(notification);
+                paperManager.saveNotifications();
+            }
         }
 
-        //we'll also need to differentiate between completed and uncompleted reviews (maybe for score = -1)
         response.redirect("/reviewPapers");
         halt();
         return null;
