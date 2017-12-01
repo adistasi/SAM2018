@@ -37,7 +37,7 @@
         <#if notifications?size != 0>
             <p>Your Unread Notifications:</p>
             <#list notifications as n>
-                <p>FROM: ${n.getCreator().getUsername()}</p>
+                <p>FROM: ${n.getCreator().getFirstName()} ${n.getCreator().getLastName()}</p>
                 <p>DATE: ${n.getDateGenerated()?string('MM/dd/yyyy HH:mm')}</p>
                 <p>MESSAGE: ${n.getMessage()}</p>
                 <button onclick="markAsRead(${n.getID()})">Mark as Read</button>
@@ -50,7 +50,7 @@
         <#if readNotifications?size != 0>
             <p>Your read Notifications:</p>
             <#list readNotifications as rn>
-                <p>FROM: ${rn.getCreator().getUsername()}</p>
+                <p>FROM: ${rn.getCreator().getFirstName()} ${rn.getCreator().getLastName()}</p>
                 <p>DATE: ${rn.getDateGenerated()?string('MM/dd/yyyy HH:mm')}</p>
                 <p>MESSAGE: ${rn.getMessage()}</p>
                 <hr />
