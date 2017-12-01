@@ -2,9 +2,7 @@ package com.SAM2018.appl;
 
 import com.SAM2018.model.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.ArrayList;
@@ -584,6 +582,64 @@ public class PaperManager {
         }
     }
 
+    /*function to assignRole PCC/PCM to users*/
+    public User assignRole(User user, String type)
+    {
+        String username=user.getUsername();
+        String password=user.getPassword();
+        String firstName=user.getFirstName();
+        String lastName=user.getLastName();
+        PCC newPCC;
+        PCM newPCM;
+        if(type.equalsIgnoreCase("PCC"))
+        {
+            newPCC=new PCC(username,password,firstName,lastName);
+            return newPCC;
+        }
+
+        if(type.equalsIgnoreCase("PCM"))
+        {
+            newPCM=new PCM(username,password,firstName,lastName);
+            return newPCM;
+        }
+        return user;
+    }
+
+    /*Function to delete user and remove the user entry from the users.txt file*/
+    public boolean deleteUser(User user) throws IOException
+    {
+        String username=user.getUsername();
+        String password=user.getPassword();
+        String firstName=user.getFirstName();
+        String lastName=user.getLastName();
+        String classType=user.getClass().toString();
+
+        String toDelete=username+"|||"+classType+"|||"+password+"|||"+firstName+"|||"+lastName+"|||";
+        System.out.println(toDelete);
+
+        File inFile = new File("users.txt");
+        File tmpFile = new File("users_new.txt");
+
+        BufferedReader reader = new BufferedReader(new FileReader(inFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tmpFile));
+
+        String line;
+
+        while((line = reader.readLine()) != null) {
+            // trim newline when comparing with lineToRemove
+            String trimmedLine = line.trim();
+            if(trimmedLine.equals(toDelete)) continue;
+            writer.write(line + System.getProperty("line.separator"));
+        }
+        writer.close();
+        reader.close();
+
+        inFile.delete();
+        boolean flag = tmpFile.renameTo(new File("users.txt"));
+        return flag;
+
+    }
+
     public void loadApplication() {
         loadUsers();
         loadPapers();
@@ -591,4 +647,6 @@ public class PaperManager {
         loadReports();
         loadNotifications();
     }
+
+
 }
