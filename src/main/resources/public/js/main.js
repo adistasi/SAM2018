@@ -31,13 +31,14 @@ function rereviewPaper(paperID) {
     jQuery.post('/rereviewPaper', JSON.stringify(paperID), handleMessageResponse, 'json');
 }
 
+function markAsRead(notificationID) {
+    jQuery.post("/markAsRead", JSON.stringify(notificationID), handleMessageResponse, 'json');
+}
+
 function handleMessageResponse(message, textStatus, jqXHR) {
     displayMessage(message);
 }
 
 function displayMessage(message) {
-    console.log("HMR");
-    console.log(message.type);
-    console.log(message.text);
     $('#message').attr('class', message.type).html(message.text).slideDown(400);
 }

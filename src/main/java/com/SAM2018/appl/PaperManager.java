@@ -1,17 +1,12 @@
 package com.SAM2018.appl;
 
-import com.SAM2018.Application;
 import com.SAM2018.model.*;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import com.SAM2018.model.*;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +20,9 @@ public class PaperManager {
     private  Map<String, User> users = new HashMap<>();
     private List<Paper> papers = new ArrayList<>();
     private Map<String, List<Review>> reviews = new HashMap<>();
-    private Map<String, List<User>> requestedReviews = new HashMap();
+    private Map<String, List<User>> requestedReviews = new HashMap<>();
     private List<Report> reports = new ArrayList<>();
+    private List<Notification> notifications = new ArrayList<>();
 
     //USER FUNCTIONALITY
     public Set<String> getUsernames() {
@@ -75,6 +71,18 @@ public class PaperManager {
             return "PCM";
         else
             return "Submitter";
+    }
+
+    public List<User> getAllUsers(String _username) {
+        List<User> userList = new ArrayList<>();
+
+        for(User u : users.values()) {
+            if(!u.getUsername().equals(_username)) {
+                userList.add(u);
+            }
+        }
+
+        return userList;
     }
 
 
@@ -204,9 +212,6 @@ public class PaperManager {
 
         for(List<Review> revs : reviews.values()) {
             for(Review r : revs) {
-                boolean gnr = r.getNeedsRereviewed();
-                boolean gr = r.getRating() >= 0;
-                boolean gr2 = r.getRating() != -1;
                 if(r.getReviewer().getUsername().equals(username) && (r.getNeedsRereviewed() || r.getRating() >= 0))
                     completedReviews.add(r);
             }
@@ -267,6 +272,54 @@ public class PaperManager {
         }
 
         return null;
+    }
+
+    //NOTIFICATION FUNCTIONALITY
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public List<Notification> getUnreadNotificationsForUser(String username) {
+        List<Notification> nots = new ArrayList<>();
+
+        for(Notification n : notifications) {
+            if(n.getRecipient().getUsername().equals(username) && !n.getIsRead())
+                nots.add(n);
+        }
+
+        return nots;
+    }
+
+    public List<Notification> getReadNotificationsForUser(String username) {
+        List<Notification> nots = new ArrayList<>();
+
+        for(Notification n : notifications) {
+            if(n.getRecipient().getUsername().equals(username) && n.getIsRead())
+                nots.add(n);
+        }
+
+        return nots;
+    }
+
+    public int getUnreadNotificationCount(String _username) {
+        List<Notification> nots = getUnreadNotificationsForUser(_username);
+        return nots.size();
+    }
+
+    public void addNotification(Notification n) {
+        notifications.add(n);
+    }
+
+    public int getNotificationsSize() {
+        return notifications.size();
+    }
+
+    public Notification getNotificationByID(int id) {
+        try {
+            return notifications.get((id));
+        } catch(Exception e) {
+            return null;
+        }
     }
 
     //SAVING FUNCTIONALITY
@@ -483,10 +536,53 @@ public class PaperManager {
         }
     }
 
+    public void saveNotifications() {
+        try {
+            FileWriter writer = new FileWriter("notifications.txt");
+            writer.write("=====NOTIFICATIONS=====\n");
+            for(Notification n : notifications) {
+                writer.write(n.saveNotification());
+            }
+
+            writer.close();
+        } catch(Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+    }
+
+    public void loadNotifications() {
+        try {
+            try (BufferedReader br = new BufferedReader(new FileReader("notifications.txt"))) {
+                String header = br.readLine();
+                String line = br.readLine();
+                while (line != null) {
+                    String[] notificationLine = line.split("\\|\\|\\|");
+                    int id = Integer.parseInt(notificationLine[0]);
+                    User generator = getUser(notificationLine[1]);
+                    User recipient = getUser(notificationLine[2]);
+                    String message = notificationLine[3];
+                    boolean isRead = Boolean.valueOf(notificationLine[4]);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm");
+                    Date dateGenerated = sdf.parse(notificationLine[5]);
+
+
+                    Notification notification = new Notification(id, generator, recipient, message, isRead, dateGenerated);
+                    notifications.add(notification);
+
+                    line = br.readLine();
+                }
+            }
+        } catch(Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+    }
+
     public void loadApplication() {
         loadUsers();
         loadPapers();
         loadReviews();
         loadReports();
+        loadNotifications();
     }
 }

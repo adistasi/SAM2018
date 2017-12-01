@@ -15,8 +15,11 @@
             <a href="/managePapers">Manage Papers</a> |
             <#if userType == "Admin">
                 <a href="/accountManagement">Manage Accounts</a> |
+            </#if>
+            <#if userType == "Admin" || userType =="PCC">
                 <a href="/createNotification">Create Notification</a> |
             </#if>
+            <a href ="/viewNotifications">Notifications<#if notificationCount != 0> (<span style="color:red">${notificationCount}</span>)</#if></a> |
             <a href="/logout">Logout</a>
         <#else>
             <a href="/login">Login</a> |

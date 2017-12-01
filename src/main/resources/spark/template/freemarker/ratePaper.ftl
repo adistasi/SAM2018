@@ -81,7 +81,7 @@
                 </#list>
             </#if>
         <#else>
-            <p style="text-align:center">Please select a valid paper to rate</p>
+            <p style="text-align:center">Please s1elect a valid paper to rate</p>
         </#if>
     </div>
 

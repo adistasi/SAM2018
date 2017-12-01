@@ -117,5 +117,11 @@ public class WebServer {
 
         post("/rereviewPaper", new PostRereviewPaperRoute(paperManager), JsonUtils.json());
 
+        get("/createNotification", new GetCreateNotificationRoute(paperManager), templateEngine);
+        post("/createNotification", new PostCreateNotificationRoute(paperManager), templateEngine);
+
+        get("/viewNotifications", new GetViewNotificationsRoute(paperManager), templateEngine);
+        post("/markAsRead", new PostMarkAsReadRoute(paperManager), JsonUtils.json());
+
   }
 }

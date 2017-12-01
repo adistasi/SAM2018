@@ -1,35 +1,67 @@
 package com.SAM2018.model;
 
+import freemarker.template.SimpleDate;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class Notification {
     //Attributes
+    private int id;
+    private User creator;
     private String message;
-    private List<User> recipients;
-    private Date sendDate;
+    private User recipient;
+    private boolean isRead;
+    private Date dateGenerated;
 
-    public Notification(String _message, List<User> _recipients) {
+    public Notification(int _id, User _creator, User _recipient, String _message, boolean _isRead) {
+        this.id= _id;
+        this.creator  =_creator;
+        this.recipient = _recipient;
         this.message = _message;
-        this.recipients = _recipients;
-        this.sendDate = null;
+        this.isRead = _isRead;
+        dateGenerated = new Date();
     }
 
-    public Notification(String _message, List<User> _recipients, Date _sendDate) {
+    public Notification(int _id, User _creator, User _recipient, String _message, boolean _isRead, Date _dateGenerated) {
+        this.id = _id;
+        this.creator = _creator;
+        this.recipient = _recipient;
         this.message = _message;
-        this.recipients = _recipients;
-        this.sendDate = _sendDate;
+        this.isRead = _isRead;
+        this.dateGenerated = _dateGenerated;
     }
+
+    public int getID() {
+        return id;
+    }
+
+    public User getCreator() { return creator; }
 
     public String getMessage() {
         return message;
     }
 
-    public List<User> getRecipients() {
-        return recipients;
+    public User getRecipient() {
+        return recipient;
     }
 
-    public Date getSendDate() {
-        return sendDate;
+    public boolean getIsRead() { return isRead; }
+
+    public Date getDateGenerated() {
+        return dateGenerated;
+    }
+
+    public void markAsRead() {
+        this.isRead = true;
+    }
+
+    public String saveNotification() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm");
+        String dateStr = sdf.format(dateGenerated);
+
+        String saveString = id + "|||" + creator.getUsername() + "|||" + recipient.getUsername() + "|||" + message + "|||" + isRead + "|||" + dateStr + "|||\n";
+        return saveString;
     }
 }
