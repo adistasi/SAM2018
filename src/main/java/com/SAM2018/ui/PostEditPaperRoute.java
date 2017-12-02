@@ -56,9 +56,9 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         if(authors.size() == 0) {
             vm.put("paper", paper);
             return UIUtils.error(vm, "A paper must have an author", "submitPaper.ftl");
-        } else if(rawAuthors.contains("|||")) {
+        } else if(rawAuthors.contains("|||") || rawAuthors.contains(",")) {
             vm.put("paper", paper);
-            return UIUtils.error(vm, "An author may not contain the characters '|||'", "editPaper.ftl");
+            return UIUtils.error(vm, "An author may not contain the characters '|||' or ','", "editPaper.ftl");
         }
 
         String title = request.queryParams("title");

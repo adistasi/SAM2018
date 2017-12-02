@@ -45,8 +45,8 @@ public class GetRequestPaperRoute implements TemplateViewRoute {
             return null;
         }
 
-
         vm.put("title", "Request a Paper");
+        vm.put("hasRequested", paperManager.hasUserMadeRequest(username));
         vm.put(PAPERS_FOR_REVIEW, paperManager.getPapersForReview(username));
         return new ModelAndView(vm , "requestPaper.ftl");
     }

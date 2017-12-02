@@ -38,8 +38,8 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
 
         if(authors.size() == 0) {
             return UIUtils.error(vm, "A paper must have an author", "submitPaper.ftl");
-        } else if(rawAuthors.contains("|||")) {
-            return UIUtils.error(vm, "An author may not contain the characters '|||'", "submitPaper.ftl");
+        } else if(rawAuthors.contains("|||") || rawAuthors.contains(",")) {
+            return UIUtils.error(vm, "An author may not contain the characters '|||' or ','", "submitPaper.ftl");
         }
 
         String contactAuthorString = session.attribute("username");
@@ -61,7 +61,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
         paperManager.addNotification(notification);
         paperManager.savePapers();
         paperManager.saveNotifications();
-        
+
         return new ModelAndView(vm , "submitPaper.ftl");
     }
 }

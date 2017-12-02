@@ -192,6 +192,16 @@ public class PaperManager {
         return rrds;
     }
 
+    public boolean hasUserMadeRequest(String username) {
+        User user = getUser(username);
+        for(List<User> reqUsers : requestedReviews.values()) {
+            if(reqUsers.contains(user))
+                return true;
+        }
+
+        return false;
+    }
+
 
     //REVIEW FUNCTIONALITY
     public void addReview(String paperID, Review review) {
