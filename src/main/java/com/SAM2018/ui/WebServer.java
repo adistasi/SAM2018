@@ -127,5 +127,8 @@ public class WebServer {
         post("/approveUser", new PostApproveUserRoute(paperManager), JsonUtils.json());
         post("/denyUser", new PostDenyUserRoute(paperManager), JsonUtils.json());
         post("/deleteUser", new PostDeleteUserRoute(paperManager), JsonUtils.json());
+
+        get("/manageDeadlines", new GetManageDeadlinesRoute(paperManager), templateEngine);
+        post("/createDeadline", new PostCreateDeadlineRoute(paperManager), templateEngine);
   }
 }

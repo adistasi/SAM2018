@@ -9,23 +9,24 @@
   <div class="page">
   
     <h1>SAM 2018 Home Page</h1>
-    
-    <div class="navigation">
-        <#if username??>
-            <a href="/managePapers">Manage Papers</a> |
-            <#if userType == "Admin">
-                <a href="/manageAccounts">Manage Accounts</a> |
-            </#if>
-            <#if userType == "Admin" || userType =="PCC">
-                <a href="/createNotification">Create Notification</a> |
-            </#if>
-            <a href ="/viewNotifications">Notifications<#if notificationCount != 0> (<span style="color:red">${notificationCount}</span>)</#if></a> |
-            <a href="/logout">Logout</a>
-        <#else>
-            <a href="/login">Login</a> |
-            <a href="/register">Register</a>
-        </#if>
-    </div>
+
+      <div class="navigation">
+      <#if username??>
+          <a href="/managePapers">Manage Papers</a> |
+          <#if userType == "Admin">
+              <a href="/manageAccounts">Manage Accounts</a> |
+              <a href="/manageDeadlines">Manage Deadlines</a> |
+          </#if>
+          <#if userType == "Admin" || userType =="PCC">
+              <a href="/createNotification">Create Notification</a> |
+          </#if>
+          <a href ="/viewNotifications">Notifications<#if notificationCount != 0> (<span style="color:red">${notificationCount}</span>)</#if></a> |
+          <a href="/logout">Logout</a>
+      <#else>
+          <a href="/login">Login</a> |
+          <a href="/register">Register</a>
+      </#if>
+      </div>
 
 
     <div class="body">

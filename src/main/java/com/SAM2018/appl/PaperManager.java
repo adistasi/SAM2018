@@ -23,6 +23,7 @@ public class PaperManager {
     private List<Report> reports = new ArrayList<>();
     private List<Notification> notifications = new ArrayList<>();
     private Map<User, String> requestedPermissions = new HashMap<>();
+    private Map<String, Deadline> deadlines = new HashMap<>();
 
     //USER FUNCTIONALITY
     public Set<String> getUsernames() {
@@ -125,6 +126,38 @@ public class PaperManager {
         }
 
         return prd;
+    }
+
+    public void assignRole(String _username, boolean _approved) {
+        User user = getUser(_username);
+        String type = requestedPermissions.get(user);
+
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+
+        if(_approved) {
+            if(type.equals("PCC")) {
+                users.remove(user.getUsername());
+                PCC newPCC = new PCC(username, password, firstName, lastName);
+                users.put(newPCC.getUsername(), newPCC);
+            } else if(type.equals("PCM")) {
+                users.remove(user.getUsername());
+                PCM newPCM = new PCM(username, password, firstName, lastName);
+                users.put(newPCM.getUsername(), newPCM);
+            }
+        }
+
+        requestedPermissions.remove(user);
+        saveUsers();
+    }
+
+    public void deleteUser(String _username) {
+        users.remove(_username);
+        requestedPermissions.remove(getUser(_username));
+        //TODO: Remove from reviews, requests, papers, & ratings
+        saveUsers();
     }
 
 
@@ -392,6 +425,17 @@ public class PaperManager {
             return null;
         }
     }
+
+
+    //DEADLINE FUNCTIONALITY
+    public void addDeadline(String _title, Deadline _deadline) {
+        deadlines.put(_title, _deadline);
+    }
+
+    public Deadline getDeadline(String title) {
+        return deadlines.get(title);
+    }
+
 
     //SAVING FUNCTIONALITY
     public void savePapers() {
@@ -665,44 +709,50 @@ public class PaperManager {
         }
     }
 
+    public void saveDeadlines() {
+        try {
+            FileWriter writer = new FileWriter("deadlines.txt");
+            writer.write("=====DEADLINES=====\n");
+            for(Deadline d : deadlines.values()) {
+                writer.write(d.saveDeadline());
+            }
+
+            writer.close();
+        } catch(Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+    }
+
+    public void loadDeadlines() {
+        try {
+            try (BufferedReader br = new BufferedReader(new FileReader("deadlines.txt"))) {
+                String header = br.readLine();
+                String line = br.readLine();
+                while (line != null) {
+                    String[] deadlineLine = line.split("\\|\\|\\|");
+
+                    String title = deadlineLine[0];
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm");
+                    Date date = sdf.parse(deadlineLine[1]);
+
+                    Deadline deadline = new Deadline(title, date);
+                    deadlines.put(title, deadline);
+
+                    line = br.readLine();
+                }
+            }
+        } catch(Exception e) {
+            System.out.println("ERROR: " + e);
+        }
+    }
+
     public void loadApplication() {
         loadUsers();
         loadPapers();
         loadReviews();
         loadReports();
         loadNotifications();
-    }
-
-    /*function to assignRole PCC/PCM to users*/
-    public void assignRole(String _username, boolean _approved) {
-        User user = getUser(_username);
-        String type = requestedPermissions.get(user);
-
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-
-        if(_approved) {
-            if(type.equals("PCC")) {
-                users.remove(user.getUsername());
-                PCC newPCC = new PCC(username, password, firstName, lastName);
-                users.put(newPCC.getUsername(), newPCC);
-            } else if(type.equals("PCM")) {
-                users.remove(user.getUsername());
-                PCM newPCM = new PCM(username, password, firstName, lastName);
-                users.put(newPCM.getUsername(), newPCM);
-            }
-        }
-
-        requestedPermissions.remove(user);
-        saveUsers();
-    }
-
-    public void deleteUser(String _username) {
-        users.remove(_username);
-        requestedPermissions.remove(getUser(_username));
-        //TODO: Remove from reviews, requests, papers, & ratings
-        saveUsers();
+        loadDeadlines();
     }
 }

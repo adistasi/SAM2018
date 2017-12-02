@@ -1,5 +1,6 @@
 package com.SAM2018.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline {
@@ -18,5 +19,13 @@ public class Deadline {
 
     public Date getDate() {
         return date;
+    }
+
+    public String saveDeadline() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm");
+        String dateStr = sdf.format(date);
+
+        String saveString = title + "|||" + dateStr + "\n";
+        return saveString;
     }
 }

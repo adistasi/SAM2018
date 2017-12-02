@@ -16,6 +16,7 @@
             <a href="/managePapers">Manage Papers</a> |
             <#if userType == "Admin">
                 <a href="/manageAccounts">Manage Accounts</a> |
+                <a href="/manageDeadlines">Manage Deadlines</a> |
             </#if>
             <#if userType == "Admin" || userType =="PCC">
                 <a href="/createNotification">Create Notification</a> |
