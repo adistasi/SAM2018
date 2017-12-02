@@ -94,6 +94,16 @@ public class PaperManager {
         return null;
     }
 
+    public int getCountPCC() {
+        int pccs = 0;
+        for(User u : users.values()) {
+            if(u instanceof PCC)
+                pccs++;
+        }
+
+        return pccs;
+    }
+
     public User getAdmin() {
         for(User u : users.values()) {
             if(u instanceof Admin)

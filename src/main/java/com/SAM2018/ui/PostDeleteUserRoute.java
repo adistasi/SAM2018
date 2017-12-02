@@ -2,6 +2,7 @@ package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Message;
+import com.SAM2018.model.PCC;
 import com.SAM2018.model.User;
 import spark.Request;
 import spark.Response;
@@ -38,6 +39,10 @@ public class PostDeleteUserRoute implements Route {
         }
 
         String uid = request.body().substring(1, request.body().length() - 1);
+        User user = paperManager.getUser(uid);
+        if(paperManager.getCountPCC() == 1 && user instanceof PCC)
+            return new Message("There must be at least one PCC in the System at all times", "error");
+
         paperManager.deleteUser(uid);
 
         return new Message("User has been deleted", "info");
