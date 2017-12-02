@@ -14,7 +14,7 @@
         <#if username??>
             <a href="/managePapers">Manage Papers</a> |
             <#if userType == "Admin">
-                <a href="/accountManagement">Manage Accounts</a> |
+                <a href="/manageAccounts">Manage Accounts</a> |
             </#if>
             <#if userType == "Admin" || userType =="PCC">
                 <a href="/createNotification">Create Notification</a> |

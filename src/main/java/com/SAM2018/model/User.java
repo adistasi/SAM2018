@@ -61,7 +61,7 @@ public abstract class User {
     }
 
     public String saveUser() {
-        String saveString = username + "|||" + getClass().toString() + "|||" + password + "|||" + firstName + "|||" + lastName + "|||\n";
+        String saveString = username + "|||" + getClass().toString() + "|||" + password + "|||" + firstName + "|||" + lastName + "|||";
         return saveString;
     }
 }

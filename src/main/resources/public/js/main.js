@@ -35,6 +35,18 @@ function markAsRead(notificationID) {
     jQuery.post("/markAsRead", JSON.stringify(notificationID), handleMessageResponse, 'json');
 }
 
+function deleteUser(username) {
+    jQuery.post("/deleteUser", JSON.stringify(username), handleMessageResponse, 'json');
+}
+
+function approveUser(username) {
+    jQuery.post("/approveUser", JSON.stringify(username), handleMessageResponse, 'json');
+}
+
+function denyUser(username) {
+    jQuery.post("/denyUser", JSON.stringify(username), handleMessageResponse, 'json');
+}
+
 function handleMessageResponse(message, textStatus, jqXHR) {
     displayMessage(message);
 }

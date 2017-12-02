@@ -12,15 +12,17 @@
     <div class="navigation">
         <#if username??>
             <a href="/">Home</a> |
+            <a href="/submitPaper">Submit a Paper</a> |
+            <a href="/requestPaper">Request Reviews</a> |
             <a href="/logout">Logout</a> |
         <#else>
-            <a href="/">Home</a> |
+            <a href="/home">Home</a> |
             <a href="/login">Login</a>
         </#if>
     </div>
 
     <#if message??>
-        <div id="message" class="${messageType}">${message}</div>
+        <div id="message" class="${messageType}">"${message}"</div>
     </#if>
 
     <form class="inputForm" method="POST" action="/register">
@@ -33,6 +35,10 @@
 
             <label for="lName">Last Name</label>
             <input type="text" class="form-control" id="lName" name="lName" placeholder="Enter your Last Name" required><br />
+
+            <label>Request Role</label>
+            <input type="radio" name="usertype" value="PCM">PCM<br>
+            <input type="radio" name="usertype" value="PCC">PCC<br>
 
             <label for="Password">Password</label>
             <input type="password" lass="form-control" id="password" name="password" placeholder="Enter your password" required><br />

@@ -2,9 +2,8 @@ package com.SAM2018.appl;
 
 import com.SAM2018.model.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.security.Permission;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class PaperManager {
     private Map<String, List<User>> requestedReviews = new HashMap<>();
     private List<Report> reports = new ArrayList<>();
     private List<Notification> notifications = new ArrayList<>();
+    private Map<User, String> requestedPermissions = new HashMap<>();
 
     //USER FUNCTIONALITY
     public Set<String> getUsernames() {
@@ -101,6 +101,20 @@ public class PaperManager {
         }
 
         return null;
+    }
+
+    public void requestPermissions(User _user, String _permissionlevel) {
+        requestedPermissions.put(_user, _permissionlevel);
+    }
+
+    public List<PermissionRequestDisplay> getRequestedPermissions() {
+        List<PermissionRequestDisplay> prd = new ArrayList<>();
+        for(User u : requestedPermissions.keySet()) {
+            PermissionRequestDisplay p = new PermissionRequestDisplay(u, requestedPermissions.get(u));
+            prd.add(p);
+        }
+
+        return prd;
     }
 
 
@@ -447,6 +461,12 @@ public class PaperManager {
             writer.write("=====USERS=====\n");
             for(User u : users.values()) {
                 writer.write(u.saveUser());
+
+                String requestedPermissionVal = requestedPermissions.get(u);
+                if(requestedPermissionVal != null)
+                    writer.write(requestedPermissionVal + "\n");
+                else
+                    writer.write("\n");
             }
 
             writer.close();
@@ -480,6 +500,10 @@ public class PaperManager {
                     }
 
                     users.put(username, user);
+
+                    if(userLine.length == 6) {
+                        requestedPermissions.put(user, userLine[5]);
+                    }
 
                     line = br.readLine();
                 }
@@ -637,5 +661,38 @@ public class PaperManager {
         loadReviews();
         loadReports();
         loadNotifications();
+    }
+
+    /*function to assignRole PCC/PCM to users*/
+    public void assignRole(String _username, boolean _approved) {
+        User user = getUser(_username);
+        String type = requestedPermissions.get(user);
+
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+
+        if(_approved) {
+            if(type.equals("PCC")) {
+                users.remove(user.getUsername());
+                PCC newPCC = new PCC(username, password, firstName, lastName);
+                users.put(newPCC.getUsername(), newPCC);
+            } else if(type.equals("PCM")) {
+                users.remove(user.getUsername());
+                PCM newPCM = new PCM(username, password, firstName, lastName);
+                users.put(newPCM.getUsername(), newPCM);
+            }
+        }
+
+        requestedPermissions.remove(user);
+        saveUsers();
+    }
+
+    public void deleteUser(String _username) {
+        users.remove(_username);
+        requestedPermissions.remove(getUser(_username));
+        //TODO: Remove from reviews, requests, papers, & ratings
+        saveUsers();
     }
 }

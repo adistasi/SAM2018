@@ -123,5 +123,9 @@ public class WebServer {
         get("/viewNotifications", new GetViewNotificationsRoute(paperManager), templateEngine);
         post("/markAsRead", new PostMarkAsReadRoute(paperManager), JsonUtils.json());
 
+        get("/manageAccounts", new GetManageAccountsRoute(paperManager), templateEngine);
+        post("/approveUser", new PostApproveUserRoute(paperManager), JsonUtils.json());
+        post("/denyUser", new PostDenyUserRoute(paperManager), JsonUtils.json());
+        post("/deleteUser", new PostDeleteUserRoute(paperManager), JsonUtils.json());
   }
 }

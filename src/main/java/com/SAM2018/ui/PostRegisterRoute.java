@@ -48,6 +48,12 @@ public class PostRegisterRoute implements TemplateViewRoute {
                 User user = new Submitter(username, password, firstName, lastName);
                 paperManager.addUser(user);
 
+                String requestedType = request.queryParams("usertype");
+                if(requestedType != null) {
+                    paperManager.requestPermissions(user, requestedType);
+                }
+                paperManager.saveUsers();
+
                 response.redirect("/login");
                 halt();
                 return null;

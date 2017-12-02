@@ -15,7 +15,7 @@
     <#if username??>
         <a href="/managePapers">Manage Papers</a> |
         <#if userType == "Admin">
-            <a href="/accountManagement">Manage Accounts</a> |
+            <a href="/manageAccounts">Manage Accounts</a> |
         </#if>
         <a href ="/viewNotifications">Notifications<#if notificationCount != 0> (<span style="color:red">${notificationCount}</span>)</#if></a> |
         <a href="/logout">Logout</a>
