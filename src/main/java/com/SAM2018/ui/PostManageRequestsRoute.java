@@ -71,7 +71,7 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
             }
         }
 
-        /*for(List<String> prs : potentialReviews.values()) {
+        for(List<String> prs : potentialReviews.values()) {
             if(prs.size() != 3) {
                 vm.put("pcmUsers", paperManager.getAllPCMs());
                 vm.put("papersRequested", paperManager.getRequestedReviews());
@@ -84,7 +84,7 @@ public class PostManageRequestsRoute implements TemplateViewRoute {
                     return UIUtils.error(vm, "You cannot assign a PCM to the same paper twice", "reviewManagement.ftl");
                 }
             }
-        }*/
+        }
 
         for(String req : approvedRequests.values()) {
             String[] pcmAndPaper = req.split("\\|\\|\\|");

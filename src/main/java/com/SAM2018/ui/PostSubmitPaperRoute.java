@@ -9,6 +9,8 @@ import spark.*;
 import java.io.File;
 import java.util.*;
 
+import static spark.Spark.halt;
+
 public class PostSubmitPaperRoute implements TemplateViewRoute {
     //Attributes
     private final PaperManager paperManager;
@@ -62,6 +64,8 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
         paperManager.savePapers();
         paperManager.saveNotifications();
 
-        return new ModelAndView(vm , "submitPaper.ftl");
+        response.redirect("/managePapers");
+        halt();
+        return null;
     }
 }

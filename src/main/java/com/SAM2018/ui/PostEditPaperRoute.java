@@ -78,6 +78,8 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         paperManager.savePapers();
         paperManager.saveNotifications();
 
-        return new ModelAndView(vm , "editPaper.ftl");
+        response.redirect("/managePapers");
+        halt();
+        return null;
     }
 }
