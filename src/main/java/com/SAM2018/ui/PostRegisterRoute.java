@@ -1,6 +1,7 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Notification;
 import com.SAM2018.model.Submitter;
 import com.SAM2018.model.User;
 import spark.ModelAndView;
@@ -51,6 +52,9 @@ public class PostRegisterRoute implements TemplateViewRoute {
                 String requestedType = request.queryParams("usertype");
                 if(requestedType != null) {
                     paperManager.requestPermissions(user, requestedType);
+                    Notification note = new Notification(paperManager.getNotificationsSize(), user, paperManager.getAdmin(), "A user (" + user.getFullName() + ") has registered and requested " + requestedType + " status", false);
+                    paperManager.addNotification(note);
+                    paperManager.saveNotifications();
                 }
                 paperManager.saveUsers();
 

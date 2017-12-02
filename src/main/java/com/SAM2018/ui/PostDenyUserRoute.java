@@ -2,6 +2,8 @@ package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Message;
+import com.SAM2018.model.Notification;
+import com.SAM2018.model.User;
 import spark.*;
 
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class PostDenyUserRoute implements Route {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String userType = paperManager.getUserType(request.session().attribute("username"));
+        User user = paperManager.getUser(request.session().attribute("username"));
 
         if(!userType.equals("Admin")) {
             response.redirect("/manageAccounts");
@@ -38,6 +41,11 @@ public class PostDenyUserRoute implements Route {
 
         String uid = request.body().substring(1, request.body().length() - 1);
         paperManager.assignRole(uid, false);
+
+        User requester = paperManager.getUser(uid);
+        Notification note = new Notification(paperManager.getNotificationsSize(), user, requester, "Your request for elevated status has been denied", false);
+        paperManager.addNotification(note);
+        paperManager.saveNotifications();
 
         return new Message("Permission Elevation Requested Denied", "info");
     }

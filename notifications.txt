@@ -1,2 +1,6 @@
 =====NOTIFICATIONS=====
 0|||System|||add5980|||All PCMs have submitted their Review for 'Goomba Stomping: How to use your enemies to reach new Heights'.|||false|||2017-12-02 12:10|||
+1|||test11|||username|||A user (test1 test2) has registered and requested PCC status|||false|||2017-12-02 17:04|||
+2|||anotherTest|||username|||A user (testy testy) has registered and requested PCM status|||false|||2017-12-02 17:09|||
+3|||username|||anotherTest|||Your request for elevated status has been approved|||false|||2017-12-02 17:10|||
+4|||username|||test11|||Your request for elevated status has been approved|||false|||2017-12-02 17:10|||
