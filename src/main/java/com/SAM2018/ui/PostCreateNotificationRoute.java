@@ -58,7 +58,7 @@ public class PostCreateNotificationRoute implements TemplateViewRoute {
         Notification notification = new Notification(paperManager.getNotificationsSize(), generator, recipient, message, false);
         paperManager.addNotification(notification);
         paperManager.saveNotifications();
-        response.body("Hello");
+
         response.redirect("/createNotification");
         halt();
         return null;

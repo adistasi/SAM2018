@@ -27,9 +27,6 @@ public class GetCreateNotificationRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
-        String asdf = response.body();
-
-
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String username = request.session().attribute("username");
