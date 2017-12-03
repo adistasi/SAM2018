@@ -24,6 +24,7 @@ public class PaperManager {
     private List<Notification> notifications = new ArrayList<>();
     private Map<User, String> requestedPermissions = new HashMap<>();
     private Map<String, Deadline> deadlines = new HashMap<>();
+    Timer timer = new Timer();
 
     //USER FUNCTIONALITY
     public Set<String> getUsernames() {
@@ -259,6 +260,10 @@ public class PaperManager {
         return false;
     }
 
+    public boolean areOutstandingRequests() {
+        return requestedReviews.size() > 0;
+    }
+
 
     //REVIEW FUNCTIONALITY
     public void addReview(String paperID, Review review) {
@@ -328,29 +333,7 @@ public class PaperManager {
         return reviews.get(paperID);
     }
 
-    public List<Paper> getRatablePapers() {
-        List<Paper> ratablePapers = new ArrayList<>();
-
-        for(List<Review> revs: reviews.values()) {
-            if(revs.size() == REVIEWS_PER_PAPER) {
-                boolean allReviewsComplete = true;
-
-                for(int i=0; i < REVIEWS_PER_PAPER; i++) {
-                    if(revs.get(i).getRating() == -1 || revs.get(i).getNeedsRereviewed()) {
-                        allReviewsComplete = false;
-                        break;
-                    }
-                }
-
-                if(allReviewsComplete && !reports.contains(getReportByID(revs.get(0).getSubject().getPaperID())))
-                    ratablePapers.add(revs.get(0).getSubject());
-            }
-        }
-
-        return ratablePapers;
-    }
-
-    public int getReviewsLeftForPaper(String _paperID) {
+        public int getReviewsLeftForPaper(String _paperID) {
         List<Review> paperReviews = reviews.get(_paperID);
         int countCompleted = 0;
 
@@ -376,6 +359,28 @@ public class PaperManager {
         }
 
         return null;
+    }
+
+    public List<Paper> getRatablePapers() {
+        List<Paper> ratablePapers = new ArrayList<>();
+
+        for(List<Review> revs: reviews.values()) {
+            if(revs.size() == REVIEWS_PER_PAPER) {
+                boolean allReviewsComplete = true;
+
+                for(int i=0; i < REVIEWS_PER_PAPER; i++) {
+                    if(revs.get(i).getRating() == -1 || revs.get(i).getNeedsRereviewed()) {
+                        allReviewsComplete = false;
+                        break;
+                    }
+                }
+
+                if(allReviewsComplete && !reports.contains(getReportByID(revs.get(0).getSubject().getPaperID())))
+                    ratablePapers.add(revs.get(0).getSubject());
+            }
+        }
+
+        return ratablePapers;
     }
 
     //NOTIFICATION FUNCTIONALITY
@@ -435,6 +440,65 @@ public class PaperManager {
     public Deadline getDeadline(String title) {
         return deadlines.get(title);
     }
+
+    public Map<String, Deadline> getDeadlines() {
+        return deadlines;
+    }
+
+    public void enforceSubmissionDeadline() {
+        List<User> pcms = getAllPCMs();
+
+        for(User pcm : pcms) {
+            Notification not = new Notification(getNotificationsSize(), null, pcm, "The Submission Deadline has passed.  Please request papers you wish to review.", false, new Date());
+            addNotification(not);
+        }
+        saveNotifications();
+
+    }
+
+    public void enforceRequestDeadline() {
+        if(areOutstandingRequests()) {
+            User pcc = getPCC();
+
+            Notification not = new Notification(getNotificationsSize(), null, pcc, "The Submission Deadline has passed, but there are still unassigned papers.  Please assign these papers ASAP.", false, new Date());
+            addNotification(not);
+            //Notify PCC every day for any unassigned papers
+
+            saveNotifications();
+        }
+    }
+
+    public void enforceReviewDeadline() {
+        List<User> pcms = getAllPCMs();
+
+        for(User pcm : pcms) {
+            List<Review> pendingReviews = getPendingReviewsForUser(pcm.getUsername());
+
+            if(pendingReviews.size() > 0) {
+                Notification not = new Notification(getNotificationsSize(), null, pcm, "The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.", false, new Date());
+                addNotification(not);
+            }
+        }
+    }
+
+    public void enforceRatingDeadline() {
+        User pcc = getPCC();
+
+        if(getRatablePapers().size() > 0) {
+            Notification not = new Notification(getNotificationsSize(), null, pcc, "The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.", false, new Date());
+            addNotification(not);
+            saveNotifications();
+        }
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer _timer) {
+        this.timer = _timer;
+    }
+
 
 
     //SAVING FUNCTIONALITY

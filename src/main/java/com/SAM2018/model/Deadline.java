@@ -28,4 +28,10 @@ public class Deadline {
         String saveString = title + "|||" + dateStr + "\n";
         return saveString;
     }
+
+    public boolean hasPassed() {
+        Date currTime = new Date();
+
+        return currTime.after(date);
+    }
 }

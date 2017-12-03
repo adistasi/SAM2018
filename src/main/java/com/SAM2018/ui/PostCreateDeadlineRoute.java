@@ -1,14 +1,13 @@
 package com.SAM2018.ui;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Deadline;
 import com.SAM2018.model.Message;
+import com.SAM2018.model.Notification;
+import com.SAM2018.model.User;
 import spark.*;
 
 import static spark.Spark.halt;
@@ -58,7 +57,28 @@ public class PostCreateDeadlineRoute implements TemplateViewRoute {
             paperManager.addDeadline(title, deadline);
             paperManager.saveDeadlines();
 
+            Timer timer = paperManager.getTimer();
+            timer.cancel();
+            Timer timer2 = new Timer();
+            for( Deadline d : paperManager.getDeadlines().values())
+                timer2.schedule(new TimerTask() {
+                    public void run() {
+                        if(d.getTitle().equals("Submission Deadline")) {
+                            paperManager.enforceSubmissionDeadline();
+                        } else if(d.getTitle().equals("Request Deadline")) {
+                            paperManager.enforceRequestDeadline();
+                        } else if(d.getTitle().equals("Review Deadline")) {
+                            paperManager.enforceReviewDeadline();
+                        } else if(d.getTitle().equals("Rating Deadline")) {
+                            paperManager.enforceRatingDeadline();
+                        }
+                    }
+                }, d.getDate(), 86400000);
+
+            paperManager.setTimer(timer2);
+
         } catch (Exception e){
+            e.printStackTrace();
         }
 
         response.redirect("/manageDeadlines");

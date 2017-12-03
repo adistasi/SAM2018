@@ -44,29 +44,35 @@
 
             </div>
         </#if>
-        <h3 style="text-align:center">Upload a Paper to be considered for the conference</h3>
 
-        <form method="POST" action="/submitPaper" id="submitPaper" class="inputForm">
-            <div class="form-group">
-                <div style="margin-bottom: 35px;" id="authorsDiv">
-                    <label>Authors</label>
-                    <input type="text" class="authorField" name="author"/><br />
+        <#if closed != true>
+            <h3 style="text-align:center">Upload a Paper to be considered for the conference</h3>
+
+            <form method="POST" action="/submitPaper" id="submitPaper" class="inputForm">
+                <div class="form-group">
+                    <div style="margin-bottom: 35px;" id="authorsDiv">
+                        <label>Authors</label>
+                        <input type="text" class="authorField" name="author"/><br />
+                    </div>
+                    <input type="hidden" id="authInput" name="authors" />
+                    <a href="#" onclick="addAuthor()">Add Author</a><br />
+
+                    <label>Paper Title</label>
+                    <input type="text" name="title" required /><br />
+
+                    <label>Paper Format</label>
+                    <input type="text" name="format" required /><br />
+
+                    <label>Upload Paper</label>
+                    <input type="text" name="paperFile" required /><br />
+                    <!--<input type="file" name="paperFile" /><br />-->
+                    <button type="submit">Upload</button>
                 </div>
-                <input type="hidden" id="authInput" name="authors" />
-                <a href="#" onclick="addAuthor()">Add Author</a><br />
+            </form>
+        <#else>
+            <p style="text-align:center">The submission deadline has passed.</p>
+        </#if>
 
-                <label>Paper Title</label>
-                <input type="text" name="title" required /><br />
-
-                <label>Paper Format</label>
-                <input type="text" name="format" required /><br />
-
-                <label>Upload Paper</label>
-                <input type="text" name="paperFile" required /><br />
-                <!--<input type="file" name="paperFile" /><br />-->
-                <button type="submit">Upload</button>
-            </div>
-        </form>
     </div>
 
 </div>

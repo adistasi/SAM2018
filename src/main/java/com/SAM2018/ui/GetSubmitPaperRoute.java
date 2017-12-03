@@ -1,6 +1,7 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Deadline;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -32,6 +33,13 @@ public class GetSubmitPaperRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Submit Paper");
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
+
+        Deadline subDead = paperManager.getDeadline("Submission Deadline");
+
+        if(subDead != null && subDead.hasPassed())
+            vm.put("closed", true);
+        else
+            vm.put("closed", false);
 
         return new ModelAndView(vm , "submitPaper.ftl");
     }

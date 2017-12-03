@@ -1,6 +1,137 @@
 =====NOTIFICATIONS=====
-0|||System|||add5980|||All PCMs have submitted their Review for 'Goomba Stomping: How to use your enemies to reach new Heights'.|||false|||2017-12-02 12:10|||
+0|||System|||add5980|||All PCMs have submitted their Review for 'Goomba Stomping: How to use your enemies to reach new Heights'.|||true|||2017-12-02 12:10|||
 1|||test11|||username|||A user (test1 test2) has registered and requested PCC status|||false|||2017-12-02 17:04|||
 2|||anotherTest|||username|||A user (testy testy) has registered and requested PCM status|||false|||2017-12-02 17:09|||
 3|||username|||anotherTest|||Your request for elevated status has been approved|||false|||2017-12-02 17:10|||
 4|||username|||test11|||Your request for elevated status has been approved|||false|||2017-12-02 17:10|||
+5|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+6|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+7|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+8|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+9|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+10|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+11|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+12|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:44|||
+13|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:44|||
+14|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:44|||
+15|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:44|||
+16|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:44|||
+17|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:44|||
+18|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:45|||
+19|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:45|||
+20|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:45|||
+21|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+22|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+23|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+24|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+25|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+26|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+27|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+28|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:45|||
+29|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:45|||
+30|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+31|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+32|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+33|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+34|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+35|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+36|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+37|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+38|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:46|||
+39|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:46|||
+40|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:46|||
+41|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:46|||
+42|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+43|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+44|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+45|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+46|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+47|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+48|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+49|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:46|||
+50|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:46|||
+51|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:46|||
+52|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:46|||
+53|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:46|||
+54|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:46|||
+55|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:46|||
+56|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:46|||
+57|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+58|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+59|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+60|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+61|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+62|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+63|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+64|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:47|||
+65|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+66|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+67|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+68|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+69|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+70|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+71|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+72|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+73|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:49|||
+74|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:49|||
+75|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:49|||
+76|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:49|||
+77|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:49|||
+78|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:49|||
+79|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+80|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+81|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+82|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+83|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+84|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+85|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+86|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:49|||
+87|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:49|||
+88|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:49|||
+89|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:49|||
+90|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:49|||
+91|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+92|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+93|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+94|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+95|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+96|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+97|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+98|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+99|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+100|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+101|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+102|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:50|||
+103|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+104|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+105|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+106|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+107|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+108|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+109|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+110|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+111|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||true|||2017-12-03 18:50|||
+112|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+113|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+114|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+115|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+116|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+117|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+118|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+119|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+120|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+121|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+122|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+123|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+124|||System|||pcm2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+125|||System|||pcm3|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+126|||System|||microMan|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+127|||System|||pcm4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+128|||System|||pcm5|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+129|||System|||anotherTest|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+130|||System|||test4|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+131|||System|||test2|||The Submission Deadline has passed.  Please request papers you wish to review.|||false|||2017-12-03 18:50|||
+132|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+133|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+134|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||
+135|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-03 18:50|||

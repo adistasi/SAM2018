@@ -1,6 +1,7 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Deadline;
 import spark.*;
 
 import java.util.*;
@@ -44,6 +45,13 @@ public class GetRequestPaperRoute implements TemplateViewRoute {
             halt();
             return null;
         }
+
+        Deadline reqDead = paperManager.getDeadline("Request Deadline");
+
+        if(reqDead != null && reqDead.hasPassed())
+            vm.put("closed", true);
+        else
+            vm.put("closed", false);
 
         vm.put("title", "Request a Paper");
         vm.put("hasRequested", paperManager.hasUserMadeRequest(username));

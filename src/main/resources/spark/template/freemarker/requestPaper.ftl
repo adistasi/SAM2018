@@ -35,24 +35,28 @@
     </div>
 
     <div class="body">
-        <#if hasRequested?? && !hasRequested>
-            <form action="/requestPaper" method="POST" class="inputForm">
-                <#if paperForReview?size != 0>
-                    <p>Papers Available for Review:</p>
-                    <div class="paperRequestForm">
-                        <#list paperForReview as paper>
-                            <input type="checkbox" name="requestedPaper" value=${paper.getPaperID()}> "<em>${paper.getTitle()}</em>" - ${paper.getAuthorsAsString()}<br>
-                        </#list>
-                    </div>
-                    <div id="requestFormSubmitButton">
-                        <button type="submit" class="btn btn-default">Submit Request</button>
-                    </div>
-                <#else>
-                    <p style="text-align:center">No papers are available for review.</p>
-                </#if>
-            </form>
+        <#if closed != true>
+            <#if hasRequested?? && !hasRequested>
+                <form action="/requestPaper" method="POST" class="inputForm">
+                    <#if paperForReview?size != 0>
+                        <p>Papers Available for Review:</p>
+                        <div class="paperRequestForm">
+                            <#list paperForReview as paper>
+                                <input type="checkbox" name="requestedPaper" value=${paper.getPaperID()}> "<em>${paper.getTitle()}</em>" - ${paper.getAuthorsAsString()}<br>
+                            </#list>
+                        </div>
+                        <div id="requestFormSubmitButton">
+                            <button type="submit" class="btn btn-default">Submit Request</button>
+                        </div>
+                    <#else>
+                        <p style="text-align:center">No papers are available for review.</p>
+                    </#if>
+                </form>
+            <#else>
+                <p style="text-align:center">You have already made a request to review papers</p>
+            </#if>
         <#else>
-            <p style="text-align:center">You have already made a request to review papers</p>
+            <p style="text-align:center">The Request Deadline has passed</p>
         </#if>
     </div>
 
