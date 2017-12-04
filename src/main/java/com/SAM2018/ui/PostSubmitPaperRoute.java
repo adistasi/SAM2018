@@ -56,7 +56,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
         User contactAuthor = paperManager.getContactAuthorByUsername(contactAuthorString);
         Paper paper = new Paper(paperManager.getPaperCount(), authors, contactAuthor, title, format, 1, file);
         paperManager.addPaper(paper);
-        contactAuthor.addPaperToSubmissions(paper);
+        contactAuthor.submitPaper(paper);
 
         String messageString = "A User (" + contactAuthor.getFullName() + ") has submitted a Paper entitled '" + paper.getTitle() + "'.";
         Notification notification = new Notification(paperManager.getNotificationsSize(), contactAuthor, paperManager.getPCC(), messageString, false, new Date());

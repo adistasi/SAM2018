@@ -167,7 +167,7 @@ public class PaperManager {
         Paper paper = new Paper(papers.size(), _authors, _contactAuthor, _title, _format, _version, _paperUpload);
 
         papers.add(paper);
-        _contactAuthor.addPaperToSubmissions(paper);
+        _contactAuthor.submitPaper(paper);
         savePapers();
     }
 
@@ -542,7 +542,7 @@ public class PaperManager {
 
                     Paper p = new Paper(id, authors, contactAuthor, title, format, version, paperUpload);
                     papers.add(p);
-                    contactAuthor.addPaperToSubmissions(p);
+                    contactAuthor.submitPaper(p);
 
                     if(paperLine.length > 7) {
                         String[] requestors = paperLine[7].split("/");
