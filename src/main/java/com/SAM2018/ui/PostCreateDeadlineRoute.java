@@ -60,20 +60,27 @@ public class PostCreateDeadlineRoute implements TemplateViewRoute {
             Timer timer = paperManager.getTimer();
             timer.cancel();
             Timer timer2 = new Timer();
-            for( Deadline d : paperManager.getDeadlines().values())
-                timer2.schedule(new TimerTask() {
-                    public void run() {
-                        if(d.getTitle().equals("Submission Deadline")) {
+            for( Deadline d : paperManager.getDeadlines().values()) {
+                if(d.getTitle().equals("Submission Deadline")) {
+                    timer2.schedule(new TimerTask() {
+                        public void run() {
                             paperManager.enforceSubmissionDeadline();
-                        } else if(d.getTitle().equals("Request Deadline")) {
-                            paperManager.enforceRequestDeadline();
-                        } else if(d.getTitle().equals("Review Deadline")) {
-                            paperManager.enforceReviewDeadline();
-                        } else if(d.getTitle().equals("Rating Deadline")) {
-                            paperManager.enforceRatingDeadline();
                         }
-                    }
-                }, d.getDate(), 86400000);
+                    }, d.getDate());
+                } else {
+                    timer2.schedule(new TimerTask() {
+                        public void run() {
+                            if (d.getTitle().equals("Request Deadline")) {
+                                paperManager.enforceRequestDeadline();
+                            } else if (d.getTitle().equals("Review Deadline")) {
+                                paperManager.enforceReviewDeadline();
+                            } else if (d.getTitle().equals("Rating Deadline")) {
+                                paperManager.enforceRatingDeadline();
+                            }
+                        }
+                    }, d.getDate(), 86400000);
+                }
+            }
 
             paperManager.setTimer(timer2);
 

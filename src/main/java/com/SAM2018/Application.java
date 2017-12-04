@@ -10,7 +10,6 @@ import spark.template.freemarker.FreeMarkerEngine;
 
 import com.SAM2018.ui.WebServer;
 
-
 /**
  * The entry point for the SAM2018 web application.
  *
@@ -24,12 +23,13 @@ public final class Application {
     * @param args Command line arguments; none expected.
     */
     public static void main(String[] args) {
-
         //Create PaperManager
         final PaperManager paperManager = new PaperManager();
 
+        //Load in each piece of data
         paperManager.loadApplication();
 
+        //Get all the loaded deadlines
         Map<String, Deadline> deadlines = paperManager.getDeadlines();
         Deadline subDead = deadlines.get("Submission Deadline");
         Deadline reqDead = deadlines.get("Request Deadline");
@@ -37,7 +37,7 @@ public final class Application {
         Deadline ratDead = deadlines.get("Rating Deadline");
         Timer timer = paperManager.getTimer();
 
-        if(subDead != null) {
+        if(subDead != null) { //If there is a submission deadline defined, queue it to activate at the given date
             timer.schedule(new TimerTask() {
                 public void run() {
                     paperManager.enforceSubmissionDeadline();
@@ -45,27 +45,22 @@ public final class Application {
             }, subDead.getDate());
         }
 
-        if(reqDead != null) {
+        if(reqDead != null) { //If there is a request deadline defined, queue it to activate at the given date and repeat daily
             timer.schedule(new TimerTask() {
-                public void run() {
-                    paperManager.enforceRequestDeadline();
-                }
+                public void run() { paperManager.enforceRequestDeadline(); }
             }, reqDead.getDate(), 86400000);
         }
 
-        if(revDead != null) {
+        if(revDead != null) { //If there is a review deadline defined, queue it to activate at the given date and repeat daily
             timer.schedule(new TimerTask() {
-                public void run() {
-                    paperManager.enforceReviewDeadline();
+                public void run() { paperManager.enforceReviewDeadline();
                 }
             }, revDead.getDate(), 86400000);
         }
 
-        if(ratDead != null) {
+        if(ratDead != null) { //If there is a rating deadline defined, queue it to activate at the given date and repeat daily
             timer.schedule(new TimerTask() {
-                public void run() {
-                    paperManager.enforceRatingDeadline();
-                }
+                public void run() { paperManager.enforceRatingDeadline(); }
             }, ratDead.getDate(), 86400000);
         }
 
