@@ -12,6 +12,10 @@ import java.util.Objects;
 
 import static spark.Spark.halt;
 
+/**
+ * The Web Controller for the Approve User POST.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class PostApproveUserRoute implements Route {
     //Attributes
     private final PaperManager paperManager;
@@ -28,6 +32,7 @@ public class PostApproveUserRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Elevating User");
@@ -35,12 +40,13 @@ public class PostApproveUserRoute implements Route {
         vm.put("userType", userType);
         User user = paperManager.getUser(request.session().attribute("username"));
 
-        if(!userType.equals("Admin")) {
+        if(!userType.equals("Admin")) { //Redirect any non-Admin users
             response.redirect("/manageAccounts");
             halt();
             return null;
         }
 
+        //Get the user ID, validate it, & assign the role to the user (then send them a notification)
         String uid = request.body().substring(1, request.body().length() - 1);
         paperManager.assignRole(uid, true);
 

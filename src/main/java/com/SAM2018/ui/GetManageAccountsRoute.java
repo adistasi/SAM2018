@@ -9,6 +9,10 @@ import java.util.Objects;
 
 import static spark.Spark.halt;
 
+/**
+ * The Web Controller for the Manage Accounts page.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class GetManageAccountsRoute implements TemplateViewRoute {
     //Attributes
     private final PaperManager paperManager;
@@ -25,6 +29,7 @@ public class GetManageAccountsRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Account Management");
@@ -32,12 +37,13 @@ public class GetManageAccountsRoute implements TemplateViewRoute {
         vm.put("userType", userType);
         vm.put("notificationCount", paperManager.getUnreadNotificationCount(request.session().attribute("username")));
 
-        if(!userType.equals("Admin")) {
+        if(!userType.equals("Admin")) { //Redirect any non admin users
             response.redirect("/");
             halt();
             return null;
         }
 
+        //Add all users and any requested permissions to the viewmodel
         vm.put("users", paperManager.getAllUsers(request.session().attribute("username")));
         vm.put("requestedPermissions", paperManager.getRequestedPermissions());
 

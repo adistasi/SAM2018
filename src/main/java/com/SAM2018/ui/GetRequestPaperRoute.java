@@ -10,18 +10,15 @@ import static spark.Spark.halt;
 
 /**
  * The GetRequestPaperRoute for Requesting Available papers.
- *
- * @author <a href='mailto:rp3737@rit.edu'>Raseshwari Pulle</a>
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 
 public class GetRequestPaperRoute implements TemplateViewRoute {
-    public static final String PAPERS_FOR_REVIEW= "paperForReview";
-
     //Attributes
     private final PaperManager paperManager;
 
     /**
-    * The constructor for the {@code POST /submitPaper} route handler
+    * The constructor for the {@code GET /requestPaper} route handler
     * @param _paperManager The {@link PaperManager} for the application.
     */
     GetRequestPaperRoute(final PaperManager _paperManager) {
@@ -31,31 +28,32 @@ public class GetRequestPaperRoute implements TemplateViewRoute {
     }
 
     @Override
-        public ModelAndView handle(Request request, Response response) {
+    public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
-
         String username = request.session().attribute("username");
         String userType = paperManager.getUserType(request.session().attribute("username"));
         vm.put("userType", userType);
 
 
-        if(!(userType.equals("PCM") || userType.equals("Admin"))) {
+        if(!(userType.equals("PCM") || userType.equals("Admin"))) { //Redirect any non PCM or Admin users
             response.redirect("/managePapers");
             halt();
             return null;
         }
 
+        //Get the deadline & put "closed" as true if the deadline has passed
         Deadline reqDead = paperManager.getDeadline("Request Deadline");
-
         if(reqDead != null && reqDead.hasPassed())
             vm.put("closed", true);
         else
             vm.put("closed", false);
 
+        //Put if the user has already made requests and a list of the papers for review in the VM
         vm.put("title", "Request a Paper");
         vm.put("hasRequested", paperManager.hasUserMadeRequest(username));
-        vm.put(PAPERS_FOR_REVIEW, paperManager.getPapersForReview(username));
+        vm.put("paperForReview", paperManager.getPapersForReview(username));
         return new ModelAndView(vm , "requestPaper.ftl");
     }
 }

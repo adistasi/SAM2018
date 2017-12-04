@@ -6,17 +6,14 @@ import java.util.Objects;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Paper;
-import com.SAM2018.model.User;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
-
 import static spark.Spark.halt;
 
 /**
  * The Web Controller for the Paper Editing page.
- *
  * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class GetEditPaperRoute implements TemplateViewRoute {
@@ -36,24 +33,27 @@ public class GetEditPaperRoute implements TemplateViewRoute {
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();
 
+        //Validate if users are logged in and then put page information
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Edit Paper");
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
+        //Get the user information
         String username = request.session().attribute("username");
         String paperIDString = request.queryParams("pid");
         vm.put("username", username);
 
         int paperID = UIUtils.parseIntInput(paperIDString);
-        if(paperID == -2) {
+        if(paperID == -2) { //route input validation (-2 means a non-integer was entered)
             response.redirect("/managePapers");
             halt();
             return null;
         }
 
+        //Get the paper and return add it to the page
         Paper paper = paperManager.getPaperbyID(paperID);
 
-        if(paper == null || !paper.getContactAuthor().getUsername().equals(username)) {
+        if(paper == null || !paper.getContactAuthor().getUsername().equals(username)) { //If there is no paper or an invalid paper, redirect the user
             response.redirect("/manageSubmissions");
             halt();
             return null;

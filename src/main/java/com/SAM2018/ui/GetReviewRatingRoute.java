@@ -9,6 +9,10 @@ import java.util.Objects;
 
 import static spark.Spark.halt;
 
+/**
+ * The Web Controller for the Review Rating page.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class GetReviewRatingRoute implements TemplateViewRoute {
     //Attributes
     private final PaperManager paperManager;
@@ -25,6 +29,7 @@ public class GetReviewRatingRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
@@ -34,12 +39,14 @@ public class GetReviewRatingRoute implements TemplateViewRoute {
         String pid = request.queryParams("pid");
         int paperID = UIUtils.parseIntInput(pid);
 
+        //Validate that a valid PaperID came from the route and that the user has access to the paper (redirect if they don't)
         if(paperID == -2 || paperManager.getPaperbyID(paperID) == null || !paperManager.getPaperbyID(paperID).getContactAuthor().getUsername().equals(username)) {
             response.redirect("/manageSubmissions");
             halt();
             return null;
         }
 
+        //Put the report in the VM if they do
         vm.put("title", "Review Paper Report");
         vm.put("username", session.attribute("username"));
         vm.put("report", paperManager.getReportByID(paperID));

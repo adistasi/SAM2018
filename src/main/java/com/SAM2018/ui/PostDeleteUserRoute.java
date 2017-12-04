@@ -11,7 +11,10 @@ import java.util.*;
 
 import static spark.Spark.halt;
 
-
+/**
+ * The Web Controller for the Delete User POST (AJAX Method)
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class PostDeleteUserRoute implements Route {
     //Attributes
     private final PaperManager paperManager;
@@ -28,19 +31,22 @@ public class PostDeleteUserRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String userType = paperManager.getUserType(request.session().attribute("username"));
 
-        if(!userType.equals("Admin")) {
+        if(!userType.equals("Admin")) { //Redirect any non-Admin users
             response.redirect("/manageAccounts");
             halt();
             return null;
         }
 
+        //Parse in the UID & validate it, deleting the user if it's valid
         String uid = request.body().substring(1, request.body().length() - 1);
         User user = paperManager.getUser(uid);
-        if(paperManager.getCountPCC() == 1 && user instanceof PCC)
+
+        if(paperManager.getCountPCC() == 1 && user instanceof PCC) //The last PCC cannot be deleted
             return new Message("There must be at least one PCC in the System at all times", "error");
 
         paperManager.deleteUser(uid);

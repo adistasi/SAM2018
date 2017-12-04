@@ -4,13 +4,15 @@ import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Notification;
 import com.SAM2018.model.User;
 import spark.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
 import static spark.Spark.halt;
 
+/**
+ * The Web Controller for the Create Notification POST
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class PostCreateNotificationRoute implements TemplateViewRoute {
     //Attributes
     private final PaperManager paperManager;
@@ -27,12 +29,13 @@ public class PostCreateNotificationRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String username = request.session().attribute("username");
         String userType = paperManager.getUserType(username);
 
-        if(!(userType.equals("PCC") || userType.equals("Admin"))) {
+        if(!(userType.equals("PCC") || userType.equals("Admin"))) { //Redirect non-PCC & Admin Users
             response.redirect("/");
             halt();
             return null;
@@ -43,6 +46,7 @@ public class PostCreateNotificationRoute implements TemplateViewRoute {
         vm.put("notificationCount", paperManager.getUnreadNotificationCount(username));
         vm.put("users", paperManager.getAllUsers(username));
 
+        //Get the form data and parse it
         String recipientString = request.queryParams("recipient");
         String message = request.queryParams("message");
 
@@ -52,6 +56,7 @@ public class PostCreateNotificationRoute implements TemplateViewRoute {
             return UIUtils.error(vm, "An author may not contain the characters '|||'", "createNotification.ftl");
         }
 
+        //Create the notification & refresh the page
         User generator = paperManager.getUser(username);
         User recipient = paperManager.getUser(recipientString);
 

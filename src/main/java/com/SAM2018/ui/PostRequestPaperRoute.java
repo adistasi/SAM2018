@@ -10,13 +10,12 @@ import java.util.*;
 import static spark.Spark.halt;
 
 /**
- * The PostRequestPaperRoute for displaying requested Papers.
- *
- * @author <a href='mailto:rp3737@rit.edu'>Raseshwari Pulle</a>
+ * The Web Controller for the requestPaper POST.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class PostRequestPaperRoute implements TemplateViewRoute {
-
-    public static final String NO_PAPER_REQUESTED = "You have not requested any papers."; //message when no paper is requested
+    //Constants
+    public static final String NO_PAPER_REQUESTED = "You have not requested any papers.";
 
     //Attributes
     private final PaperManager paperManager;
@@ -33,15 +32,15 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
-
         final Session session = request.session();
         String username = session.attribute("username");
         String userType = paperManager.getUserType(username);
         vm.put("userType", userType);
 
-        if(!(userType.equals("PCM") || userType.equals("Admin"))) {
+        if(!(userType.equals("PCM") || userType.equals("Admin"))) { //Redirect non PCM & Admin Users
             response.redirect("/managePapers");
             halt();
             return null;
@@ -50,21 +49,20 @@ public class PostRequestPaperRoute implements TemplateViewRoute {
         PCM user = (PCM)paperManager.getUser(username);
         QueryParamsMap paperRequests = request.queryMap("requestedPaper");
 
-        if(paperRequests.booleanValue()== null) {
-            vm.put("title",NO_PAPER_REQUESTED);
-            return new ModelAndView(vm , "reviewManagement.ftl"); //return with no paper requested message
+        if(paperRequests.booleanValue()== null) { //Return error message if no papers requested
+            return UIUtils.error(vm, NO_PAPER_REQUESTED, "reviewManagement.ftl");
         }
 
-        for(String id : paperRequests.values()) {
+        for(String id : paperRequests.values()) { //Loop through each requested paper
             int paperID = UIUtils.parseIntInput(id);
-            if(paperID == -2) {
+            if(paperID == -2) { //parse for validity
                 response.redirect("/managePapers");
                 halt();
                 return null;
             }
 
             Paper p = paperManager.getPaperbyID(paperID);
-            if(p != null) {
+            if(p != null) { //Create a request for that paper if it doesn't already exist for that user
                 user.requestReview(p);
                 paperManager.addRequest(p, paperManager.getUser(username));
             }

@@ -16,6 +16,10 @@ import java.util.Objects;
 
 import static spark.Spark.halt;
 
+/**
+ * The Web Controller for the Mark as Read POST.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class PostMarkAsReadRoute implements Route {
     //Attributes
     private final PaperManager paperManager;
@@ -32,6 +36,7 @@ public class PostMarkAsReadRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String userType = paperManager.getUserType(request.session().attribute("username"));
@@ -39,12 +44,13 @@ public class PostMarkAsReadRoute implements Route {
 
         String nid = request.body();
         int notificationID = UIUtils.parseIntInput(nid);
-        if(notificationID == -2) {
+        if(notificationID == -2) { //Parse for invalid notification ID from route
             response.redirect("/viewNotifications");
             halt();
             return null;
         }
 
+        //Get the notification and mark it as read if it exists
         Notification notification = paperManager.getNotificationByID(notificationID);
         if(notification != null) {
             notification.markAsRead();

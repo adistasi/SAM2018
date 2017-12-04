@@ -15,8 +15,7 @@ import spark.TemplateViewRoute;
 import static spark.Spark.halt;
 
 /**
- * The Web Controller for the Submitted Paper Management page.
- *
+ * The Web Controller for the Submitted Paper Management page
  * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class GetManageSubmissionsRoute implements TemplateViewRoute {
@@ -34,6 +33,7 @@ public class GetManageSubmissionsRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Manage Submissions");
@@ -44,6 +44,7 @@ public class GetManageSubmissionsRoute implements TemplateViewRoute {
 
         User user = paperManager.getUser(username);
 
+        //Return a SubmissionReportDisplay (containing info on a submission and it's report) to the view model for each paper the user has submitted
         List<SubmissionReportDisplay> srd = new ArrayList<>();
         for(Paper p : user.getSubmissions()) {
             Report r = paperManager.getReportByID(p.getPaperID());

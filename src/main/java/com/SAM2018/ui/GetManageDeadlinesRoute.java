@@ -1,7 +1,6 @@
 package com.SAM2018.ui;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -17,7 +16,6 @@ import static spark.Spark.halt;
 
 /**
  * The Web Controller for the Paper Management page.
- *
  * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class GetManageDeadlinesRoute implements TemplateViewRoute {
@@ -35,6 +33,7 @@ public class GetManageDeadlinesRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Deadline Management");
@@ -42,19 +41,19 @@ public class GetManageDeadlinesRoute implements TemplateViewRoute {
         vm.put("userType", userType);
         vm.put("notificationCount", paperManager.getUnreadNotificationCount(request.session().attribute("username")));
 
-        if(!userType.equals("Admin")) {
+        if(!userType.equals("Admin")) { //Redirect any non admin users
             response.redirect("/manageDeadlines");
             halt();
             return null;
         }
 
-
+        //Get each deadline
         Deadline submissionDeadline = paperManager.getDeadline("Submission Deadline");
         Deadline requestDeadline = paperManager.getDeadline("Request Deadline");
         Deadline reviewDeadline = paperManager.getDeadline("Review Deadline");
         Deadline ratingDeadline = paperManager.getDeadline("Rating Deadline");
 
-        if(submissionDeadline != null) {
+        if(submissionDeadline != null) { //If the review deadline exists, format date and time strings and add them to the ViewModel
             try {
                 SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
                 String dateStr = date.format(submissionDeadline.getDate());
@@ -69,7 +68,7 @@ public class GetManageDeadlinesRoute implements TemplateViewRoute {
             }
         }
 
-        if(requestDeadline != null) {
+        if(requestDeadline != null) { //If the request deadline exists, format date and time strings and add them to the ViewModel
             try {
                 SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
                 String dateStr = date.format(requestDeadline.getDate());
@@ -84,7 +83,7 @@ public class GetManageDeadlinesRoute implements TemplateViewRoute {
             }
         }
 
-        if(reviewDeadline != null) {
+        if(reviewDeadline != null) { //If the review deadline exists, format date and time strings and add them to the ViewModel
             try {
                 SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
                 String dateStr = date.format(reviewDeadline.getDate());
@@ -99,7 +98,7 @@ public class GetManageDeadlinesRoute implements TemplateViewRoute {
             }
         }
 
-        if(ratingDeadline != null) {
+        if(ratingDeadline != null) { //If the rating deadline exists, format date and time strings and add them to the ViewModel
             try {
                 SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
                 String dateStr = date.format(ratingDeadline.getDate());

@@ -11,14 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static spark.Spark.halt;
-
+/**
+ * The Web Controller for the Submit Paper page.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class GetSubmitPaperRoute implements TemplateViewRoute {
     //Attributes
     private final PaperManager paperManager;
 
     /**
-     * The constructor for the {@code GET /reviewRating} route handler
+     * The constructor for the {@code GET /submitPaper} route handler
      * @param _paperManager The {@link PaperManager} for the application.
      */
     GetSubmitPaperRoute(final PaperManager _paperManager) {
@@ -29,13 +31,14 @@ public class GetSubmitPaperRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Submit Paper");
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
+        //If the submission deadline has passed, set "closed" as true in the VM
         Deadline subDead = paperManager.getDeadline("Submission Deadline");
-
         if(subDead != null && subDead.hasPassed())
             vm.put("closed", true);
         else

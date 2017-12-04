@@ -1,7 +1,6 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
-import com.SAM2018.model.Report;
 import com.SAM2018.model.Review;
 import spark.ModelAndView;
 import spark.Request;
@@ -15,12 +14,16 @@ import java.util.Objects;
 
 import static spark.Spark.halt;
 
+/**
+ * The Web Controller for the Review Paper page.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class GetReviewPaperRoute implements TemplateViewRoute{
     //Attributes
     private final PaperManager paperManager;
 
     /**
-     * The constructor for the {@code GET /reviewPapers} route handler
+     * The constructor for the {@code GET /reviewPaper} route handler
      * @param _paperManager The {@link PaperManager} for the application.
      */
     GetReviewPaperRoute(final PaperManager _paperManager) {
@@ -31,17 +34,19 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         String userType = paperManager.getUserType(request.session().attribute("username"));
         vm.put("userType", userType);
 
-        if(!(userType.equals("PCM") || userType.equals("Admin"))) {
+        if(!(userType.equals("PCM") || userType.equals("Admin"))) { //Redirect any non-PCM or Admin users
             response.redirect("/managePapers");
             halt();
             return null;
         }
 
+        //Input validation (username and valid paper ID from the route)
         String username = request.session().attribute("username");
         String pid = request.queryParams("pid");
         int paperID = UIUtils.parseIntInput(pid);
@@ -54,8 +59,8 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
         vm.put("title", "Review Paper");
         vm.put("username", username);
 
+        //Get the review and put it in the VM (redirect the user if there is no valid review)
         Review thisReview = paperManager.getReview(paperID, username);
-
         if(thisReview != null && !thisReview.getReviewer().getUsername().equals(username)) {
             response.redirect("/reviewPapers");
             halt();
@@ -64,9 +69,8 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
 
         vm.put("paper", paperManager.getPaperbyID(paperID));
 
-        if(thisReview != null && thisReview.getNeedsRereviewed()) {
+        if(thisReview != null && thisReview.getNeedsRereviewed()) { //If there is a review that is marked as needing re-reviewed, also show the other PCM's reviews
             List<Review> otherReviews = paperManager.getReviewsForPaper(pid);
-
             vm.put("otherReviews", otherReviews);
         }
 

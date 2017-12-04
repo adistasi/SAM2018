@@ -10,6 +10,10 @@ import java.util.Objects;
 
 import static spark.Spark.halt;
 
+/**
+ * The Web Controller for the Login POST.
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
+ */
 public class PostLoginRoute implements TemplateViewRoute{
     //Attributes
     private final PaperManager paperManager;
@@ -30,27 +34,28 @@ public class PostLoginRoute implements TemplateViewRoute{
 
     @Override
     public ModelAndView handle(Request request, Response response) {
+        //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         final Session session = request.session();
 
         String username = request.queryParams("username");
         String password = request.queryParams("password");
 
-        if(paperManager.userExists(username)){
+        if(paperManager.userExists(username)){ //Don't let users register with the same username
             User user = paperManager.getUser(username);
 
-            if (user.getPassword().equals(password)){
+            if (user.getPassword().equals(password)){ //password check validation
                 session.attribute("username", username);
                 response.redirect("/");
                 halt();
                 return null;
-            } else {
+            } else { //Return invalid password error message
                 vm.put("title","Login");
                 vm.put("messageType", "error");
                 vm.put("message", WRONG_PASSWORD);
                 return new ModelAndView(vm, "login.ftl");
             }
-        } else {
+        } else { //Return taken username error message
             vm.put("title","Login");
             vm.put("messageType", "error");
             vm.put("message", WRONG_USERNAME);
