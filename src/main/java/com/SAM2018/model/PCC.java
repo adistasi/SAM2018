@@ -40,7 +40,16 @@ public class PCC extends User {
         return review;
     }
 
-
+    /**
+     * A method that lets a PCC generate a report
+     * @param pcc The PCC generating the report
+     * @param paper The paper the report is for
+     * @param pccRating The PCC's score of the paper
+     * @param pccComments The PCC's comments on the paper
+     * @param pcmReiviews The List of PCM Review objects
+     * @param acceptStatus If the paper was accepted
+     * @return report THe report that was generated
+     */
     public Report ratePaper(PCC pcc, Paper paper, Double pccRating, String pccComments, List<Review> pcmReiviews, AcceptanceStatus acceptStatus) {
         Review pccReview = new Review(pcc, paper, pccRating, pccComments, false);
         Report report = new Report(paper, pcc, pcmReiviews, pccReview, acceptStatus);
