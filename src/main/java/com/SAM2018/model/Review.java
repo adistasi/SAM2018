@@ -2,6 +2,7 @@ package com.SAM2018.model;
 
 /**
  * A class to represent a review of a paper completed by a PCC or PCM
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class Review {
     //Attributes

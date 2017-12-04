@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * A class to represent a Paper submitted to SAM2018
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class Paper {
 

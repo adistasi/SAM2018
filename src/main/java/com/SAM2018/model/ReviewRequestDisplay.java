@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * ViewModel-like class that returns a complex dataset when a view needs connected data across multiple objects
  * Used when a PCC views what PCMs have requested what papers
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class ReviewRequestDisplay {
     private Paper paper;

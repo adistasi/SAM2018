@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * A class that represents a notification generated and displayed to users
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class Notification {
     //Attributes

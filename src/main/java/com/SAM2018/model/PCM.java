@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * Class to represent a PCM Program Committee Member - A user with elevated permissions
  * This class extends User
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class PCM extends User {
 

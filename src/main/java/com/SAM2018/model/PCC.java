@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * A class to represent a PCC (Program Committee Chair) - A User with elevated permissions
  * The class extends User
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class PCC extends User {
     //Attributes

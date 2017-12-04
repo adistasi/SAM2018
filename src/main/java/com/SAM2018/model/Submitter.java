@@ -3,6 +3,7 @@ package com.SAM2018.model;
 /**
  * A class that represents a base level of user that can only submit papers
  * The class extends User
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class Submitter extends User {
     /**

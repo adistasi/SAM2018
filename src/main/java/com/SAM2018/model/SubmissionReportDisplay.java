@@ -3,6 +3,7 @@ package com.SAM2018.model;
 /**
  * ViewModel-like class that returns a complex dataset when a view needs connected data across multiple objects
  * Used when a Submitter views a report generated for their paper
+ * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class SubmissionReportDisplay {
     //Attributes
