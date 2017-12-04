@@ -32,6 +32,22 @@ public class PaperManager {
 
     /*==========USER FUNCTIONALITY=========*/
     /**
+     * Helper function to return the Map of Users
+     * @return users The Map of all Users
+     */
+    public Map<String, User> getUsers() {
+        return users;
+    }
+
+    /**
+     * Mutator for users
+     * @param _users The updated list of users
+     */
+    public void setUsers(Map<String, User> _users) {
+        users = _users;
+    }
+
+    /**
      * A method to retreive the author of a paper by their username
      * @param _username The username of the author
      * @return The user that has that username
@@ -180,33 +196,29 @@ public class PaperManager {
     }
 
     /**
-     * A method to either approve or deny a user's request for elevated permissions
-     * @param _username The username of the user who requested elevated permissions
-     * @param _approved whether or not their request was approved
+     * Helper method to get the permissions a user requested by their username
+     * @param _username The requestor's username
+     * @return The requested permissions
      */
-    public void assignRole(String _username, boolean _approved) {
+    public String getRequestedPermissionforUser(String _username) {
         User user = getUser(_username);
-        String type = requestedPermissions.get(user);
+        return requestedPermissions.get(user);
+    }
 
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-
-        if(_approved) { //If the request was approved, elevate them and then save.  Otherwise just delete their request
-            if(type.equals("PCC")) { //If it's a PCC, create a new PCC user to replace the old account
-                users.remove(user.getUsername());
-                PCC newPCC = new PCC(username, password, firstName, lastName);
-                users.put(newPCC.getUsername(), newPCC);
-            } else if(type.equals("PCM")) { //If it's a PCM, create a new PCM user to replace the old account
-                users.remove(user.getUsername());
-                PCM newPCM = new PCM(username, password, firstName, lastName);
-                users.put(newPCM.getUsername(), newPCM);
-            }
+    /**
+     * A method to either approve or deny a user's request for elevated permissions based on admin response
+     * @param _uid The username of the user who requested elevated permissions
+     * @param newUser The new permission level of the user (if approved)
+     * @param approved whether or not their request was approved
+     */
+    public void updatePermissionsRequests(String _uid, User newUser, boolean approved) {
+        User oldUser = getUser(_uid);
+        if(approved) {
+            users.remove(oldUser.getUsername());
+            users.put(newUser.getUsername(), newUser);
         }
 
-        //Remove the request and save the user information
-        requestedPermissions.remove(user);
+        requestedPermissions.remove(oldUser);
         saveUsers();
     }
 

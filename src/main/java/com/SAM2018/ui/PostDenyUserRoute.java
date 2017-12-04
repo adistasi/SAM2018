@@ -46,7 +46,7 @@ public class PostDenyUserRoute implements Route {
 
         //Parse in the UID & validate it
         String uid = request.body().substring(1, request.body().length() - 1);
-        paperManager.assignRole(uid, false);
+        paperManager.updatePermissionsRequests(uid, null, false);
 
         //Deny that user's permission request & send them a notification
         User requester = paperManager.getUser(uid);

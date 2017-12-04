@@ -1,6 +1,7 @@
 package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
+import com.SAM2018.model.Admin;
 import com.SAM2018.model.Message;
 import com.SAM2018.model.Notification;
 import com.SAM2018.model.User;
@@ -46,9 +47,15 @@ public class PostApproveUserRoute implements Route {
             return null;
         }
 
+        Admin admin = (Admin)paperManager.getUser(request.session().attribute("username"));
+
         //Get the user ID, validate it, & assign the role to the user (then send them a notification)
         String uid = request.body().substring(1, request.body().length() - 1);
-        paperManager.assignRole(uid, true);
+        User requestor = paperManager.getUser(uid);
+        String type = paperManager.getRequestedPermissionforUser(uid);
+
+        User newUser = admin.addRole(requestor, type);
+        paperManager.updatePermissionsRequests(uid, newUser, true);
 
         User requester = paperManager.getUser(uid);
         Notification note = new Notification(paperManager.getNotificationsSize(), user, requester, "Your request for elevated status has been approved", false);

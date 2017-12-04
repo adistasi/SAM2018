@@ -268,3 +268,15 @@
 266|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-04 11:10|||
 267|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-04 11:10|||
 268|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-04 11:10|||
+269|||System|||pcm2|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-04 11:49|||
+270|||System|||pcm3|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-04 11:49|||
+271|||System|||pcm4|||The Review Deadline has passed, but you still have pending Reviews.  Please review these papers ASAP.|||false|||2017-12-04 11:49|||
+272|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-04 11:49|||
+273|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-04 11:49|||
+274|||System|||add5980|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-04 12:17|||
+275|||pcmReqYes|||username|||A user (PCM REQ YES) has registered and requested PCM status|||false|||2017-12-04 12:17|||
+276|||PCCReqYes|||username|||A user (PCC REQ YES) has registered and requested PCC status|||false|||2017-12-04 12:17|||
+277|||ReqNo|||username|||A user (Req No) has registered and requested PCM status|||false|||2017-12-04 12:18|||
+278|||username|||pcmReqYes|||Your request for elevated status has been approved|||false|||2017-12-04 12:18|||
+279|||username|||PCCReqYes|||Your request for elevated status has been approved|||false|||2017-12-04 12:18|||
+280|||username|||ReqNo|||Your request for elevated status has been denied|||false|||2017-12-04 12:19|||

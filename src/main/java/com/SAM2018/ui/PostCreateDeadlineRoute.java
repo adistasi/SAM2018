@@ -1,10 +1,9 @@
 package com.SAM2018.ui;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.SAM2018.appl.PaperManager;
-import com.SAM2018.model.Deadline;
+import com.SAM2018.model.Admin;
 import spark.*;
 
 import static spark.Spark.halt;
@@ -48,43 +47,8 @@ public class PostCreateDeadlineRoute implements TemplateViewRoute {
         String time = request.queryParams("time");
         String dateTime = date + " " + time;
 
-        try { //Format the date into a java.util.Date format
-            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm");
-            Date dateGenerated = sdf.parse(dateTime);
-
-            Deadline deadline = new Deadline(title, dateGenerated);
-            paperManager.addDeadline(title, deadline);
-            paperManager.saveDeadlines();
-
-            //Get the timer, unset it, and reapply a new Timer for the Application with the updated deadline information
-            Timer timer = paperManager.getTimer();
-            timer.cancel();
-            Timer timer2 = new Timer();
-            for( Deadline d : paperManager.getDeadlines().values()) { //Loop through every deadline and apply a timer method should one exist
-                if(d.getTitle().equals("Submission Deadline")) { //Don't set the submission deadline timer to repeat it's method call
-                    timer2.schedule(new TimerTask() {
-                        public void run() {paperManager.enforceSubmissionDeadline();
-                        }
-                    }, d.getDate());
-                } else {
-                    timer2.schedule(new TimerTask() {
-                        public void run() { //Set all other deadlines to re-send notifications daily
-                            if (d.getTitle().equals("Request Deadline")) {
-                                paperManager.enforceRequestDeadline();
-                            } else if (d.getTitle().equals("Review Deadline")) {
-                                paperManager.enforceReviewDeadline();
-                            } else if (d.getTitle().equals("Rating Deadline")) {
-                                paperManager.enforceRatingDeadline();
-                            }
-                        }
-                    }, d.getDate(), 86400000);
-                }
-            }
-
-            paperManager.setTimer(timer2);
-        } catch (Exception e){ //Error handling
-            e.printStackTrace();
-        }
+        Admin user = (Admin)paperManager.getUser(request.session().attribute("username"));
+        user.setDeadline(dateTime, title, paperManager);
 
         response.redirect("/manageDeadlines");
         halt();
