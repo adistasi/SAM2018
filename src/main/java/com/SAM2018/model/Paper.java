@@ -1,5 +1,6 @@
 package com.SAM2018.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -186,5 +187,16 @@ public class Paper {
         String saveString = paperID + "|||" + authorsString + "|||" + contactAuthor.getUsername() + "|||" + title + "|||" + format + "|||" + version + "|||" + paperUpload + "|||";
 
         return saveString;
+    }
+
+    /* ADDED IN REFACTORING */
+
+    /**
+     * Helper method to indicate whether or not a given username relates to a User who authored the paper
+     * @param _username The username of the user we're checking
+     * @return If the user is an author (or contact author) for the paper
+     */
+    public boolean isUserAnAuthor(String _username) {
+        return authors.contains(_username) || contactAuthor.getUsername().equals(_username);
     }
 }

@@ -108,7 +108,7 @@ public class PaperManager {
         List<User> userList = new ArrayList<>();
 
         for(User u : users.values()) { //For each user in the application, add them to the list unless their username matches
-            if(!u.getUsername().equals(_username)) {
+            if(!u.usernameMatches(_username)) {
                 userList.add(u);
             }
         }
@@ -241,31 +241,13 @@ public class PaperManager {
     }
 
     /**
-     * A method to validate the inputted strings for Author names for a paper
-     * @param _authors A string containing every author name delimited by '/'
-     * @return A List of Strings containing the author names
-     */
-    public List<String> validateAuthors(String _authors) {
-        List<String> authors = new ArrayList<>();
-        String[] authorsArr = _authors.split("/");
-        List<String> authorsRaw = Arrays.asList(authorsArr);
-
-        for(String auth : authorsRaw) { //loop through each inputted author name
-            if(auth != null && !auth.equals("")) //If the author name exists, add it to the list
-                authors.add(auth);
-        }
-
-        return authors;
-    }
-
-    /**
      * Method to get a given Paper by it's ID number
      * @param id The ID number of a paper
      * @return Either the paper if the ID number matches or null if none exist
      */
     public Paper getPaperbyID(int id) {
         try {
-            return papers.get((id));
+            return papers.get(id);
         } catch(Exception e) {
             return null;
         }
@@ -291,7 +273,7 @@ public class PaperManager {
             List<Review> paperReviews = getReviewsForPaper(Integer.toString(p.getPaperID()));
 
             //If the paper was not written by the inputted user and the paper has no reviews, add it to the list
-            if(!p.getAuthors().contains(username) && !p.getContactAuthor().getUsername().equals(username) && paperReviews == null)
+            if(!p.isUserAnAuthor(username) && paperReviews == null)
                 reviewPapers.add(p);
         }
 
@@ -392,7 +374,7 @@ public class PaperManager {
 
         for(List<Review> revs : reviews.values()) { //Loop through each paper's reviews
             for(Review r : revs) { //Loop through each review and return the ones that match that user's username
-                if (r.getReviewer().getUsername().equals(username)) {
+                if (r.userHasReview(username)) {
                     userReviews.add(r);
                 }
             }
@@ -411,8 +393,7 @@ public class PaperManager {
 
         for(List<Review> revs : reviews.values()) { //Loop through each paper's reviews
             for(Review r : revs) { //Loop through each review
-                //If the review hasn't been completed (rating is -1) or doesn't need re-reviewed
-                if (r.getReviewer().getUsername().equals(username) && (r.getNeedsRereviewed() || r.getRating() == -1))
+                if (r.userHasReview(username) && r.isReviewPending()) //If the review hasn't been completed (rating is -1) or doesn't need re-reviewed
                     userReviews.add(r);
             }
         }
@@ -431,7 +412,7 @@ public class PaperManager {
         for(List<Review> revs : reviews.values()) { //Loop through each paper's reviews
             for(Review r : revs) { //Loop through each review
                 //If the review has been completed (rating > 0) and doesn't need re-reviwed
-                if(r.getReviewer().getUsername().equals(username) && (!r.getNeedsRereviewed() || r.getRating() >= 0))
+                if(r.userHasReview(username) && r.isReviewComplete())
                     completedReviews.add(r);
             }
         }
@@ -448,7 +429,7 @@ public class PaperManager {
     public Review getReview(int paperID, String username) {
         if(getPaperbyID(paperID) != null) { //If the paper for the given ID exists
             for (Review r : reviews.get(Integer.toString(paperID))) { //Loop through each review for that paper
-                if (r.getSubject().getPaperID() == paperID && r.getReviewer().getUsername().equals(username)) //If the Review's paper ID matches and is for the correct user, return it
+                if (r.isReviewForPaper(paperID) && r.userHasReview(username)) //If the Review's paper ID matches and is for the correct user, return it
                     return r;
             }
         }
@@ -475,7 +456,7 @@ public class PaperManager {
         int countCompleted = 0;
 
         for(Review r : paperReviews) { //Loop through each review for the paper
-            if(r.getRating() != -1 && !r.getNeedsRereviewed()) //If the rating isn't negative 1 and it doesn't need re-reviewed, add it to the count
+            if(r.isReviewComplete()) //If the rating isn't negative 1 and it doesn't need re-reviewed, add it to the count
                 countCompleted++;
         }
         return REVIEWS_PER_PAPER - countCompleted; //Return the number of specified reviews minus the number of completed reviews
@@ -503,7 +484,7 @@ public class PaperManager {
      */
     public Report getReportByID(int paperID) {
         for(Report r : reports) { //Loop through each report
-            if(r.getSubject().getPaperID() == paperID) { //If it's paper's ID matches, return true
+            if(r.isReportForPaper(paperID)) { //If it's paper's ID matches, return true
                 return r;
             }
         }
@@ -547,7 +528,7 @@ public class PaperManager {
         List<Notification> nots = new ArrayList<>();
 
         for(Notification n : notifications) { //Loop through every notification & return the ones for that user that are not read
-            if(n.getRecipient().getUsername().equals(username) && !n.getIsRead())
+            if(n.isUsernameRecipient(username) && !n.getIsRead())
                 nots.add(n);
         }
 
@@ -563,7 +544,7 @@ public class PaperManager {
         List<Notification> nots = new ArrayList<>();
 
         for(Notification n : notifications) { //Loop through every notification and get the ones for that user that are read
-            if(n.getRecipient().getUsername().equals(username) && n.getIsRead())
+            if(n.isUsernameRecipient(username) && n.getIsRead())
                 nots.add(n);
         }
 
@@ -603,7 +584,7 @@ public class PaperManager {
      */
     public Notification getNotificationByID(int id) {
         try {
-            return notifications.get((id));
+            return notifications.get(id);
         } catch(Exception e) {
             return null;
         }

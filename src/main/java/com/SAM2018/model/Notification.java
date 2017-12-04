@@ -151,4 +151,15 @@ public class Notification {
         String saveString = id + "|||" + creatorString + "|||" + recipient.getUsername() + "|||" + message + "|||" + isRead + "|||" + dateStr + "|||\n";
         return saveString;
     }
+
+    /* ADDED IN REFACTORING */
+
+    /**
+     * Helper method to check if the inputted username is the username of the notification's recipient
+     * @param _username The username we're checking
+     * @return Whether or not the user is the recipient
+     */
+    public boolean isUsernameRecipient(String _username) {
+        return recipient.getUsername().equals(_username);
+    }
 }

@@ -3,6 +3,10 @@ package com.SAM2018.ui;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import static spark.Spark.halt;
 
@@ -75,5 +79,23 @@ public class UIUtils {
         } catch (Exception e) {
             return -2.0;
         }
+    }
+
+    /**
+     * A method to validate the inputted strings for Author names for a paper
+     * @param _authors A string containing every author name delimited by '/'
+     * @return A List of Strings containing the author names
+     */
+    public static List<String> validateAuthors(String _authors) {
+        List<String> authors = new ArrayList<>();
+        String[] authorsArr = _authors.split("/");
+        List<String> authorsRaw = Arrays.asList(authorsArr);
+
+        for(String auth : authorsRaw) { //loop through each inputted author name
+            if(auth != null && !auth.equals("")) //If the author name exists, add it to the list
+                authors.add(auth);
+        }
+
+        return authors;
     }
 }

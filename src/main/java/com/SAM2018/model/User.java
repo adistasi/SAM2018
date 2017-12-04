@@ -131,4 +131,15 @@ public abstract class User {
         String saveString = username + "|||" + getClass().toString() + "|||" + password + "|||" + firstName + "|||" + lastName + "|||";
         return saveString;
     }
+
+    /*ADDED IN REFACTORING*/
+
+    /**
+     * Helper method to validate if a given username matches this user
+     * @param _username The username we're checking for equality
+     * @return Whether or not the username matches
+     */
+    public boolean usernameMatches(String _username) {
+        return username.equals(_username);
+    }
 }

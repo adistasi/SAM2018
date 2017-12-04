@@ -118,4 +118,40 @@ public class Review {
         String saveString = subject.getPaperID() + "|||" + reviewer.getUsername() + "|||" + rating + "|||" + reviewerComments + "|||" + needsRereviewed + "\n";
         return saveString;
     }
+
+    /* ADDED IN REFACTORING */
+
+    /**
+     * Helper Method to check if a given username corresponds to a the Review's Reviewer
+     * @param _username The username we're checking for
+     * @return If the reviewer has that username
+     */
+    public boolean userHasReview(String _username) {
+        return reviewer.getUsername().equals(_username);
+    }
+
+    /**
+     * Helper method to return whether or not a review exists and is pending (i.e. needs to be completed)
+     * @return If this Review either needs to be rereviewed or hasn't been rated yet
+     */
+    public boolean isReviewPending() {
+        return (needsRereviewed || rating == -1);
+    }
+
+    /**
+     * Helper method to return whether or not a review exists and is completed
+     * @return If this Review has been rated and has a score of greater than 0
+     */
+    public boolean isReviewComplete() {
+        return (!needsRereviewed && rating >= 0);
+    }
+
+    /**
+     * Helper function to validate that a Review is for a specified paper ID
+     * @param paperID The ID number of the paper
+     * @return Whether or not the paper ID matches
+     */
+    public boolean isReviewForPaper(int paperID) {
+        return subject.getPaperID() == paperID;
+    }
 }

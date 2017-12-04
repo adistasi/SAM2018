@@ -39,7 +39,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
 
         //Get the information from the form
         String rawAuthors = request.queryParams("authors");
-        List<String> authors = paperManager.validateAuthors(rawAuthors);
+        List<String> authors = UIUtils.validateAuthors(rawAuthors);
 
         if(authors.size() == 0) { //Validate that they inputted authors
             return UIUtils.error(vm, "A paper must have an author", "submitPaper.ftl");

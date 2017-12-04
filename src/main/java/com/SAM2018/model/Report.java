@@ -118,4 +118,13 @@ public class Report {
         String saveString = subject.getPaperID() + "|||" + generator.getUsername() + "|||" + pccReview.getRating() + "|||" + pccReview.getReviewerComments() + "|||" + acceptanceStatus + "\n";
         return saveString;
     }
+
+    /**
+     * Helper function to validate that a Report is for a specified paper ID
+     * @param paperID The ID number of the paper
+     * @return Whether or not the paper ID matches
+     */
+    public boolean isReportForPaper(int paperID) {
+        return subject.getPaperID() == paperID;
+    }
 }

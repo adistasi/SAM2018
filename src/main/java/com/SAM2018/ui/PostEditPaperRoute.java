@@ -56,7 +56,7 @@ public class PostEditPaperRoute implements TemplateViewRoute {
 
         //Get all the information from the form & update the paper
         String rawAuthors = request.queryParams("authors");
-        List<String> authors = paperManager.validateAuthors(rawAuthors);
+        List<String> authors = UIUtils.validateAuthors(rawAuthors);
 
         if(authors.size() == 0) { //Validation that they must put an author
             vm.put("paper", paper);
