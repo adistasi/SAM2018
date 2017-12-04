@@ -44,6 +44,14 @@ public class PCM extends User {
     }
 
     /**
+     * A method to add a Request to a User's list of requested papers
+     * @param _paper
+     */
+    public void addRequestedReview(Paper _paper) {
+        requestedReviews.add(_paper);
+    }
+
+    /**
      * Helper function to format the list of requestedReviews as a '/' delimited string list
      * @return
      */

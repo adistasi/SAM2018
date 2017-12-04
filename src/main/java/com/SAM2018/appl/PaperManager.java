@@ -20,14 +20,14 @@ public class PaperManager {
     private final int REVIEWS_PER_PAPER = 3;
 
     //Attributes
-    private  Map<String, User> users = new HashMap<>();
+    private  Map<String, User> users = new HashMap<>(); //<Username, User Object>
     private List<Paper> papers = new ArrayList<>();
-    private Map<String, List<Review>> reviews = new HashMap<>();
-    private Map<String, List<User>> requestedReviews = new HashMap<>();
+    private Map<String, List<Review>> reviews = new HashMap<>(); //<Paper ID, List of Revies for that paper>
+    private Map<String, List<User>> requestedReviews = new HashMap<>(); //<Paper ID, List of PCMs that have requested it>
     private List<Report> reports = new ArrayList<>();
     private List<Notification> notifications = new ArrayList<>();
-    private Map<User, String> requestedPermissions = new HashMap<>();
-    private Map<String, Deadline> deadlines = new HashMap<>();
+    private Map<User, String> requestedPermissions = new HashMap<>(); //<User, Type of permission requested>
+    private Map<String, Deadline> deadlines = new HashMap<>(); //<Deadline Title, Deadline Object>
     Timer timer = new Timer();
 
     /*==========USER FUNCTIONALITY=========*/
@@ -310,6 +310,8 @@ public class PaperManager {
             reqUsers.add(user);
             requestedReviews.put(paperID, reqUsers);
         }
+
+        ((PCM)user).addRequestedReview(paper);
 
         savePapers();
     }

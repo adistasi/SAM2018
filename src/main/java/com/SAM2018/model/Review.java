@@ -41,11 +41,6 @@ public class Review {
         this.needsRereviewed = false;
     }
 
-    public Review editReview(Review _review) {
-        //TODO: Review editing
-        return _review;
-    }
-
     /**
      * Accessor for review
      * @return review The PCC/PCM who is creating the review

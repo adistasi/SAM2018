@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class PCC extends User {
     //Attributes
-    private List<Review> pendingPCCReivew;
+    private List<Review> pendingPCCReview;
 
     /**
      * Constructor for the PCC Object (calls super())
@@ -20,11 +20,6 @@ public class PCC extends User {
      */
     public PCC(String _username, String _password, String _firstName, String _lastName) {
         super(_username, _password, _firstName, _lastName);
-    }
-
-    public Report createReport(Paper _paper) {
-        return null;
-        //TODO: Report generation
     }
 
     /**
@@ -61,15 +56,15 @@ public class PCC extends User {
      * Accessor for the pendingPCCReview attribute
      * @return pendingPCCReview The list of pending PCC Reviews
      */
-    public List<Review> getPendingPCCReivew() {
-        return pendingPCCReivew;
+    public List<Review> getPendingPCCReview() {
+        return pendingPCCReview;
     }
 
     /**
      * Mutator for the pendingPCCReview attribute
      * @param _reviews The list of pending PCC Reviews
      */
-    public void setPendingPCCReivew(List<Review> _reviews) {
-        this.pendingPCCReivew = _reviews;
+    public void setPendingPCCReview(List<Review> _reviews) {
+        this.pendingPCCReview = _reviews;
     }
 }
