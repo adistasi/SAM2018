@@ -74,9 +74,8 @@ public class PostRatePaperRoute implements TemplateViewRoute {
         }
 
         //Actually create & save the report
-        Review pccReview = new Review(user, p, pccRating, pccComment, false);
         List<Review> pcmReviews = paperManager.getReviewsForPaper(pid);
-        Report report = new Report(p, user, pcmReviews, pccReview, as);
+        Report report = user.ratePaper(user, p, pccRating, pccComment, pcmReviews, as);
         paperManager.addReport(report);
         paperManager.saveReports();
 

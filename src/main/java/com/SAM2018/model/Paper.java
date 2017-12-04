@@ -189,8 +189,6 @@ public class Paper {
         return saveString;
     }
 
-    /* ADDED IN REFACTORING */
-
     /**
      * Helper method to indicate whether or not a given username relates to a User who authored the paper
      * @param _username The username of the user we're checking

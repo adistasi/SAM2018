@@ -58,7 +58,7 @@
             </form>
 
             <#if otherReviews??>
-                <p>A PCM has requested these papers be re-reviewed.  Here are the reviews that were submitted:</p>
+                <p>A PCC has requested these papers be re-reviewed.  Here are the reviews that were submitted:</p>
 
                 <#list otherReviews as or>
                     <p>Rating: ${or.getRating()}</p>

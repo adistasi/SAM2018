@@ -40,8 +40,12 @@ public class PCC extends User {
         return review;
     }
 
-    public void ratePaper(Paper _paper) {
-        //TODO: Rate paper
+
+    public Report ratePaper(PCC pcc, Paper paper, Double pccRating, String pccComments, List<Review> pcmReiviews, AcceptanceStatus acceptStatus) {
+        Review pccReview = new Review(pcc, paper, pccRating, pccComments, false);
+        Report report = new Report(paper, pcc, pcmReiviews, pccReview, acceptStatus);
+
+        return report;
     }
 
     /**

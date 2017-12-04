@@ -1,21 +1,9 @@
 =====USERS=====
-test11|||class com.SAM2018.model.Submitter|||pass|||test1|||test2|||
-add5980|||class com.SAM2018.model.PCC|||pass|||Andy|||DiStasi|||
-newSave|||class com.SAM2018.model.Submitter|||pass|||New|||Save|||
-pcm2|||class com.SAM2018.model.PCM|||pass|||Satya|||Nadella|||
-ReqNo|||class com.SAM2018.model.Submitter|||pass|||Req|||No|||
-pcm3|||class com.SAM2018.model.PCM|||pass|||Steve|||Ballmer|||
-microMan|||class com.SAM2018.model.PCM|||pass|||Bill|||Gates|||
-pcm4|||class com.SAM2018.model.PCM|||pass|||Paul|||Allen|||
-pcm5|||class com.SAM2018.model.PCM|||pass|||Sidney|||Crosby|||
-anotherTest|||class com.SAM2018.model.PCM|||asdf|||testy|||testy|||
-test4|||class com.SAM2018.model.PCM|||password|||Test|||Four|||
-test5|||class com.SAM2018.model.Submitter|||pass|||Test|||Five|||
-test2|||class com.SAM2018.model.PCM|||pass|||Test|||Two|||
-test3|||class com.SAM2018.model.Submitter|||password|||Test|||Three|||
-testReg|||class com.SAM2018.model.Submitter|||pass|||test|||Register|||
-testReg2|||class com.SAM2018.model.Submitter|||pass|||Testy|||McTesterson|||
-user|||class com.SAM2018.model.Submitter|||2|||h|||j|||
-PCCReqYes|||class com.SAM2018.model.PCC|||pass|||PCC|||REQ YES|||
-pcmReqYes|||class com.SAM2018.model.PCM|||pass|||PCM|||REQ YES|||
-username|||class com.SAM2018.model.Admin|||pass|||Test|||User|||
+pcm1|||class com.SAM2018.model.PCM|||pass|||PCM|||1|||
+PCCUser|||class com.SAM2018.model.PCC|||pass|||PCC|||User|||
+AdminUser|||class com.SAM2018.model.Admin|||pass|||Admin|||User|||
+submitter2|||class com.SAM2018.model.Submitter|||pass|||Paper|||Submitter 2|||
+pcm2|||class com.SAM2018.model.PCM|||pass|||PCM|||2|||
+submitter1|||class com.SAM2018.model.Submitter|||pass|||Paper|||Submitter 1|||
+pcm3|||class com.SAM2018.model.PCM|||pass|||PCM|||3|||
+pcm4|||class com.SAM2018.model.PCM|||pass|||PCM|||4|||

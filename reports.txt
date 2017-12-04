@@ -1,4 +1,2 @@
 =====REPORTS=====
-0|||add5980|||3.1|||NOT GOOD ENOUGH|||Denied
-1|||add5980|||5.0|||meh|||Modify
-2|||add5980|||8.0|||YES!|||Accepted
+2|||PCCUser|||8.5|||Excellent Job, welcome to the conference|||Accepted

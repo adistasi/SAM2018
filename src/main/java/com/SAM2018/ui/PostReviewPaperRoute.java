@@ -2,6 +2,7 @@ package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Notification;
+import com.SAM2018.model.PCM;
 import com.SAM2018.model.Review;
 import spark.ModelAndView;
 import spark.Request;
@@ -69,9 +70,8 @@ public class PostReviewPaperRoute implements TemplateViewRoute{
         Review review = paperManager.getReview(pid, username);
 
         if(review != null) { //Validate that the review they are posting for exists
-            review.setRating(score);
-            review.setReviewerComments(comments);
-            review.setNeedsRereviewed(false);
+            PCM user = (PCM)paperManager.getUser(username);
+            review = user.reviewPaper(review, score, comments);
             paperManager.saveReviews();
 
             int remainingReviews = paperManager.getReviewsLeftForPaper(Integer.toString(pid));

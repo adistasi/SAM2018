@@ -28,7 +28,7 @@ public abstract class User {
         this.password = _password;
         this.firstName = _firstName;
         this.lastName = _lastName;
-        this.submittedPapers = new ArrayList<Paper>();
+        this.submittedPapers = new ArrayList<>();
     }
 
     /**
@@ -131,8 +131,6 @@ public abstract class User {
         String saveString = username + "|||" + getClass().toString() + "|||" + password + "|||" + firstName + "|||" + lastName + "|||";
         return saveString;
     }
-
-    /*ADDED IN REFACTORING*/
 
     /**
      * Helper method to validate if a given username matches this user

@@ -70,4 +70,12 @@ public class PCM extends User {
     public void addReview(Review review) {
         pendingPCMReviews.add(review);
     }
+
+    public Review reviewPaper(Review review, double score, String comments) {
+        review.setRating(score);
+        review.setReviewerComments(comments);
+        review.setNeedsRereviewed(false);
+
+        return review;
+    }
 }
