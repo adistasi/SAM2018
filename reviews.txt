@@ -20,12 +20,9 @@
 6|||pcm3|||3.0|||asdf|||false
 6|||microMan|||9.3|||Pretty solid|||false
 6|||pcm4|||4.0|||asdf|||false
-7|||pcm3|||6.0|||asdf|||false
-7|||pcm2|||0.0|||You tried|||false
-7|||microMan|||8.1|||Not good enough|||false
-8|||pcm2|||10.0|||Still a classic|||false
-8|||pcm3|||8.8|||Please don't break|||false
-8|||pcm4|||9.0|||So Good|||false
-9|||pcm2|||-1.0|||null|||false
-9|||pcm3|||-1.0|||null|||false
-9|||pcm4|||-1.0|||null|||false
+7|||pcm2|||10.0|||Still a classic|||false
+7|||pcm3|||8.8|||Please don't break|||false
+7|||pcm4|||9.0|||So Good|||false
+8|||pcm2|||-1.0|||null|||false
+8|||pcm3|||-1.0|||null|||false
+8|||pcm4|||-1.0|||null|||false

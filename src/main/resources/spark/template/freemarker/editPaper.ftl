@@ -48,7 +48,7 @@
         <#if paper??>
             <h3 style="text-align:center">Edit your paper: ${paper.getTitle()}</h3>
 
-            <form method="POST" action="./editPaper" id="submitPaper" class="inputForm">
+            <form method="POST" enctype="multipart/form-data" action="/editPaper" id="submitPaper" class="inputForm">
                 <div class="form-group">
                     <input type="hidden" name="pid" value="${paper.getPaperID()}" />
 
@@ -65,12 +65,9 @@
                     <label>Paper Title</label>
                     <input type="text" name="title" value="${paper.getTitle()}" required /><br />
 
-                    <label>Paper Format</label>
-                    <input type="text" name="format" value="${paper.getFormat()}" required /><br />
-
                     <label>Upload Paper</label>
-                    <input type="text" name="paperFile" value="${paper.getPaperUpload()}" required /><br />
-                    <!--<input type="file" name="paperFile" /><br />-->
+                    <input type="file" accept=".pdf,.doc,.docx" name="paperFile" /><br />
+                    <span><em>Current File: ${paper.getPaperUpload()}</em></span><br />
                     <button type="submit">Edit</button>
                 </div>
             </form>

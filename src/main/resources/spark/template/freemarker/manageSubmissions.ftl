@@ -43,6 +43,8 @@
                     <div>
                         <p>${p.getPaper().getTitle()}</p>
                         <p>${p.getPaper().getVersion()}</p>
+                        <a href="file:///${p.getPaper().getPaperUpload()}" download>Download Paper</a>
+
                         <a href="/editPaper?pid=${p.getPaper().getPaperID()}">Edit Paper</a>
                         <p>
                             STATUS:

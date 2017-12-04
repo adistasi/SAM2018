@@ -1,9 +1,18 @@
 package com.SAM2018.ui;
 
+import com.SAM2018.Application;
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Notification;
 import com.SAM2018.model.Paper;
+import com.SAM2018.model.User;
 import spark.*;
+import spark.utils.IOUtils;
+
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.*;
 
 import static spark.Spark.halt;
@@ -37,52 +46,76 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         vm.put("username", session.attribute("username"));
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
-        //Read in the PaperID from the Route & Validate it
-        String pid = request.queryParams("pid");
-        int paperID = UIUtils.parseIntInput(pid);
-        if(paperID == -2) { //-2 means it wasn't a valid int
-            response.redirect("/manageSubmissions");
-            halt();
-            return null;
+        try { //Configure for multipart form data
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/SubmittedPapers"));
+
+            //Read in the PaperID from the Route & Validate it
+            Part pidPart = request.raw().getPart("pid");
+            String pid = IOUtils.toString(pidPart.getInputStream());
+            int paperID = UIUtils.parseIntInput(pid);
+            if(paperID == -2) { //-2 means it wasn't a valid int
+                response.redirect("/manageSubmissions");
+                halt();
+                return null;
+            }
+
+            //Get the paper & redirect the user if they aren't the contact Author for the paper
+            Paper paper = paperManager.getPaperbyID(paperID);
+            if(!paper.getContactAuthor().getUsername().equals(session.attribute("username"))) {
+                response.redirect("/manageSubmissions");
+                halt();
+                return null;
+            }
+
+            //Pull in Authors and format it as a list
+            Part rawAuthorsPart = request.raw().getPart("authors");
+            String rawAuthors = IOUtils.toString(rawAuthorsPart.getInputStream());
+            List<String> authors = UIUtils.validateAuthors(rawAuthors);
+
+            //Get Paper Title
+            Part titlePart = request.raw().getPart("title");
+            String title = IOUtils.toString(titlePart.getInputStream());
+
+            //Get Uploaded File Name (will be empty string if they don't upload a file)
+            Part filePart = request.raw().getPart("paperFile");
+            String fileName = UIUtils.getSubmittedFileName(filePart);
+
+            if(authors.size() == 0) { //Validate that they inputted authors
+                return UIUtils.error(vm, "A paper must have an author", "submitPaper.ftl");
+            } else if(rawAuthors.contains("|||") || rawAuthors.contains(",")) { //validate that no protected characters were used
+                return UIUtils.error(vm, "An author may not contain the characters '|||' or ','", "submitPaper.ftl");
+            }
+
+            if (UIUtils.validateInputText(title)) { //validate text inputs
+                return UIUtils.error(vm, "Paper information cannot be blank or contain the characters '|||", "submitPaper.ftl");
+            }
+
+            if(fileName.length() > 0) { //Only update the format and paper name if they've uploaded a new paper
+                try(InputStream in = filePart.getInputStream()) {
+                    OutputStream out = new FileOutputStream("" + Application.path  +"\\SubmittedPapers\\" + fileName);
+                    IOUtils.copy(in, out);
+                    out.close();
+                }
+
+                //Get format from file extension
+                String[] rawFormat = fileName.split("\\.");
+                String format = rawFormat[rawFormat.length-1];
+
+                //Update the paper, send a notification, and save everything
+                paper.updatePaper(authors, title, format, Application.path + "/" + fileName);
+            } else { //Otherwise just update the authors & title
+                paper.updatePaper(authors, title, paper.getFormat(), paper.getPaperUpload());
+            }
+
+            //Send notifcation and save Paper
+            String messageString = "A User (" + paper.getContactAuthor().getFullName() + ") has edited their paper entitled '" + paper.getTitle() + "'.";
+            Notification notification = new Notification(paperManager.getNotificationsSize(), paper.getContactAuthor(), paperManager.getPCC(), messageString, false, new Date());
+            paperManager.addNotification(notification);
+            paperManager.savePapers();
+            paperManager.saveNotifications();
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-
-        //Get the paper & redirect the user if they aren't the contact Author for the paper
-        Paper paper = paperManager.getPaperbyID(paperID);
-        if(!paper.getContactAuthor().getUsername().equals(session.attribute("username"))) {
-            response.redirect("/manageSubmissions");
-            halt();
-            return null;
-        }
-
-        //Get all the information from the form & update the paper
-        String rawAuthors = request.queryParams("authors");
-        List<String> authors = UIUtils.validateAuthors(rawAuthors);
-
-        if(authors.size() == 0) { //Validation that they must put an author
-            vm.put("paper", paper);
-            return UIUtils.error(vm, "A paper must have an author", "submitPaper.ftl");
-        } else if(rawAuthors.contains("|||") || rawAuthors.contains(",")) { //Protected character validation (these are used as delimiters)
-            vm.put("paper", paper);
-            return UIUtils.error(vm, "An author may not contain the characters '|||' or ','", "editPaper.ftl");
-        }
-
-        String title = request.queryParams("title");
-        String format = request.queryParams("format");
-        String file = request.queryParams("paperFile");
-
-        if (UIUtils.validateInputText(title) || UIUtils.validateInputText(format) || UIUtils.validateInputText(file)) { //Text validate for text inputs
-            vm.put("paper", paper);
-            return UIUtils.error(vm, "Paper information cannot be blank or contain the characters '|||", "editPaper.ftl");
-        }
-
-        //Update the paper, send a notification, and save everything
-        paper.updatePaper(authors, title, format, file);
-
-        String messageString = "A User (" + paper.getContactAuthor().getFullName() + ") has edited their paper entitled '" + paper.getTitle() + "'.";
-        Notification notification = new Notification(paperManager.getNotificationsSize(), paper.getContactAuthor(), paperManager.getPCC(), messageString, false, new Date());
-        paperManager.addNotification(notification);
-        paperManager.savePapers();
-        paperManager.saveNotifications();
 
         response.redirect("/managePapers");
         halt();

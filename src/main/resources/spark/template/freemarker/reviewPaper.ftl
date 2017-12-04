@@ -42,8 +42,7 @@
         <#if paper??>
             <p>Submit a Review for ${paper.getTitle()}</p>
             <p>By ${paper.getAuthorsAsString()}</p>
-            <p>Paper: ${paper.getPaperUpload()}</p>
-            <p><em>THIS WILL BE REPLACED WITH DOWNLOAD LINK</em></p>
+            <a href="file:///${paper.getPaperUpload()}" download>Download Paper</a>
             <form method="POST" action="/reviewPaper" id="submitPaper" class="inputForm">
                 <div class="form-group">
                     <input type="hidden" name="pid" value="${paper.getPaperID()}"

@@ -49,7 +49,7 @@
             <p>Submit a Review for ${paper.getTitle()}</p>
             <p>By ${paper.getAuthorsAsString()}</p>
             <p>Paper: ${paper.getPaperUpload()}</p>
-            <p><em>THIS WILL BE REPLACED WITH DOWNLOAD LINK</em></p>
+            <a href="${paper.getPaperUpload()}" download>Download Paper</a>
             <form method="POST" action="/ratePaper" id="submitRating" class="inputForm">
                 <div class="form-group">
                     <input type="hidden" name="pid" value="${paper.getPaperID()}" />

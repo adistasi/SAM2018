@@ -48,7 +48,7 @@
         <#if closed != true>
             <h3 style="text-align:center">Upload a Paper to be considered for the conference</h3>
 
-            <form method="POST" action="/submitPaper" id="submitPaper" class="inputForm">
+            <form method="POST" enctype="multipart/form-data" action="/submitPaper" id="submitPaper" class="inputForm">
                 <div class="form-group">
                     <div style="margin-bottom: 35px;" id="authorsDiv">
                         <label>Authors</label>
@@ -60,12 +60,8 @@
                     <label>Paper Title</label>
                     <input type="text" name="title" required /><br />
 
-                    <label>Paper Format</label>
-                    <input type="text" name="format" required /><br />
-
                     <label>Upload Paper</label>
-                    <input type="text" name="paperFile" required /><br />
-                    <!--<input type="file" name="paperFile" /><br />-->
+                    <input type="file" accept=".pdf,.doc,.docx" name="paperFile" required /><br />
                     <button type="submit">Upload</button>
                 </div>
             </form>

@@ -37,6 +37,7 @@
     <div class="body">
         <#if report??>
             <p>Report for ${report.getSubject().getTitle()}</p>
+            <p>FILE DOWNLOAD GOES HERE</p>
             <p>Overall Rating: ${report.getPccReview().getRating()}</p>
             <p>PCC Comments: ${report.getPccReview().getReviewerComments()}</p>
             <br />

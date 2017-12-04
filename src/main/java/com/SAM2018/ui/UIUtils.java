@@ -4,6 +4,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,5 +98,22 @@ public class UIUtils {
         }
 
         return authors;
+    }
+
+    /**
+     * Helper function to get the file name of a submitted Part from a form
+     * @param _part The part representing the file that was uploaded
+     * @return The filename without any of the other path information
+     */
+    public static String getSubmittedFileName(Part _part)  {
+        for(String content : _part.getHeader("content-disposition").split(";")) { //Loop through each part of the file information
+            if(content.trim().startsWith("filename")) { //Get just the filename, remove quotes, and substring away anything that isn't [fileName].[extension]
+                String fileName = content.substring(content.indexOf("=")+1).trim().replace("\"", "");
+
+                return fileName.substring(fileName.lastIndexOf('/')+1).substring(fileName.lastIndexOf('\\')+1);
+            }
+        }
+
+        return null;
     }
 }

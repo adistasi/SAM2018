@@ -17,7 +17,7 @@ import com.SAM2018.ui.WebServer;
  */
 public final class Application {
     private static final Logger LOG = Logger.getLogger(Application.class.getName());
-
+    public static String path;
     /**
     * Entry point for the SAM2018 web application.
     * @param args Command line arguments; none expected.
@@ -28,6 +28,7 @@ public final class Application {
 
         //Load in each piece of data
         paperManager.loadApplication();
+        path = System.getProperty("user.dir");
 
         //Get all the loaded deadlines
         Map<String, Deadline> deadlines = paperManager.getDeadlines();
