@@ -79,11 +79,26 @@ public class PCM extends User {
         pendingPCMReviews.add(review);
     }
 
+    /**
+     * A method to complete the review of a paper by a PCM
+     * @param review The Review being completed
+     * @param score The score the PCM is assigning to the Paper
+     * @param comments The PCM's comments about the paper
+     * @return review The Review Object
+     */
     public Review reviewPaper(Review review, double score, String comments) {
         review.setRating(score);
         review.setReviewerComments(comments);
         review.setNeedsRereviewed(false);
 
         return review;
+    }
+
+    /**
+     * Helper method to identify if the PCM has any pending reviews
+     * @return Whether or not the PCM has any reviews
+     */
+    public boolean hasReviews() {
+        return pendingPCMReviews.size() > 0;
     }
 }

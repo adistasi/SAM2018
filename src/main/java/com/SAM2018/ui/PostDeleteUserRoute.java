@@ -3,6 +3,7 @@ package com.SAM2018.ui;
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Message;
 import com.SAM2018.model.PCC;
+import com.SAM2018.model.PCM;
 import com.SAM2018.model.User;
 import spark.Request;
 import spark.Response;
@@ -48,6 +49,9 @@ public class PostDeleteUserRoute implements Route {
 
         if(paperManager.getCountPCC() == 1 && user instanceof PCC) //The last PCC cannot be deleted
             return new Message("There must be at least one PCC in the System at all times", "error");
+
+        if(user instanceof PCM && ((PCM) user).hasReviews())
+            return new Message("You cannot delete a PCM who has pending Reviews", "error");
 
         paperManager.deleteUser(uid);
 
