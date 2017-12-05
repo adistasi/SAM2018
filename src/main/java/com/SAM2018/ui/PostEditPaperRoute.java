@@ -47,7 +47,7 @@ public class PostEditPaperRoute implements TemplateViewRoute {
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         try { //Configure for multipart form data
-            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/SubmittedPapers"));
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/src/main/resources/public/SubmittedPapers"));
 
             //Read in the PaperID from the Route & Validate it
             Part pidPart = request.raw().getPart("pid");
@@ -92,7 +92,7 @@ public class PostEditPaperRoute implements TemplateViewRoute {
 
             if(fileName.length() > 0) { //Only update the format and paper name if they've uploaded a new paper
                 try(InputStream in = filePart.getInputStream()) {
-                    OutputStream out = new FileOutputStream("" + Application.path  +"\\SubmittedPapers\\" + fileName);
+                    OutputStream out = new FileOutputStream("" + Application.path  +"\\src\\main\\resources\\public\\SubmittedPapers\\" + fileName);
                     IOUtils.copy(in, out);
                     out.close();
                 }
@@ -102,7 +102,7 @@ public class PostEditPaperRoute implements TemplateViewRoute {
                 String format = rawFormat[rawFormat.length-1];
 
                 //Update the paper, send a notification, and save everything
-                paper.updatePaper(authors, title, format, Application.path + "/" + fileName);
+                paper.updatePaper(authors, title, format, "SubmittedPapers/" + fileName);
             } else { //Otherwise just update the authors & title
                 paper.updatePaper(authors, title, paper.getFormat(), paper.getPaperUpload());
             }
@@ -111,6 +111,11 @@ public class PostEditPaperRoute implements TemplateViewRoute {
             String messageString = "A User (" + paper.getContactAuthor().getFullName() + ") has edited their paper entitled '" + paper.getTitle() + "'.";
             Notification notification = new Notification(paperManager.getNotificationsSize(), paper.getContactAuthor(), paperManager.getPCC(), messageString, false, new Date());
             paperManager.addNotification(notification);
+
+            String messageString2 = "Your Paper '" + paper.getTitle()  +"' was successfully edited.";
+            Notification not2 = new Notification(paperManager.getNotificationsSize(), null, paper.getContactAuthor(), messageString2, false, new Date());
+            paperManager.addNotification(not2);
+
             paperManager.savePapers();
             paperManager.saveNotifications();
         } catch(Exception e) {

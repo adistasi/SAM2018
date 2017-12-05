@@ -1,5 +1,11 @@
 =====PAPERS=====
-0|||Andy DiStasi,J.R.R Tolkein,J.K. Rowling|||submitter1|||To Kill or not to Kill: Should we murder everyone's favorite character?|||pdf|||1|||C:\Users\addis\Desktop\School Stuff\Academics\Grad School\Year One\Fall Semester\Software Modeling\SAM2018/DiStasi_Assignment1.pdf||| 
-1|||Andy DiStasi,Bill Gates,Paul Allen|||submitter1|||I was totally there: How Andy DiStasi definitely helped build Microsoft|||pdf|||1|||C:\Users\addis\Desktop\School Stuff\Academics\Grad School\Year One\Fall Semester\Software Modeling\SAM2018/DiStasi_Assignment2.pdf||| 
-2|||Andy DiStasi,Mario,Luigi|||submitter2|||Goomba Stomping: How to use your enemies to reach new Heights|||pdf|||1|||C:\Users\addis\Desktop\School Stuff\Academics\Grad School\Year One\Fall Semester\Software Modeling\SAM2018/DiStasi_Assignment3.pdf||| 
-3|||Andy DiStasi,Thomas Jefferson,George Washington|||submitter2|||I was totally there 2: How Andy DiStasi shaped the founding of America|||pdf|||1|||C:\Users\addis\Desktop\School Stuff\Academics\Grad School\Year One\Fall Semester\Software Modeling\SAM2018/DiStasi_LiteratureReview.pdf||| 
+0|||Andy DiStasi,J.R.R Tolkein,J.K. Rowling|||submitter1|||To Kill or not to Kill: Should we murder everyone's favorite character?|||pdf|||1|||SubmittedPapers/DiStasi_Assignment1.pdf||| 
+1|||Andy DiStasi,Bill Gates,Paul Allen|||submitter1|||I was totally there: How Andy DiStasi definitely helped build Microsoft|||pdf|||1|||SubmittedPapers/DiStasi_Assignment2.pdf||| 
+2|||Andy DiStasi,Mario,Luigi|||submitter2|||Goomba Stomping: How to use your enemies to reach new Heights|||pdf|||1|||SubmittedPapers/DiStasi_Assignment3.pdf||| 
+3|||Andy DiStasi,Thomas Jefferson,George Washington|||submitter2|||I was totally there 2: How Andy DiStasi shaped the founding of America|||pdf|||1|||SubmittedPapers/DiStasi_LiteratureReview.pdf||| 
+4|||Testing Upload,Oh Please,Please Work|||submitter1|||New Upload Test|||pdf|||1|||SubmittedPapers/DiStasi_ProposalDraft.pdf||| 
+5|||for real|||submitter2|||for real!|||pdf|||3|||SubmittedPapers/DiStasi_FinalSubmission.pdf||| 
+6|||final|||submitter2|||This is the one|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek13.pdf||| 
+7|||test|||submitter2|||tesr|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek14.pdf||| 
+8|||test34|||submitter2|||test4|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek10.pdf||| 
+9|||Paper Test Auth|||PaperSubmitter3|||Test Paper|||pdf|||3|||SubmittedPapers/DiStasi_RAWeek9.pdf||| 

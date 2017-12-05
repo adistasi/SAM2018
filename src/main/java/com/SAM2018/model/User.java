@@ -8,7 +8,7 @@ import java.util.List;
  * This class is abstract and is extended by the different levels of permission that exist in the system
  * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
-public abstract class User {
+public class User {
     //Attributes
     private String username;
     private String password;

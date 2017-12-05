@@ -40,15 +40,29 @@ public class GetManageSubmissionsRoute implements TemplateViewRoute {
 
         String username = request.session().attribute("username");
         vm.put("username", username);
-        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
+
+        String userType = paperManager.getUserType(request.session().attribute("username"));
+        vm.put("userType", userType);
 
         User user = paperManager.getUser(username);
 
         //Return a SubmissionReportDisplay (containing info on a submission and it's report) to the view model for each paper the user has submitted
         List<SubmissionReportDisplay> srd = new ArrayList<>();
-        for(Paper p : user.getSubmissions()) {
-            Report r = paperManager.getReportByID(p.getPaperID());
-            srd.add(new SubmissionReportDisplay(p, r));
+
+        if(userType.equals("PCC") || userType.equals("Admin")) {
+            for(User u : paperManager.getAllUsers()) {
+                for(Paper p : u.getSubmissions()) {
+                    Report r = paperManager.getReportByID(p.getPaperID());
+                    srd.add(new SubmissionReportDisplay(p, r));
+                }
+            }
+            vm.put("isAdminOrPCC", true);
+        } else {
+            for(Paper p : user.getSubmissions()) {
+                Report r = paperManager.getReportByID(p.getPaperID());
+                srd.add(new SubmissionReportDisplay(p, r));
+            }
+            vm.put("isAdminOrPCC", false);
         }
 
         vm.put("papers", srd);

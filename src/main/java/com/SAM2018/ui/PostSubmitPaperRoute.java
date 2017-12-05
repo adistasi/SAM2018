@@ -46,7 +46,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
         vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
 
         try { //Configure for multipart data
-            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/SubmittedPapers"));
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/src/main/resources/public/SubmittedPapers"));
 
             //Get Author data and format into a List
             Part rawAuthorsPart = request.raw().getPart("authors");
@@ -64,7 +64,7 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
             Part filePart = request.raw().getPart("paperFile");
             String fileName = UIUtils.getSubmittedFileName(filePart);
             try(InputStream in = filePart.getInputStream()) {
-                OutputStream out = new FileOutputStream("" + Application.path  +"\\SubmittedPapers\\" + fileName);
+                OutputStream out = new FileOutputStream("" + Application.path  +"\\src\\main\\resources\\public\\SubmittedPapers\\" + fileName);
                 IOUtils.copy(in, out);
                 out.close();
             }
@@ -85,13 +85,18 @@ public class PostSubmitPaperRoute implements TemplateViewRoute {
 
             //Create the Paper, notify the PCC, and save everything
             User contactAuthor = paperManager.getContactAuthorByUsername(contactAuthorString);
-            Paper paper = new Paper(paperManager.getPaperCount(), authors, contactAuthor, title, format, 1, Application.path + "/" + fileName);
+            Paper paper = new Paper(paperManager.getPaperCount(), authors, contactAuthor, title, format, 1,  "SubmittedPapers/" + fileName);
             paperManager.addPaper(paper);
             contactAuthor.submitPaper(paper);
 
             String messageString = "A User (" + contactAuthor.getFullName() + ") has submitted a Paper entitled '" + paper.getTitle() + "'.";
             Notification notification = new Notification(paperManager.getNotificationsSize(), contactAuthor, paperManager.getPCC(), messageString, false, new Date());
             paperManager.addNotification(notification);
+
+            String messageString2 = "Your Paper '" + paper.getTitle()  +"' was successfully submitted.";
+            Notification not2 = new Notification(paperManager.getNotificationsSize(), null, contactAuthor, messageString2, false, new Date());
+            paperManager.addNotification(not2);
+
             paperManager.savePapers();
             paperManager.saveNotifications();
         } catch(Exception e) { //General error handling

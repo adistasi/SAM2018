@@ -2,7 +2,6 @@ package com.SAM2018.ui;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Notification;
-import com.SAM2018.model.Submitter;
 import com.SAM2018.model.User;
 import spark.ModelAndView;
 import spark.Request;
@@ -54,7 +53,7 @@ public class PostRegisterRoute implements TemplateViewRoute {
                     return UIUtils.error(vm, "That username is already taken", "register.ftl");
 
                 //Create the user as a submitter and create a permission request (notifying the Admin) if they input one
-                User user = new Submitter(username, password, firstName, lastName);
+                User user = new User(username, password, firstName, lastName);
                 paperManager.addUser(user);
 
                 String requestedType = request.queryParams("usertype");

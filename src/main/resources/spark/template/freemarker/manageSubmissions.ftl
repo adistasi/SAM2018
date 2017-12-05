@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="10">
     <title>${title} | SAM 2018</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -41,11 +40,18 @@
             <#if papers?size != 0>
                 <#list papers as p>
                     <div>
-                        <p>${p.getPaper().getTitle()}</p>
-                        <p>${p.getPaper().getVersion()}</p>
-                        <a href="file:///${p.getPaper().getPaperUpload()}" download>Download Paper</a>
+                        <p>Paper Title: ${p.getPaper().getTitle()}</p>
+                        <p>Version Number: ${p.getPaper().getVersion()}</p>
+                        <#if isAdminOrPCC == true>
+                            <p>Paper Author: ${p.getPaper().getContactAuthor().getFullName()}</p>
+                        </#if>
 
-                        <a href="/editPaper?pid=${p.getPaper().getPaperID()}">Edit Paper</a>
+                        <a href="${p.getPaper().getPaperUpload()}" download>Download Paper</a>
+
+                        <#if isAdminOrPCC == false>
+                            <a href="/editPaper?pid=${p.getPaper().getPaperID()}">Edit Paper</a>
+                        </#if>
+
                         <p>
                             STATUS:
                             <#if p.getReport()??>

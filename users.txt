@@ -1,9 +1,10 @@
 =====USERS=====
 pcm1|||class com.SAM2018.model.PCM|||pass|||PCM|||1|||
 PCCUser|||class com.SAM2018.model.PCC|||pass|||PCC|||User|||
+PaperSubmitter3|||class com.SAM2018.model.User|||asdf|||Delete|||This User|||
 AdminUser|||class com.SAM2018.model.Admin|||pass|||Admin|||User|||
-submitter2|||class com.SAM2018.model.Submitter|||pass|||Paper|||Submitter 2|||
 pcm2|||class com.SAM2018.model.PCM|||pass|||PCM|||2|||
-submitter1|||class com.SAM2018.model.Submitter|||pass|||Paper|||Submitter 1|||
+submitter1|||class com.SAM2018.model.User|||pass|||Paper|||Submitter 1|||
+submitter2|||class com.SAM2018.model.User|||pass|||Paper|||Submitter 2|||
 pcm3|||class com.SAM2018.model.PCM|||pass|||PCM|||3|||
 pcm4|||class com.SAM2018.model.PCM|||pass|||PCM|||4|||

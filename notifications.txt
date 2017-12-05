@@ -21,3 +21,23 @@
 19|||System|||pcm1|||The Reviews for 'To Kill or not to Kill: Should we murder everyone's favorite character?' need to be redone.  Please read each other's comments and then re-submit an updated Review|||false|||2017-12-04 13:53|||
 20|||System|||pcm3|||The Reviews for 'To Kill or not to Kill: Should we murder everyone's favorite character?' need to be redone.  Please read each other's comments and then re-submit an updated Review|||false|||2017-12-04 13:53|||
 21|||System|||pcm4|||The Reviews for 'To Kill or not to Kill: Should we murder everyone's favorite character?' need to be redone.  Please read each other's comments and then re-submit an updated Review|||false|||2017-12-04 13:53|||
+22|||submitter1|||PCCUser|||A User (Paper Submitter 1) has submitted a Paper entitled 'New Upload Test'.|||false|||2017-12-04 15:48|||
+23|||System|||submitter1|||A User (Paper Submitter 1) has submitted a Paper entitled 'New Upload Test'.|||false|||2017-12-04 15:48|||
+24|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'for real'.|||false|||2017-12-04 16:01|||
+25|||System|||submitter2|||Your Paper 'for real' was successfully submitted.|||false|||2017-12-04 16:01|||
+26|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'This is the one'.|||false|||2017-12-04 16:07|||
+27|||System|||submitter2|||Your Paper 'This is the one' was successfully submitted.|||false|||2017-12-04 16:07|||
+28|||submitter2|||PCCUser|||A User (Paper Submitter 2) has edited their paper entitled 'for real'.|||false|||2017-12-04 16:10|||
+29|||System|||submitter2|||Your Paper 'for real' was successfully submitted.|||false|||2017-12-04 16:10|||
+30|||submitter2|||PCCUser|||A User (Paper Submitter 2) has edited their paper entitled 'for real!'.|||false|||2017-12-04 16:10|||
+31|||System|||submitter2|||Your Paper 'for real!' was successfully submitted.|||false|||2017-12-04 16:10|||
+32|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'tesr'.|||false|||2017-12-04 16:16|||
+33|||System|||submitter2|||Your Paper 'tesr' was successfully submitted.|||false|||2017-12-04 16:16|||
+34|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'test4'.|||false|||2017-12-04 16:26|||
+35|||System|||submitter2|||Your Paper 'test4' was successfully submitted.|||false|||2017-12-04 16:26|||
+36|||PaperSubmitter3|||PCCUser|||A User (Delete This User) has submitted a Paper entitled 'Test Paper'.|||false|||2017-12-04 18:50|||
+37|||System|||PaperSubmitter3|||Your Paper 'Test Paper' was successfully submitted.|||false|||2017-12-04 18:50|||
+38|||PaperSubmitter3|||PCCUser|||A User (Delete This User) has edited their paper entitled 'Test Paper'.|||false|||2017-12-04 18:51|||
+39|||System|||PaperSubmitter3|||Your Paper 'Test Paper' was successfully edited.|||false|||2017-12-04 18:51|||
+40|||PaperSubmitter3|||PCCUser|||A User (Delete This User) has edited their paper entitled 'Test Paper'.|||false|||2017-12-04 18:53|||
+41|||System|||PaperSubmitter3|||Your Paper 'Test Paper' was successfully edited.|||false|||2017-12-04 18:53|||

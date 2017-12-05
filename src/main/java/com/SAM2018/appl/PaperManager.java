@@ -116,7 +116,7 @@ public class PaperManager {
     }
 
     /**
-     * Method to get EVERY user within the application
+     * Method to get EVERY user within the application except one
      * @param _username The username of the user requesting the search (so we don't return them in the list)
      * @return A list of Users
      */
@@ -127,6 +127,20 @@ public class PaperManager {
             if(!u.usernameMatches(_username)) {
                 userList.add(u);
             }
+        }
+
+        return userList;
+    }
+
+    /**
+     * Overloaded Method to get EVERY user within the application
+     * @return The List of every User
+     */
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+
+        for(User u : users.values()) { //For Each user in the application, add them to the list
+            userList.add(u);
         }
 
         return userList;
@@ -840,7 +854,7 @@ public class PaperManager {
                     else if(classString.contains("PCM"))
                         user = new PCM(username, password, firstName, lastName);
                     else
-                        user = new Submitter(username, password, firstName, lastName);
+                        user = new User(username, password, firstName, lastName);
 
                     users.put(username, user);
 
