@@ -46,23 +46,23 @@
         </#if>
 
         <#if closed != true>
-            <h3 style="text-align:center">Upload a Paper to be considered for the conference</h3>
+            <h4 style="text-align:center">Upload a Paper to be considered for the conference</h4>
 
             <form method="POST" enctype="multipart/form-data" action="/submitPaper" id="submitPaper" class="inputForm">
                 <div class="form-group">
-                    <div style="margin-bottom: 35px;" id="authorsDiv">
+                    <div id="authorsDiv">
                         <label>Authors</label>
                         <input type="text" class="authorField" name="author"/><br />
                     </div>
                     <input type="hidden" id="authInput" name="authors" />
-                    <a href="#" onclick="addAuthor()">Add Author</a><br />
+                    <a href="#" class="btn-good" style="margin-left:95px; margin-bottom: 25px;" onclick="addAuthor()">Add Author</a><br />
 
                     <label>Paper Title</label>
                     <input type="text" name="title" required /><br />
 
                     <label>Upload Paper</label>
-                    <input type="file" accept=".pdf,.doc,.docx" name="paperFile" required /><br />
-                    <button type="submit">Upload</button>
+                    <input type="file" style="margin-bottom: 15px" accept=".pdf,.doc,.docx" name="paperFile" required /><br />
+                    <button class="btn-good" type="submit">Upload</button>
                 </div>
             </form>
         <#else>

@@ -39,26 +39,29 @@
     <div class="body">
     <#if username??>
         <#if reviews?size != 0>
-            <p>You have been assigned the following reviews:</p>
-            <#list reviews as r>
-                <div>
-                    <a href="/reviewPaper?pid=${r.getSubject().getPaperID()}">${r.getSubject().getTitle()} - ${r.getSubject().getAuthorsAsString()}</a>
-
-                </div>
-            </#list>
+            <div class="subdiv" style="margin-bottom:50px;">
+                <p class="subheader">You have been assigned the following reviews:</p>
+                <hr style="margin-bottom:15px"/>
+                <#list reviews as r>
+                    <div>
+                        <a style="margin-bottom: 25px" href="/reviewPaper?pid=${r.getSubject().getPaperID()}">${r.getSubject().getTitle()} - ${r.getSubject().getAuthorsAsString()}</a>
+                    </div>
+                </#list>
+            </div>
         <#else>
             <p style="text-align:center">You have no pending reviews!</p>
         </#if>
 
-        <hr />
-
         <#if completedReviews?size != 0>
-            <p>You have completed the following reviews:</p>
-            <#list completedReviews as cr>
-                <div>
-                    <p>${cr.getSubject().getTitle()} - ${cr.getSubject().getAuthorsAsString()} <em>(Score: ${cr.getRating()})</em></p>
-                </div>
-            </#list>
+            <div class="subdiv">
+                <p class="subheader">You have completed the following reviews:</p>
+                <hr />
+                <#list completedReviews as cr>
+                    <div>
+                        <p style="margin-bottom: 25px;">${cr.getSubject().getTitle()} - ${cr.getSubject().getAuthorsAsString()} <em>(Score: ${cr.getRating()})</em></p>
+                    </div>
+                </#list>
+            </div>
         </#if>
     </#if>
     </div>

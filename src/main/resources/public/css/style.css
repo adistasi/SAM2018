@@ -16,7 +16,8 @@ a[disabled] {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
     background: white;
     border: 1px solid #BFE6FF;
     padding: 2px;
@@ -198,6 +199,7 @@ div.info {
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .btn-alert {
@@ -209,9 +211,30 @@ div.info {
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-black {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 #paperDeadline, #reviewDeadline, #requestDeadline, #ratingDeadline {
     padding-left: 60px;
     padding-bottom: 15px;
+}
+
+#authorsDiv input:not(:first-child) {
+    margin-left: 105px;
+}
+
+#authorsDiv input:nth-child(2) {
+    margin-left: 0px !important;
 }

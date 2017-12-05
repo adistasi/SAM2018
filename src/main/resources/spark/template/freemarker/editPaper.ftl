@@ -46,13 +46,13 @@
         </#if>
 
         <#if paper??>
-            <h3 style="text-align:center">Edit your paper: ${paper.getTitle()}</h3>
+            <h4 style="text-align:center">Edit your paper: <em>'${paper.getTitle()}'</em></h4>
 
             <form method="POST" enctype="multipart/form-data" action="/editPaper" id="submitPaper" class="inputForm">
                 <div class="form-group">
                     <input type="hidden" name="pid" value="${paper.getPaperID()}" />
 
-                    <div style="margin-bottom: 35px;" id="authorsDiv">
+                    <div id="authorsDiv">
                         <label>Authors</label>
                         <#list paper.getAuthors() as a>
                             <input type="text" class="authorField" name="author" value="${a}"/><br />
@@ -60,19 +60,19 @@
                     </div>
 
                     <input type="hidden" id="authInput" name="authors" value="${paper.getAuthorsAsString()}"/>
-                    <a href="#" onclick="addAuthor()">Add Author</a><br />
+                    <a href="#" class="btn-good" style="margin-left:95px; margin-bottom: 25px;" onclick="addAuthor()">Add Author</a><br />
 
                     <label>Paper Title</label>
                     <input type="text" name="title" value="${paper.getTitle()}" required /><br />
 
                     <label>Upload Paper</label>
-                    <input type="file" accept=".pdf,.doc,.docx" name="paperFile" /><br />
-                    <span><em>Current File: ${paper.getPaperUpload()}</em></span><br />
-                    <button type="submit">Edit</button>
+                    <input style="margin-bottom: 15px" type="file" accept=".pdf,.doc,.docx" name="paperFile" /><br />
+                    <span style="font-size:9pt; margin-bottom: 15px"><em>Current File: ${paper.getPaperUpload()}</em></span><br />
+                    <button class="btn-good" style="margin-top:15px" type="submit">Edit</button>
                 </div>
             </form>
         <#else>
-            <p>Please select a valid paper for editing</p>
+            <p style="text-align:center">Please select a valid paper for editing</p>
         </#if>
     </div>
 

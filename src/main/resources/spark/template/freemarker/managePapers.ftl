@@ -33,7 +33,12 @@
 
     <div class="body">
         <#if username??>
-            <p>Welcome to the submission management system for the Software Architecture Mining Workshop.</p>
+            <p>This is the Paper Management section of the SAM2018 Submission Manager.  From here you can submit a new paper and manage your existing submissions.</p>
+
+            <#if userType == "PCC" || userType == "Admin" || userType == "PCM">
+                <br />
+                <p>From this page, Program Committee Chairs can assign papers to Program Committee Members for review and can themselves rate papers, mark papers as accepted or declined, and generate reports.  Program Committee Members can request to review certain papers and review the papers assigned to them from here.</p>
+            </#if>
         </#if>
     </div>
   </div>

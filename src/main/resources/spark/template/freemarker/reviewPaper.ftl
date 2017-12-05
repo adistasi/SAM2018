@@ -40,31 +40,32 @@
         </#if>
 
         <#if paper??>
-            <p>Submit a Review for ${paper.getTitle()}</p>
-            <p>By ${paper.getAuthorsAsString()}</p>
-            <a href="file:///${paper.getPaperUpload()}" download>Download Paper</a>
+            <h4>Submit a Review for '<em>${paper.getTitle()}</em>'</h4>
+            <p style="margin-left:25px;">By ${paper.getAuthorsAsString()}</p>
+            <a style='margin-left:25px' href="${paper.getPaperUpload()}" download>Download Paper</a>
             <form method="POST" action="/reviewPaper" id="submitPaper" class="inputForm">
-                <div class="form-group">
-                    <input type="hidden" name="pid" value="${paper.getPaperID()}"
+                <div style="margin-top:25px; margin-bottom: 50px;">
+                    <input type="hidden" name="pid" value="${paper.getPaperID()}" />
 
                     <label>Score</label>
                     <input type="number" name="score" min="0" max="10" step="0.1" required /><br />
 
-                    <label>Comments</label>
-                    <textarea name="comment" placeholder="Enter Comments Here" required /></textarea>
+                    <label style="vertical-align:top;">Comments</label>
+                    <textarea rows="5" cols="100" name="comment" placeholder="Enter Comments Here" required /></textarea><br /><br />
 
-                    <button type="submit">Submit</button>
+                    <div style="text-align:center"><button class='btn-good' type="submit">Submit</button></div>
                 </div>
             </form>
 
             <#if otherReviews??>
-                <p>A PCC has requested these papers be re-reviewed.  Here are the reviews that were submitted:</p>
-
-                <#list otherReviews as or>
-                    <p>Rating: ${or.getRating()}</p>
-                    <p>Comments: ${or.getReviewerComments()}</p>
-                    <hr />
-                </#list>
+                <h3>A PCC has requested these papers be re-reviewed.  Here are the reviews that were submitted:</h3>
+                <div class="subdiv">
+                    <#list otherReviews as or>
+                        <p>Rating: ${or.getRating()}</p>
+                        <p>Comments: ${or.getReviewerComments()}</p>
+                        <hr style="margin-left:40px;"/>
+                    </#list>
+                </div>
             </#if>
         <#else>
             <p style="text-align:center">Please select a valid paper for Review</p>

@@ -39,20 +39,22 @@
         <#if username??>
             <#if papers?size != 0>
                 <#list papers as p>
-                    <div>
-                        <p>Paper Title: ${p.getPaper().getTitle()}</p>
-                        <p>Version Number: ${p.getPaper().getVersion()}</p>
+                    <div class="subdiv">
+                        <h4 style="margin-bottom:0px">Paper Title: ${p.getPaper().getTitle()}</h4>
+                        <p style="font-weight:9px; margin-left:25px;"><em>Version Number: ${p.getPaper().getVersion()}</em></p>
                         <#if isAdminOrPCC == true>
-                            <p>Paper Author: ${p.getPaper().getContactAuthor().getFullName()}</p>
+                            <p style="margin-left:25px;">Paper Author: ${p.getPaper().getContactAuthor().getFullName()}</p>
                         </#if>
 
-                        <a href="${p.getPaper().getPaperUpload()}" download>Download Paper</a>
+                        <p style="margin-left:25px; margin-bottom: 25px;">
+                            <a class="btn-good" href="${p.getPaper().getPaperUpload()}" download>Download Paper</a>
 
-                        <#if isAdminOrPCC == false>
-                            <a href="/editPaper?pid=${p.getPaper().getPaperID()}">Edit Paper</a>
-                        </#if>
+                            <#if isAdminOrPCC == false>
+                                <a class="btn-black" href="/editPaper?pid=${p.getPaper().getPaperID()}">Edit Paper</a>
+                            </#if>
+                        </p>
 
-                        <p>
+                        <p style="margin-left:25px;">
                             STATUS:
                             <#if p.getReport()??>
                                 <#if p.getReport().getAcceptanceStatus() == "Modify">
@@ -61,12 +63,12 @@
                                     ${p.getReport().getAcceptanceStatus()}
                                 </#if>
 
-                                <a href="/reviewRating?pid=${p.getPaper().getPaperID()}">View Report</a>
+                                <a class='btn-good' href="/reviewRating?pid=${p.getPaper().getPaperID()}">View Report</a>
                             <#else>
                                 Pending
                             </#if>
                         </p>
-                        <hr />
+                        <hr style="margin-left:35px; margin-bottom:25px;"/>
                     </div>
                 </#list>
             <#else>

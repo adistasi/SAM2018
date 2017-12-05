@@ -36,18 +36,22 @@
 
     <div class="body">
         <#if report??>
-            <p>Report for ${report.getSubject().getTitle()}</p>
-            <p>Overall Rating: ${report.getPccReview().getRating()}</p>
-            <p>PCC Comments: ${report.getPccReview().getReviewerComments()}</p>
-            <br />
-            <br />
+            <div class="subdiv" style="margin-bottom:50px">
+                <h4 class="subheader">Report for ${report.getSubject().getTitle()}</h4>
+                <hr class="spacer" />
+                <p>Overall Rating: ${report.getPccReview().getRating()}</p>
+                <p>PCC Comments: ${report.getPccReview().getReviewerComments()}</p>
+            </div>
 
-            <#list report.getPcmReviews() as r>
-                <p>Reviewer Ratings:</p>
-                <p>Rating: ${r.getRating()}</p>
-                <p>Comments: ${r.getReviewerComments()}</p>
-                <hr />
-            </#list>
+            <div class="subdiv">
+                <h4 class="subheader">Reviewer Ratings:</h4>
+                <hr class="spacer" />
+                <#list report.getPcmReviews() as r>
+                    <p>Rating: ${r.getRating()}</p>
+                    <p>Comments: ${r.getReviewerComments()}</p>
+                    <hr style="margin-left:40px; margin-bottom: 25px;"/>
+                </#list>
+            </div>
         <#else>
             <p style="text-align:center">Please select a valid report</p>
         </#if>

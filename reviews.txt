@@ -10,4 +10,4 @@
 2|||pcm3|||8.7|||Great rereadability|||false
 3|||pcm2|||3.6|||Not buying it|||false
 3|||pcm3|||1.0|||BAD|||false
-3|||pcm4|||-1.0|||null|||false
+3|||pcm4|||2.0|||Not very good|||false
