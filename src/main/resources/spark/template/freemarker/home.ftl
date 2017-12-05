@@ -33,7 +33,7 @@
         <#if username??>
             <p>Welcome to the submission management system for the Software Architecture Mining Workshop.</p><br />
 
-            <p>If you are looking to submit, rate, or review Paper submissions, select "Paper Management" to see more paper related controls.  <#if userType == "Admin">Administrative Users are able to access controls to manage System Deadlines and User Accounts from this page.</#if></p>
+            <p>If you are looking to submit, rate, or review Paper submissions, select "Manage Papers" to see more paper related controls.  <#if userType == "Admin">Administrative Users are able to access controls to manage System Deadlines and User Accounts from this page.</#if></p>
         </#if>
     </div>
   </div>

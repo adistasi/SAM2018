@@ -125,7 +125,7 @@ div.info {
     font-size: 13px;
 }
 
-.inputForm label {
+.inputForm label:not(.noMaxWidth) {
     display: inline-block;
     width: 100px;
     text-align: right;

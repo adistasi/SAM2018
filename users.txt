@@ -1,11 +1,11 @@
 =====USERS=====
 PCC|||class com.SAM2018.model.PCC|||pass|||Niharika|||Dalal|||
-PCM1|||class com.SAM2018.model.User|||pass|||Raseshwari|||Pulle|||PCM
+PCM1|||class com.SAM2018.model.PCM|||pass|||Raseshwari|||Pulle|||
 DeniedPCM|||class com.SAM2018.model.User|||pass|||Steve|||Jobs|||PCM
 Admin|||class com.SAM2018.model.Admin|||pass|||Andy|||DiStasi|||
-PCM3|||class com.SAM2018.model.User|||pass|||Steve|||Ballmer|||PCM
 Submitter3|||class com.SAM2018.model.User|||pass|||John|||Tolkein|||
-PCM2|||class com.SAM2018.model.User|||pass|||Bill|||Gates|||PCM
+PCM3|||class com.SAM2018.model.PCM|||pass|||Steve|||Ballmer|||
+PCM2|||class com.SAM2018.model.PCM|||pass|||Bill|||Gates|||
 Submitter1|||class com.SAM2018.model.User|||pass|||George|||Martin|||
-PCM4|||class com.SAM2018.model.User|||pass|||Paul|||Allen|||PCM
 Submitter2|||class com.SAM2018.model.User|||pass|||Joanne|||Rowling|||
+PCM4|||class com.SAM2018.model.PCM|||pass|||Paul|||Allen|||

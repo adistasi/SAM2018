@@ -14,3 +14,7 @@
 12|||System|||Submitter2|||Your Paper 'Examining the Impact of Data Type on Speech-Based Accessible Computing' was successfully submitted.|||false|||2017-12-05 16:16|||
 13|||Submitter3|||PCC|||A User (John Tolkein) has submitted a Paper entitled 'Uncertainty Detection in Self-Adaptive Systems'.|||false|||2017-12-05 16:18|||
 14|||System|||Submitter3|||Your Paper 'Uncertainty Detection in Self-Adaptive Systems' was successfully submitted.|||false|||2017-12-05 16:18|||
+15|||PCM3|||PCM3|||Your request for elevated status has been approved|||false|||2017-12-05 16:44|||
+16|||PCM2|||PCM2|||Your request for elevated status has been approved|||false|||2017-12-05 16:44|||
+17|||PCM4|||PCM4|||Your request for elevated status has been approved|||false|||2017-12-05 16:44|||
+18|||PCM1|||PCM1|||Your request for elevated status has been approved|||false|||2017-12-05 16:44|||

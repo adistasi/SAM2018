@@ -53,7 +53,7 @@
                                 <#if p.getUsers()??>
                                     <#list p.getUsers() as u>
                                         <input type="checkbox" name="requests" value="${u.getUsername()}|||${p.getPaper().getPaperID()}"/>
-                                        <label for="requests">${u.getFirstName()} ${u.getLastName()}</label><br />
+                                        <label class='noMaxWidth' for="requests">${u.getFirstName()} ${u.getLastName()}</label><br />
                                     </#list>
                                 <#else>
                                     <p>No PCMs have requested to review this paper</p>

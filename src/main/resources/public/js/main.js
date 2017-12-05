@@ -23,7 +23,7 @@ function addPCM(selectList) {
     var username = selectList.val();
     var name = selectList.find(":selected").text();
     var pid = selectList.parent().data("pid");
-    var htmlString = '<input type="checkbox" name="requests" value="' + username + '|||' + pid + '" checked><label for="requests">' + name + '</label><br />';
+    var htmlString = '<input type="checkbox" name="requests" value="' + username + '|||' + pid + '" checked><label class="noMaxWidth" for="requests">' + name + '</label><br />';
     selectList.before(htmlString);
 }
 
