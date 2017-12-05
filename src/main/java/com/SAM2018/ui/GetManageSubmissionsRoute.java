@@ -4,15 +4,12 @@ import java.util.*;
 
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Paper;
-import com.SAM2018.model.Report;
 import com.SAM2018.model.SubmissionReportDisplay;
 import com.SAM2018.model.User;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
-
-import static spark.Spark.halt;
 
 /**
  * The Web Controller for the Submitted Paper Management page
@@ -39,28 +36,25 @@ public class GetManageSubmissionsRoute implements TemplateViewRoute {
         vm.put("title", "Manage Submissions");
 
         String username = request.session().attribute("username");
-        vm.put("username", username);
-
-        String userType = paperManager.getUserType(request.session().attribute("username"));
+        String userType = paperManager.getUserType(username);
         vm.put("userType", userType);
+        vm.put("username", username);
 
         User user = paperManager.getUser(username);
 
         //Return a SubmissionReportDisplay (containing info on a submission and it's report) to the view model for each paper the user has submitted
         List<SubmissionReportDisplay> srd = new ArrayList<>();
 
-        if(userType.equals("PCC") || userType.equals("Admin")) {
-            for(User u : paperManager.getAllUsers()) {
+        if(userType.equals("PCC") || userType.equals("Admin")) { //PCC & Admin can see all papers
+            for(User u : paperManager.getAllUsers()) { //loop through every user & get all their submissions
                 for(Paper p : u.getSubmissions()) {
-                    Report r = paperManager.getReportByID(p.getPaperID());
-                    srd.add(new SubmissionReportDisplay(p, r));
+                    srd.add(new SubmissionReportDisplay(p, paperManager.getReportByID(p.getPaperID())));
                 }
             }
             vm.put("isAdminOrPCC", true);
-        } else {
-            for(Paper p : user.getSubmissions()) {
-                Report r = paperManager.getReportByID(p.getPaperID());
-                srd.add(new SubmissionReportDisplay(p, r));
+        } else { //Other users can only see their submissions
+            for(Paper p : user.getSubmissions()) { //loop through the user's submissino
+                srd.add(new SubmissionReportDisplay(p, paperManager.getReportByID(p.getPaperID())));
             }
             vm.put("isAdminOrPCC", false);
         }

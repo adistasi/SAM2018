@@ -50,7 +50,8 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
         String username = request.session().attribute("username");
         String pid = request.queryParams("pid");
         int paperID = UIUtils.parseIntInput(pid);
-        if(paperID == -2) {
+        Review thisReview = paperManager.getReview(paperID, username);
+        if(paperID == -2 || (thisReview != null && !thisReview.getReviewer().usernameMatches(username))) {
             response.redirect("/reviewPapers");
             halt();
             return null;
@@ -58,15 +59,6 @@ public class GetReviewPaperRoute implements TemplateViewRoute{
 
         vm.put("title", "Review Paper");
         vm.put("username", username);
-
-        //Get the review and put it in the VM (redirect the user if there is no valid review)
-        Review thisReview = paperManager.getReview(paperID, username);
-        if(thisReview != null && !thisReview.getReviewer().getUsername().equals(username)) {
-            response.redirect("/reviewPapers");
-            halt();
-            return null;
-        }
-
         vm.put("paper", paperManager.getPaperbyID(paperID));
 
         if(thisReview != null && thisReview.getNeedsRereviewed()) { //If there is a review that is marked as needing re-reviewed, also show the other PCM's reviews

@@ -39,10 +39,6 @@ public class User {
         submittedPapers.add(_paper);
     }
 
-    public void editPaper(Paper _paper) {
-        //TODO: get paper in list & set it's value
-    }
-
     /**
      * Accessor for username
      * @return username The Account's username

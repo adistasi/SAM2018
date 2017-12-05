@@ -33,9 +33,10 @@ public class GetManageAccountsRoute implements TemplateViewRoute {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Account Management");
-        String userType = paperManager.getUserType(request.session().attribute("username"));
+        String username = request.session().attribute("username");
+        String userType = paperManager.getUserType(username);
         vm.put("userType", userType);
-        vm.put("notificationCount", paperManager.getUnreadNotificationCount(request.session().attribute("username")));
+        vm.put("notificationCount", paperManager.getUnreadNotificationCount(username));
 
         if(!userType.equals("Admin")) { //Redirect any non admin users
             response.redirect("/");
@@ -46,7 +47,6 @@ public class GetManageAccountsRoute implements TemplateViewRoute {
         //Add all users and any requested permissions to the viewmodel
         vm.put("users", paperManager.getAllUsers(request.session().attribute("username")));
         vm.put("requestedPermissions", paperManager.getRequestedPermissions());
-
         return new ModelAndView(vm, "accountManagement.ftl");
     }
 }

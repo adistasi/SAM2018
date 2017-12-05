@@ -1,6 +1,7 @@
 package com.SAM2018.ui;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -53,66 +54,64 @@ public class GetManageDeadlinesRoute implements TemplateViewRoute {
         Deadline reviewDeadline = paperManager.getDeadline("Review Deadline");
         Deadline ratingDeadline = paperManager.getDeadline("Rating Deadline");
 
-        if(submissionDeadline != null) { //If the review deadline exists, format date and time strings and add them to the ViewModel
-            try {
-                SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
-                String dateStr = date.format(submissionDeadline.getDate());
-
-                SimpleDateFormat time = new SimpleDateFormat("HH:mm");
-                String timeStr = time.format(submissionDeadline.getDate());
+        try {
+            if(submissionDeadline != null) { //If the review deadline exists, format date and time strings and add them to the ViewModel
+                String dateStr = formatDateString(submissionDeadline.getDate());
+                String timeStr = formatTimeString(submissionDeadline.getDate());
 
                 vm.put("submissionDeadlineDate", dateStr);
                 vm.put("submissionDeadlineTime", timeStr);
-            }catch(Exception e) {
-                e.printStackTrace();
             }
-        }
 
-        if(requestDeadline != null) { //If the request deadline exists, format date and time strings and add them to the ViewModel
-            try {
-                SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
-                String dateStr = date.format(requestDeadline.getDate());
-
-                SimpleDateFormat time = new SimpleDateFormat("HH:mm");
-                String timeStr = time.format(requestDeadline.getDate());
+            if(requestDeadline != null) { //If the request deadline exists, format date and time strings and add them to the ViewModel
+                String dateStr = formatDateString(requestDeadline.getDate());
+                String timeStr = formatTimeString(requestDeadline.getDate());
 
                 vm.put("requestDeadlineDate", dateStr);
                 vm.put("requestDeadlineTime", timeStr);
-            }catch(Exception e) {
-                e.printStackTrace();
             }
-        }
 
-        if(reviewDeadline != null) { //If the review deadline exists, format date and time strings and add them to the ViewModel
-            try {
-                SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
-                String dateStr = date.format(reviewDeadline.getDate());
-
-                SimpleDateFormat time = new SimpleDateFormat("HH:mm");
-                String timeStr = time.format(reviewDeadline.getDate());
+            if(reviewDeadline != null) { //If the review deadline exists, format date and time strings and add them to the ViewModel
+                String dateStr = formatDateString(reviewDeadline.getDate());
+                String timeStr = formatTimeString(reviewDeadline.getDate());
 
                 vm.put("reviewDeadlineDate", dateStr);
                 vm.put("reviewDeadlineTime", timeStr);
-            }catch(Exception e) {
-                e.printStackTrace();
             }
-        }
 
-        if(ratingDeadline != null) { //If the rating deadline exists, format date and time strings and add them to the ViewModel
-            try {
-                SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
-                String dateStr = date.format(ratingDeadline.getDate());
-
-                SimpleDateFormat time = new SimpleDateFormat("HH:mm");
-                String timeStr = time.format(ratingDeadline.getDate());
+            if(ratingDeadline != null) { //If the rating deadline exists, format date and time strings and add them to the ViewModel
+                String dateStr = formatDateString(ratingDeadline.getDate());
+                String timeStr = formatTimeString(ratingDeadline.getDate());
 
                 vm.put("ratingDeadlineDate", dateStr);
                 vm.put("ratingDeadlineTime", timeStr);
-            }catch(Exception e) {
-                e.printStackTrace();
             }
-        }
 
-        return new ModelAndView(vm , "manageDeadlines.ftl");
+            return new ModelAndView(vm , "manageDeadlines.ftl");
+        }catch(Exception e) {
+            response.redirect("/");
+            halt();
+            return null;
+        }
+    }
+
+    /**
+     * Helper method to utilize SimpleDateFormat to return a Freemarker-usable string for the Date
+     * @param _date The date of the deadline (we're concerned with the actual data)
+     * @return The formatted string ("yyy-MM-dd")
+     */
+    private String formatDateString(Date _date) {
+        SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
+        return date.format(_date);
+    }
+
+    /**
+     * Helper method to utilize SimpleDateFormat to return a Freemarker-usable string for the Time
+     * @param _time The date of the deadline (we're concerned with the time)
+     * @return The formatted time("HH:mm")
+     */
+    private String formatTimeString(Date _time) {
+        SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+        return time.format(_time);
     }
 }

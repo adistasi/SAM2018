@@ -34,9 +34,8 @@ public class GetRatePaperRoute implements TemplateViewRoute {
         //Prepare the VM & get username, type, & logged in status
         Map<String, Object> vm = new HashMap<>();
         Session session = request.session();
-
         vm = UIUtils.validateLoggedIn(request, response, vm);
-        String userType = paperManager.getUserType(request.session().attribute("username"));
+        String userType = paperManager.getUserType(session.attribute("username"));
         vm.put("userType", userType);
         vm.put("title", "Rate Paper");
         vm.put("username", session.attribute("username"));
@@ -56,9 +55,9 @@ public class GetRatePaperRoute implements TemplateViewRoute {
             return null;
         }
 
+        //If there aren't enough Reviews, then they can't access the rating page yet
         List<Review> reviews = paperManager.getReviewsForPaper(paperIDString);
-
-        if(reviews.size() < 3) { //If there aren't enough Reviews, then they can't access the rating page yet
+        if(reviews.size() < 3) {
             response.redirect("/ratePapers");
             halt();
             return null;

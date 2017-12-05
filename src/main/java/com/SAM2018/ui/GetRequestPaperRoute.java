@@ -45,10 +45,7 @@ public class GetRequestPaperRoute implements TemplateViewRoute {
 
         //Get the deadline & put "closed" as true if the deadline has passed
         Deadline reqDead = paperManager.getDeadline("Request Deadline");
-        if(reqDead != null && reqDead.hasPassed())
-            vm.put("closed", true);
-        else
-            vm.put("closed", false);
+        vm.put("closed", (reqDead != null && reqDead.hasPassed()));
 
         //Put if the user has already made requests and a list of the papers for review in the VM
         vm.put("title", "Request a Paper");

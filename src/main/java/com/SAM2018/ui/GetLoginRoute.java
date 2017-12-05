@@ -13,7 +13,6 @@ import java.util.Map;
  * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class GetLoginRoute implements TemplateViewRoute{
-
     @Override
     public ModelAndView handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();

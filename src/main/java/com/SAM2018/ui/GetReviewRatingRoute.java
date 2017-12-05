@@ -40,7 +40,7 @@ public class GetReviewRatingRoute implements TemplateViewRoute {
         int paperID = UIUtils.parseIntInput(pid);
 
         //Validate that a valid PaperID came from the route and that the user has access to the paper (redirect if they don't)
-        if(paperID == -2 || paperManager.getPaperbyID(paperID) == null || !paperManager.getPaperbyID(paperID).getContactAuthor().getUsername().equals(username)) {
+        if(paperID == -2 || paperManager.getPaperbyID(paperID) == null || !paperManager.getPaperbyID(paperID).getContactAuthor().usernameMatches(username)) {
             response.redirect("/manageSubmissions");
             halt();
             return null;

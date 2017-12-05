@@ -243,7 +243,6 @@ public class PaperManager {
     public void deleteUser(String _username) {
         users.remove(_username);
         requestedPermissions.remove(getUser(_username));
-        //TODO: Remove from reviews, requests, papers, & ratings
         saveUsers();
     }
 
@@ -771,27 +770,29 @@ public class PaperManager {
                     int version = Integer.parseInt(paperLine[5]);
                     String paperUpload = paperLine[6];
 
-                    //Create a new paper, add it to the list, and "submit" that paper on behalf of the author
-                    Paper p = new Paper(id, authors, contactAuthor, title, format, version, paperUpload);
-                    papers.add(p);
-                    contactAuthor.submitPaper(p);
+                    if(contactAuthor != null) {
+                        //Create a new paper, add it to the list, and "submit" that paper on behalf of the author
+                        Paper p = new Paper(id, authors, contactAuthor, title, format, version, paperUpload);
+                        papers.add(p);
+                        contactAuthor.submitPaper(p);
 
-                    if(paperLine.length > 7) { //If there is a 7th item (the requests) create those for the papers they exist for
-                        String[] requestors = paperLine[7].split("/");
-                        if(!requestors[0].equals(" ")) { //If there are requesters for the paper:
-                            for(int i=0; i < requestors.length; i++) { //Loop through each one, get their username and PCM object and "request" the review for them
-                                String username = requestors[i].trim();
-                                PCM reqUser = (PCM)getUser(username);
-                                reqUser.requestReview(p);
+                        if (paperLine.length > 7) { //If there is a 7th item (the requests) create those for the papers they exist for
+                            String[] requestors = paperLine[7].split("/");
+                            if (!requestors[0].equals(" ")) { //If there are requesters for the paper:
+                                for (int i = 0; i < requestors.length; i++) { //Loop through each one, get their username and PCM object and "request" the review for them
+                                    String username = requestors[i].trim();
+                                    PCM reqUser = (PCM) getUser(username);
+                                    reqUser.requestReview(p);
 
-                                if(requestedReviews.get(Integer.toString(id)) != null) { //If that paper already has reviews, add them to the list
-                                    List<User> reqUsers = requestedReviews.get(Integer.toString(id));
-                                    reqUsers.add(reqUser);
-                                    requestedReviews.put(Integer.toString(id), reqUsers);
-                                } else { //Otherwise, create a new list and put them on it
-                                    List<User> reqUsers = new ArrayList<>();
-                                    reqUsers.add(reqUser);
-                                    requestedReviews.put(Integer.toString(id), reqUsers);
+                                    if (requestedReviews.get(Integer.toString(id)) != null) { //If that paper already has reviews, add them to the list
+                                        List<User> reqUsers = requestedReviews.get(Integer.toString(id));
+                                        reqUsers.add(reqUser);
+                                        requestedReviews.put(Integer.toString(id), reqUsers);
+                                    } else { //Otherwise, create a new list and put them on it
+                                        List<User> reqUsers = new ArrayList<>();
+                                        reqUsers.add(reqUser);
+                                        requestedReviews.put(Integer.toString(id), reqUsers);
+                                    }
                                 }
                             }
                         }
@@ -964,12 +965,15 @@ public class PaperManager {
                     //Get the Paper, PCC User, and Reviews for a report and then create the report
                     Paper paper = getPaperbyID(paperID);
                     PCC pcc = (PCC)getUser(pccUsername);
-                    List<Review> pcmReviews = reviews.get(Integer.toString(paperID));
 
-                    Review pccReview = new Review(pcc, paper, pccScore, pccComments, false);
-                    Report report = new Report(paper, pcc, pcmReviews, pccReview, acceptanceStatus);
-                    reports.add(report);
-                    line = br.readLine();
+                    if(pcc != null) {
+                        List<Review> pcmReviews = reviews.get(Integer.toString(paperID));
+
+                        Review pccReview = new Review(pcc, paper, pccScore, pccComments, false);
+                        Report report = new Report(paper, pcc, pcmReviews, pccReview, acceptanceStatus);
+                        reports.add(report);
+                        line = br.readLine();
+                    }
                 }
             }
         } catch(Exception e) { //General error handling

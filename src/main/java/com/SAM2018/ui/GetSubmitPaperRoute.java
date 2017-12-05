@@ -39,10 +39,7 @@ public class GetSubmitPaperRoute implements TemplateViewRoute {
 
         //If the submission deadline has passed, set "closed" as true in the VM
         Deadline subDead = paperManager.getDeadline("Submission Deadline");
-        if(subDead != null && subDead.hasPassed())
-            vm.put("closed", true);
-        else
-            vm.put("closed", false);
+        vm.put("closed", (subDead != null && subDead.hasPassed()));
 
         return new ModelAndView(vm , "submitPaper.ftl");
     }

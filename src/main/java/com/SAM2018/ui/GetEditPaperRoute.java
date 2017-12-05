@@ -31,17 +31,14 @@ public class GetEditPaperRoute implements TemplateViewRoute {
 
     @Override
     public ModelAndView handle(Request request, Response response) {
-        Map<String, Object> vm = new HashMap<>();
-
         //Validate if users are logged in and then put page information
+        Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
-        vm.put("title", "Edit Paper");
-        vm.put("userType", paperManager.getUserType(request.session().attribute("username")));
-
-        //Get the user information
         String username = request.session().attribute("username");
-        String paperIDString = request.queryParams("pid");
+        vm.put("title", "Edit Paper");
+        vm.put("userType", paperManager.getUserType(username));
         vm.put("username", username);
+        String paperIDString = request.queryParams("pid");
 
         int paperID = UIUtils.parseIntInput(paperIDString);
         if(paperID == -2) { //route input validation (-2 means a non-integer was entered)
@@ -53,14 +50,13 @@ public class GetEditPaperRoute implements TemplateViewRoute {
         //Get the paper and return add it to the page
         Paper paper = paperManager.getPaperbyID(paperID);
 
-        if(paper == null || !paper.getContactAuthor().getUsername().equals(username)) { //If there is no paper or an invalid paper, redirect the user
+        if(paper == null || !paper.getContactAuthor().usernameMatches(username)) { //If there is no paper or an invalid paper, redirect the user
             response.redirect("/manageSubmissions");
             halt();
             return null;
         } else {
             vm.put("paper", paper);
+            return new ModelAndView(vm , "editPaper.ftl");
         }
-
-        return new ModelAndView(vm , "editPaper.ftl");
     }
 }
