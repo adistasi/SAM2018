@@ -31,7 +31,9 @@
 
     <div class="body">
         <#if username??>
-            <p>Welcome to the world of SAM 2018.</p>
+            <p>Welcome to the submission management system for the Software Architecture Mining Workshop.</p><br />
+
+            <p>If you are looking to submit, rate, or review Paper submissions, select "Paper Management" to see more paper related controls.  Administrative Users are able to access controls to manage System Deadlines and User Accounts from this page.</p>
         </#if>
     </div>
   </div>

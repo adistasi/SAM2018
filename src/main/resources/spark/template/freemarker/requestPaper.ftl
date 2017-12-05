@@ -46,7 +46,7 @@
                             </#list>
                         </div>
                         <div id="requestFormSubmitButton">
-                            <button type="submit" class="btn btn-default">Submit Request</button>
+                            <button type="submit" class="btn btn-good">Submit Request</button>
                         </div>
                     <#else>
                         <p style="text-align:center">No papers are available for review.</p>

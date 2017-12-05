@@ -43,7 +43,7 @@ input[type="submit"] {
 div.page {
     background: white;
     border: 1px solid #6ECCFF;
-    width: 710px;
+    width: 70%;
     margin: 30px auto;
 }
 
@@ -151,4 +151,67 @@ div.info {
 
 .reviews {
     margin-left: 25px;
+}
+
+.deleteUsers {
+    margin-left: 25px;
+}
+
+.subdiv {
+    margin-left: 15px;
+    width: 80%;
+}
+
+.subdiv > * {
+    padding-left: 40px;
+}
+
+.spacer {
+    margin-top: 0px;
+}
+
+.subheader {
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+
+#deleteAccounts {
+    width: 250px;
+}
+
+.deleteLI {
+    position: relative;
+    margin: 15px;
+}
+
+.delUser {
+    position: absolute;
+    right: 0px;
+}
+
+.btn-good {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.btn-alert {
+    background-color: #f44336; /* Green */
+    border: none;
+    color: white;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+#paperDeadline, #reviewDeadline, #requestDeadline, #ratingDeadline {
+    padding-left: 60px;
+    padding-bottom: 15px;
 }

@@ -33,7 +33,7 @@
 
     <div class="body">
         <#if username??>
-            <p>Welcome to the world of SAM 2018.</p>
+            <p>Welcome to the submission management system for the Software Architecture Mining Workshop.</p>
         </#if>
     </div>
   </div>

@@ -33,7 +33,7 @@ public class WebServer {
     */
     public void initialize() {
         // Configuration to serve static files
-        staticFileLocation("/public");
+        externalStaticFileLocation(System.getProperty("user.dir") + "\\src\\main\\resources\\public");
 
         // Shows the SAM game Home page.
         get("/", new GetHomeRoute(paperManager), templateEngine);

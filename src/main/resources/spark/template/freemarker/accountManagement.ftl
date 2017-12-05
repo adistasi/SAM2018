@@ -40,23 +40,32 @@
     </div>
 
     <#if requestedPermissions?size != 0>
-        <div>
-            <p>Users that have asked for Elevation:</p>
+        <div class="subdiv">
+            <h4 class="subheader">Users that have asked for Elevation:</h4>
+            <hr />
             <#list requestedPermissions as prd>
                 <p>${prd.getUser().getFullName()} is requesting to be a ${prd.getPermissionLevel()}</p>
-                <button onclick="approveUser('${prd.getUser().getUsername()}')">Approve</button>
-                <button onclick="denyUser('${prd.getUser().getUsername()}')">Deny</button>
-                <hr />
+                <div class="permButton">
+                    <button class="btn-good" onclick="approveUser('${prd.getUser().getUsername()}')">Approve</button>
+                    <button class="btn-alert" onclick="denyUser('${prd.getUser().getUsername()}')">Deny</button>
+                    <hr />
+                </div>
             </#list>
         </div>
     </#if>
 
     <#if users?size != 0>
-        <div>
-            <p>Delete Users:</p>
-            <#list users as u>
-                <button onclick="deleteUser('${u.getUsername()}')">${u.getFullName()}</button>
-            </#list>
+        <div class="subdiv" style="margin-top:50px";>
+            <h4 class="subheader">Delete Users:</h4>
+            <hr class="spacer"/>
+            <ul id="deleteAccounts">
+                <#list users as u>
+                    <li class="deleteLI">
+                        ${u.getFullName()}
+                        <button class="delUser" onclick="deleteUser('${u.getUsername()}')">Delete</button>
+                    </li>
+                </#list>
+            </ul>
         </div>
     </#if>
 

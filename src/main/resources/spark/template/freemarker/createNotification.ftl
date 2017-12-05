@@ -31,9 +31,10 @@
         <#if message??>
             <div id="message" class="${messageType}">"${message}"</div>
         </#if>
-        <p>Create a Notification</p>
-
+        <h4 class="subheader">Create a Notification</h4>
+        <hr class="spacer" />
         <form method="POST" action="/createNotification" id="createNotification" class="inputForm">
+            <br />
             <label>Recipient:</label>
             <select name="recipient">
                 <#list users as u>
@@ -43,13 +44,13 @@
 
             <br />
             <br />
-            <label>Message:</label>
-            <textarea name="message"></textarea>
+            <label style="vertical-align:top">Message:</label>
+            <textarea rows="5" cols="100" name="message"></textarea>
 
             <br />
             <br />
 
-            <button type="submit">Create</button>
+            <div style="padding-left: 105px"><button type="submit" class="btn-good">Create</button></div>
         </form>
     </div>
 

@@ -1,6 +1,7 @@
 =====USERS=====
 pcm1|||class com.SAM2018.model.PCM|||pass|||PCM|||1|||
 PCCUser|||class com.SAM2018.model.PCC|||pass|||PCC|||User|||
+testReg|||class com.SAM2018.model.User|||pass|||Testing|||Register|||
 PaperSubmitter3|||class com.SAM2018.model.User|||asdf|||Delete|||This User|||
 AdminUser|||class com.SAM2018.model.Admin|||pass|||Admin|||User|||
 pcm2|||class com.SAM2018.model.PCM|||pass|||PCM|||2|||

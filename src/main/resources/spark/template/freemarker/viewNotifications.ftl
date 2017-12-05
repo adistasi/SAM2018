@@ -39,26 +39,36 @@
         </#if>
 
         <#if notifications?size != 0>
-            <p>Your Unread Notifications:</p>
-            <#list notifications as n>
-                <p><#if n.getCreator()??>FROM: ${n.getCreator().getFirstName()} ${n.getCreator().getLastName()}<#else>SYSTEM GENERATED MESSAGE</#if></p>
-                <p>DATE: ${n.getDateGenerated()?string('MM/dd/yyyy HH:mm')}</p>
-                <p>MESSAGE: ${n.getMessage()}</p>
-                <button onclick="markAsRead(${n.getID()})">Mark as Read</button>
-                <hr />
-            </#list>
+            <div class="subdiv">
+                <h4 class="subheader">Your Unread Notifications:</h4>
+                <hr class="spacer">
+                <#list notifications as n>
+                    <div>
+                        <p><#if n.getCreator()??>FROM: ${n.getCreator().getFirstName()} ${n.getCreator().getLastName()}<#else>SYSTEM GENERATED MESSAGE</#if></p>
+                        <p>DATE: ${n.getDateGenerated()?string('MM/dd/yyyy HH:mm')}</p>
+                        <p>MESSAGE: ${n.getMessage()}</p>
+                        <div class="btnDiv"><button class='btn-good' onclick="markAsRead(${n.getID()})">Mark as Read</button></div>
+                        <hr style="padding-left:40px;"/>
+                    </div>
+                </#list>
+            </div>
         <#else>
             <p>You have no new Notifications</p>
         </#if>
 
         <#if readNotifications?size != 0>
-            <p>Your read Notifications:</p>
-            <#list readNotifications as rn>
-                <p>FROM: <#if rn.getCreator()??>${rn.getCreator().getFirstName()} ${rn.getCreator().getLastName()}<#else>System</#if></p>
-                <p>DATE: ${rn.getDateGenerated()?string('MM/dd/yyyy HH:mm')}</p>
-                <p>MESSAGE: ${rn.getMessage()}</p>
-                <hr />
-            </#list>
+            <div class="subdiv">
+                <h4 class="subheader">Your Read Notifications:</h4>
+                <hr class="spacer">
+                <#list readNotifications as rn>
+                    <div>
+                        <p>FROM: <#if rn.getCreator()??>${rn.getCreator().getFirstName()} ${rn.getCreator().getLastName()}<#else>SYSTEM GENERATED MESSAGE</#if></p>
+                        <p>DATE: ${rn.getDateGenerated()?string('MM/dd/yyyy HH:mm')}</p>
+                        <p>MESSAGE: ${rn.getMessage()}</p>
+                        <hr />
+                    </div>
+                </#list>
+            </div>
         <#else>
             <p>You have no read Notifications</p>
         </#if>

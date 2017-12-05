@@ -16,7 +16,7 @@
             <a href="/requestPaper">Request Reviews</a> |
             <a href="/logout">Logout</a> |
         <#else>
-            <a href="/home">Home</a> |
+            <a href="/">Home</a> |
             <a href="/login">Login</a>
         </#if>
     </div>
@@ -36,8 +36,8 @@
             <label for="lName">Last Name</label>
             <input type="text" class="form-control" id="lName" name="lName" placeholder="Enter your Last Name" required><br />
 
-            <label>Request Role</label>
-            <input type="radio" name="usertype" value="PCM">PCM<br>
+            <label style="text-align:left">Request Role</label>
+            <input type="radio" name="usertype" value="PCM">PCM
             <input type="radio" name="usertype" value="PCC">PCC<br>
 
             <label for="Password">Password</label>
@@ -45,7 +45,7 @@
             <label for="validPassword">Verify Password</label>
             <input type="password" class="form-control" id="validPassword" name="validPassword" placeholder="Re-enter password" required><br />
 
-        <button type="submit" class="btn btn-default"> Register</button>
+        <button type="submit" class="btn btn-good"> Register</button>
     </form>
 
 </div>

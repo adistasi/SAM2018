@@ -9,3 +9,4 @@
 7|||test|||submitter2|||tesr|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek14.pdf||| 
 8|||test34|||submitter2|||test4|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek10.pdf||| 
 9|||Paper Test Auth|||PaperSubmitter3|||Test Paper|||pdf|||3|||SubmittedPapers/DiStasi_RAWeek9.pdf||| 
+10|||Static Test|||AdminUser|||Static Paper|||pdf|||1|||SubmittedPapers/SE Grad Flowchart 2017-04-03.pdf||| 
