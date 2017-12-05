@@ -1,0 +1,1 @@
+web: java -jar target/SAM2018-1.0-SNAPSHOT.jar 
