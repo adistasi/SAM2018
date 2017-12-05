@@ -3,14 +3,11 @@ package com.SAM2018.ui;
 import com.SAM2018.appl.PaperManager;
 import com.SAM2018.model.Message;
 import com.SAM2018.model.Notification;
-import com.SAM2018.model.Report;
-import com.SAM2018.model.Review;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 

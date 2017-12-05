@@ -152,8 +152,6 @@ public class Notification {
         return saveString;
     }
 
-    /* ADDED IN REFACTORING */
-
     /**
      * Helper method to check if the inputted username is the username of the notification's recipient
      * @param _username The username we're checking

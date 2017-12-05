@@ -114,8 +114,6 @@ public class Review {
         return saveString;
     }
 
-    /* ADDED IN REFACTORING */
-
     /**
      * Helper Method to check if a given username corresponds to a the Review's Reviewer
      * @param _username The username we're checking for

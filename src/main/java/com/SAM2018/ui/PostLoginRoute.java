@@ -44,7 +44,7 @@ public class PostLoginRoute implements TemplateViewRoute{
         if(paperManager.userExists(username)){ //Don't let users register with the same username
             User user = paperManager.getUser(username);
 
-            if (user.getPassword().equals(password)){ //password check validation
+            if (user.validatePassword(password)){ //password check validation
                 session.attribute("username", username);
                 response.redirect("/");
                 halt();

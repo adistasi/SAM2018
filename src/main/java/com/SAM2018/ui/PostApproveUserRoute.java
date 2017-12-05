@@ -37,9 +37,10 @@ public class PostApproveUserRoute implements Route {
         Map<String, Object> vm = new HashMap<>();
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Elevating User");
-        String userType = paperManager.getUserType(request.session().attribute("username"));
+        String username = request.session().attribute("username");
+        String userType = paperManager.getUserType(username);
         vm.put("userType", userType);
-        User user = paperManager.getUser(request.session().attribute("username"));
+        User user = paperManager.getUser(username);
 
         if(!userType.equals("Admin")) { //Redirect any non-Admin users
             response.redirect("/manageAccounts");
@@ -47,7 +48,7 @@ public class PostApproveUserRoute implements Route {
             return null;
         }
 
-        Admin admin = (Admin)paperManager.getUser(request.session().attribute("username"));
+        Admin admin = (Admin)paperManager.getUser(username);
 
         //Get the user ID, validate it, & assign the role to the user (then send them a notification)
         String uid = request.body().substring(1, request.body().length() - 1);
@@ -58,7 +59,7 @@ public class PostApproveUserRoute implements Route {
         paperManager.updatePermissionsRequests(uid, newUser, true);
 
         User requester = paperManager.getUser(uid);
-        Notification note = new Notification(paperManager.getNotificationsSize(), user, requester, "Your request for elevated status has been approved", false);
+        Notification note = new Notification(paperManager.getNotificationsSize(), newUser, requester, "Your request for elevated status has been approved", false);
         paperManager.addNotification(note);
         paperManager.saveNotifications();
 

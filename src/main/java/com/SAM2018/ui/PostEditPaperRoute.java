@@ -107,7 +107,7 @@ public class PostEditPaperRoute implements TemplateViewRoute {
                 paper.updatePaper(authors, title, paper.getFormat(), paper.getPaperUpload());
             }
 
-            //Send notifcation and save Paper
+            //Send notification and save Paper
             String messageString = "A User (" + paper.getContactAuthor().getFullName() + ") has edited their paper entitled '" + paper.getTitle() + "'.";
             Notification notification = new Notification(paperManager.getNotificationsSize(), paper.getContactAuthor(), paperManager.getPCC(), messageString, false, new Date());
             paperManager.addNotification(notification);

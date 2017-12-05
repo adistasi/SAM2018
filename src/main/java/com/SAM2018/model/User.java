@@ -136,4 +136,13 @@ public class User {
     public boolean usernameMatches(String _username) {
         return username.equals(_username);
     }
+
+    /**
+     * Helper method to check if an inputted password matches the user's password
+     * @param _password The submitted password at login
+     * @return Whether or not the password match
+     */
+    public boolean validatePassword(String _password) {
+        return password.equals(_password);
+    }
 }

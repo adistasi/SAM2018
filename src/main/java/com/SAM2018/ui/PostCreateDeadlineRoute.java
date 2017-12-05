@@ -32,8 +32,9 @@ public class PostCreateDeadlineRoute implements TemplateViewRoute {
         vm = UIUtils.validateLoggedIn(request, response, vm);
         vm.put("title", "Deadline Management");
         String userType = paperManager.getUserType(request.session().attribute("username"));
+        String username = request.session().attribute("username");
         vm.put("userType", userType);
-        vm.put("notificationCount", paperManager.getUnreadNotificationCount(request.session().attribute("username")));
+        vm.put("notificationCount", paperManager.getUnreadNotificationCount(username));
 
         if(!userType.equals("Admin")) { //Redirect any non-admin users
             response.redirect("/manageDeadlines");
@@ -45,10 +46,9 @@ public class PostCreateDeadlineRoute implements TemplateViewRoute {
         String title = request.queryParams("title");
         String date = request.queryParams("date");
         String time = request.queryParams("time");
-        String dateTime = date + " " + time;
 
-        Admin user = (Admin)paperManager.getUser(request.session().attribute("username"));
-        user.setDeadline(dateTime, title, paperManager);
+        Admin user = (Admin)paperManager.getUser(username);
+        user.setDeadline(date + " " + time, title, paperManager);
 
         response.redirect("/manageDeadlines");
         halt();
