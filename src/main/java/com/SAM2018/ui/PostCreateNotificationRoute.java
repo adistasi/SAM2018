@@ -52,7 +52,7 @@ public class PostCreateNotificationRoute implements TemplateViewRoute {
 
         if(recipientString.length() == 0 || paperManager.getUser(recipientString) == null) {
             return UIUtils.error(vm, "A Notification must have a recipient", "createNotification.ftl");
-        } else if(message.contains("|||")) {
+        } else if(message.contains("|||") || message.length() == 0) {
             return UIUtils.error(vm, "An author may not contain the characters '|||'", "createNotification.ftl");
         }
 
