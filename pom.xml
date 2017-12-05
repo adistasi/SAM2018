@@ -129,7 +129,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>Application</mainClass>
+              <mainClass>com.SAM2018.Application</mainClass>
             </manifest>
           </archive>
         </configuration>
