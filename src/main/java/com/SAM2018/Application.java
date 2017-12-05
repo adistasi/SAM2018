@@ -10,6 +10,8 @@ import spark.template.freemarker.FreeMarkerEngine;
 
 import com.SAM2018.ui.WebServer;
 
+import static spark.Spark.*;
+
 /**
  * The entry point for the SAM2018 web application.
  *
@@ -23,6 +25,9 @@ public final class Application {
     * @param args Command line arguments; none expected.
     */
     public static void main(String[] args) {
+        //Get Heroku Assigned Port
+        port(getHerokuAssignedPort());
+
         //Create PaperManager
         final PaperManager paperManager = new PaperManager();
 
@@ -97,6 +102,14 @@ public final class Application {
 
         // other applications might have additional services to configure
         LOG.fine("SAM2018 initialization complete.");
+    }
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
 }
