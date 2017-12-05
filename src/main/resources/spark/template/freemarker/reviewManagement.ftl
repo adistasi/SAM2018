@@ -75,7 +75,7 @@
                 </form>
             </div>
         <#else>
-            <p>No requests have been submitted.</p>
+            <p style="text-align:center">No requests have been submitted.</p>
         </#if>
     </div>
 </div>

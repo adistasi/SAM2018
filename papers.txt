@@ -1,12 +1,5 @@
 =====PAPERS=====
-0|||Andy DiStasi,J.R.R Tolkein,J.K. Rowling|||submitter1|||To Kill or not to Kill: Should we murder everyone's favorite character?|||pdf|||1|||SubmittedPapers/DiStasi_Assignment1.pdf||| 
-1|||Andy DiStasi,Bill Gates,Paul Allen|||submitter1|||I was totally there: How Andy DiStasi definitely helped build Microsoft|||pdf|||1|||SubmittedPapers/DiStasi_Assignment2.pdf||| 
-2|||Andy DiStasi,Mario,Luigi|||submitter2|||Goomba Stomping: How to use your enemies to reach new Heights|||pdf|||1|||SubmittedPapers/DiStasi_Assignment3.pdf||| 
-3|||Andy DiStasi,Thomas Jefferson,George Washington|||submitter2|||I was totally there 2: How Andy DiStasi shaped the founding of America|||pdf|||1|||SubmittedPapers/DiStasi_LiteratureReview.pdf||| 
-4|||Testing Upload,Oh Please,Please Work|||submitter1|||New Upload Test|||pdf|||1|||SubmittedPapers/DiStasi_ProposalDraft.pdf||| 
-5|||for real|||submitter2|||for real!|||pdf|||3|||SubmittedPapers/DiStasi_FinalSubmission.pdf||| 
-6|||final|||submitter2|||This is the one|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek13.pdf||| 
-7|||test|||submitter2|||tesr|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek14.pdf||| 
-8|||test34|||submitter2|||test4|||pdf|||1|||SubmittedPapers/DiStasi_RAWeek10.pdf||| 
-9|||Paper Test Auth|||PaperSubmitter3|||Test Paper|||pdf|||3|||SubmittedPapers/DiStasi_RAWeek9.pdf||| 
-10|||Static Test|||AdminUser|||Static Paper|||pdf|||1|||SubmittedPapers/SE Grad Flowchart 2017-04-03.pdf||| 
+0|||JRR Tolkein,Ernest Hemingway,Mark Twain,F Scott Fitzgerald|||Submitter1|||Concolic Analysis for Detecting Malware in Android Applications|||pdf|||2|||SubmittedPapers/SamplePDF1.pdf||| 
+1|||JK Rowling,Stephen King,Jane Austen|||Submitter2|||Determination of Accuracy of Sentiment Analysis Using Neutral Words|||pdf|||1|||SubmittedPapers/SamplePDF2.pdf||| 
+2|||William Faulkner,William Shakespeare|||Submitter2|||Examining the Impact of Data Type on Speech-Based Accessible Computing|||pdf|||1|||SubmittedPapers/SamplePDF3.pdf||| 
+3|||Virginia Woolf,James Joyce|||Submitter3|||Uncertainty Detection in Self-Adaptive Systems|||pdf|||1|||SubmittedPapers/SamplePDF4.pdf||| 

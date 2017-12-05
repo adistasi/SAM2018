@@ -80,7 +80,7 @@
                         <input type="hidden" name="title" value="Review Deadline" />
                         <input id="reviewDate" name="date" type="date" />
                         <input id="reviewTime" name="time" type="time" />
-                        <button type="submit" class="btn-good"Set Deadline</button>
+                        <button type="submit" class="btn-good">Set Deadline</button>
                     </form>
                 </#if>
 

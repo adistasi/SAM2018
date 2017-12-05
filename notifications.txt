@@ -1,50 +1,16 @@
 =====NOTIFICATIONS=====
-0|||submitter1|||PCCUser|||A User (Paper Submitter 1) has submitted a Paper entitled 'To Kill or not to Kill: Should we murder everyone's favorite character?'.|||false|||2017-12-04 13:43|||
-1|||submitter1|||PCCUser|||A User (Paper Submitter 1) has submitted a Paper entitled 'I was totally there: How Andy DiStasi definitely helped build Microsoft'.|||false|||2017-12-04 13:43|||
-2|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'Goomba Stomping: How to use your enemies to reach new Heights'.|||false|||2017-12-04 13:44|||
-3|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'I was totally there 2: How Andy DiStasi shaped the founding of America'.|||false|||2017-12-04 13:45|||
-4|||System|||pcm1|||You have been assigned 'To Kill or not to Kill: Should we murder everyone's favorite character?' for Review|||false|||2017-12-04 13:48|||
-5|||System|||pcm3|||You have been assigned 'To Kill or not to Kill: Should we murder everyone's favorite character?' for Review|||false|||2017-12-04 13:48|||
-6|||System|||pcm4|||You have been assigned 'To Kill or not to Kill: Should we murder everyone's favorite character?' for Review|||false|||2017-12-04 13:48|||
-7|||System|||pcm1|||You have been assigned 'I was totally there: How Andy DiStasi definitely helped build Microsoft' for Review|||false|||2017-12-04 13:48|||
-8|||System|||pcm2|||You have been assigned 'I was totally there: How Andy DiStasi definitely helped build Microsoft' for Review|||false|||2017-12-04 13:48|||
-9|||System|||pcm4|||You have been assigned 'I was totally there: How Andy DiStasi definitely helped build Microsoft' for Review|||false|||2017-12-04 13:48|||
-10|||System|||pcm1|||You have been assigned 'Goomba Stomping: How to use your enemies to reach new Heights' for Review|||false|||2017-12-04 13:48|||
-11|||System|||pcm2|||You have been assigned 'Goomba Stomping: How to use your enemies to reach new Heights' for Review|||false|||2017-12-04 13:48|||
-12|||System|||pcm3|||You have been assigned 'Goomba Stomping: How to use your enemies to reach new Heights' for Review|||false|||2017-12-04 13:48|||
-13|||System|||pcm2|||You have been assigned 'I was totally there 2: How Andy DiStasi shaped the founding of America' for Review|||false|||2017-12-04 13:48|||
-14|||System|||pcm3|||You have been assigned 'I was totally there 2: How Andy DiStasi shaped the founding of America' for Review|||false|||2017-12-04 13:48|||
-15|||System|||pcm4|||You have been assigned 'I was totally there 2: How Andy DiStasi shaped the founding of America' for Review|||false|||2017-12-04 13:48|||
-16|||System|||PCCUser|||All PCMs have submitted their Review for 'Goomba Stomping: How to use your enemies to reach new Heights'.|||false|||2017-12-04 13:50|||
-17|||System|||submitter2|||Your paper 'Goomba Stomping: How to use your enemies to reach new Heights' has been rated by the SAM2018 Review Committee and has been Accepted.|||false|||2017-12-04 13:51|||
-18|||System|||PCCUser|||All PCMs have submitted their Review for 'To Kill or not to Kill: Should we murder everyone's favorite character?'.|||false|||2017-12-04 13:53|||
-19|||System|||pcm1|||The Reviews for 'To Kill or not to Kill: Should we murder everyone's favorite character?' need to be redone.  Please read each other's comments and then re-submit an updated Review|||false|||2017-12-04 13:53|||
-20|||System|||pcm3|||The Reviews for 'To Kill or not to Kill: Should we murder everyone's favorite character?' need to be redone.  Please read each other's comments and then re-submit an updated Review|||false|||2017-12-04 13:53|||
-21|||System|||pcm4|||The Reviews for 'To Kill or not to Kill: Should we murder everyone's favorite character?' need to be redone.  Please read each other's comments and then re-submit an updated Review|||false|||2017-12-04 13:53|||
-22|||submitter1|||PCCUser|||A User (Paper Submitter 1) has submitted a Paper entitled 'New Upload Test'.|||false|||2017-12-04 15:48|||
-23|||System|||submitter1|||A User (Paper Submitter 1) has submitted a Paper entitled 'New Upload Test'.|||false|||2017-12-04 15:48|||
-24|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'for real'.|||false|||2017-12-04 16:01|||
-25|||System|||submitter2|||Your Paper 'for real' was successfully submitted.|||false|||2017-12-04 16:01|||
-26|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'This is the one'.|||false|||2017-12-04 16:07|||
-27|||System|||submitter2|||Your Paper 'This is the one' was successfully submitted.|||false|||2017-12-04 16:07|||
-28|||submitter2|||PCCUser|||A User (Paper Submitter 2) has edited their paper entitled 'for real'.|||false|||2017-12-04 16:10|||
-29|||System|||submitter2|||Your Paper 'for real' was successfully submitted.|||false|||2017-12-04 16:10|||
-30|||submitter2|||PCCUser|||A User (Paper Submitter 2) has edited their paper entitled 'for real!'.|||false|||2017-12-04 16:10|||
-31|||System|||submitter2|||Your Paper 'for real!' was successfully submitted.|||false|||2017-12-04 16:10|||
-32|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'tesr'.|||false|||2017-12-04 16:16|||
-33|||System|||submitter2|||Your Paper 'tesr' was successfully submitted.|||false|||2017-12-04 16:16|||
-34|||submitter2|||PCCUser|||A User (Paper Submitter 2) has submitted a Paper entitled 'test4'.|||false|||2017-12-04 16:26|||
-35|||System|||submitter2|||Your Paper 'test4' was successfully submitted.|||false|||2017-12-04 16:26|||
-36|||PaperSubmitter3|||PCCUser|||A User (Delete This User) has submitted a Paper entitled 'Test Paper'.|||false|||2017-12-04 18:50|||
-37|||System|||PaperSubmitter3|||Your Paper 'Test Paper' was successfully submitted.|||false|||2017-12-04 18:50|||
-38|||PaperSubmitter3|||PCCUser|||A User (Delete This User) has edited their paper entitled 'Test Paper'.|||false|||2017-12-04 18:51|||
-39|||System|||PaperSubmitter3|||Your Paper 'Test Paper' was successfully edited.|||false|||2017-12-04 18:51|||
-40|||PaperSubmitter3|||PCCUser|||A User (Delete This User) has edited their paper entitled 'Test Paper'.|||false|||2017-12-04 18:53|||
-41|||System|||PaperSubmitter3|||Your Paper 'Test Paper' was successfully edited.|||false|||2017-12-04 18:53|||
-42|||testReg|||AdminUser|||A user (Testing Register) has registered and requested PCM status|||true|||2017-12-04 23:49|||
-43|||AdminUser|||pcm1||||||false|||2017-12-05 00:24|||
-44|||AdminUser|||testReg|||Your request for elevated status has been denied|||false|||2017-12-05 00:28|||
-45|||AdminUser|||PCCUser|||A User (Admin User) has submitted a Paper entitled 'Static Paper'.|||false|||2017-12-05 01:33|||
-46|||System|||AdminUser|||Your Paper 'Static Paper' was successfully submitted.|||false|||2017-12-05 01:33|||
-47|||System|||PCCUser|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-05 02:58|||
-48|||System|||PCCUser|||The Final Report Generation Deadline has passed, but you still have pending Reports for Papers.  Please review these papers ASAP.|||false|||2017-12-05 10:14|||
+0|||PCM1|||Admin|||A user (Raseshwari Pulle) has registered and requested PCM status|||false|||2017-12-05 16:02|||
+1|||PCM2|||Admin|||A user (Bill Gates) has registered and requested PCM status|||false|||2017-12-05 16:03|||
+2|||PCM3|||Admin|||A user (Steve Ballmer) has registered and requested PCM status|||false|||2017-12-05 16:04|||
+3|||PCM4|||Admin|||A user (Paul Allen) has registered and requested PCM status|||false|||2017-12-05 16:04|||
+4|||DeniedPCM|||Admin|||A user (Steve Jobs) has registered and requested PCM status|||false|||2017-12-05 16:04|||
+5|||Submitter1|||PCC|||A User (George Martin) has submitted a Paper entitled 'Concolic Analysis for Detecting Malware in Android Applications'.|||false|||2017-12-05 16:11|||
+6|||System|||Submitter1|||Your Paper 'Concolic Analysis for Detecting Malware in Android Applications' was successfully submitted.|||false|||2017-12-05 16:11|||
+7|||Submitter1|||PCC|||A User (George Martin) has edited their paper entitled 'Concolic Analysis for Detecting Malware in Android Applications'.|||false|||2017-12-05 16:11|||
+8|||System|||Submitter1|||Your Paper 'Concolic Analysis for Detecting Malware in Android Applications' was successfully edited.|||false|||2017-12-05 16:11|||
+9|||Submitter2|||PCC|||A User (Joanne Rowling) has submitted a Paper entitled 'Determination of Accuracy of Sentiment Analysis Using Neutral Words'.|||false|||2017-12-05 16:13|||
+10|||System|||Submitter2|||Your Paper 'Determination of Accuracy of Sentiment Analysis Using Neutral Words' was successfully submitted.|||false|||2017-12-05 16:13|||
+11|||Submitter2|||PCC|||A User (Joanne Rowling) has submitted a Paper entitled 'Examining the Impact of Data Type on Speech-Based Accessible Computing'.|||false|||2017-12-05 16:16|||
+12|||System|||Submitter2|||Your Paper 'Examining the Impact of Data Type on Speech-Based Accessible Computing' was successfully submitted.|||false|||2017-12-05 16:16|||
+13|||Submitter3|||PCC|||A User (John Tolkein) has submitted a Paper entitled 'Uncertainty Detection in Self-Adaptive Systems'.|||false|||2017-12-05 16:18|||
+14|||System|||Submitter3|||Your Paper 'Uncertainty Detection in Self-Adaptive Systems' was successfully submitted.|||false|||2017-12-05 16:18|||

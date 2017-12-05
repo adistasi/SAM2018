@@ -1,11 +1,11 @@
 =====USERS=====
-pcm1|||class com.SAM2018.model.PCM|||pass|||PCM|||1|||
-PCCUser|||class com.SAM2018.model.PCC|||pass|||PCC|||User|||
-testReg|||class com.SAM2018.model.User|||pass|||Testing|||Register|||
-PaperSubmitter3|||class com.SAM2018.model.User|||asdf|||Delete|||This User|||
-AdminUser|||class com.SAM2018.model.Admin|||pass|||Admin|||User|||
-pcm2|||class com.SAM2018.model.PCM|||pass|||PCM|||2|||
-submitter1|||class com.SAM2018.model.User|||pass|||Paper|||Submitter 1|||
-submitter2|||class com.SAM2018.model.User|||pass|||Paper|||Submitter 2|||
-pcm3|||class com.SAM2018.model.PCM|||pass|||PCM|||3|||
-pcm4|||class com.SAM2018.model.PCM|||pass|||PCM|||4|||
+PCC|||class com.SAM2018.model.PCC|||pass|||Niharika|||Dalal|||
+PCM1|||class com.SAM2018.model.User|||pass|||Raseshwari|||Pulle|||PCM
+DeniedPCM|||class com.SAM2018.model.User|||pass|||Steve|||Jobs|||PCM
+Admin|||class com.SAM2018.model.Admin|||pass|||Andy|||DiStasi|||
+PCM3|||class com.SAM2018.model.User|||pass|||Steve|||Ballmer|||PCM
+Submitter3|||class com.SAM2018.model.User|||pass|||John|||Tolkein|||
+PCM2|||class com.SAM2018.model.User|||pass|||Bill|||Gates|||PCM
+Submitter1|||class com.SAM2018.model.User|||pass|||George|||Martin|||
+PCM4|||class com.SAM2018.model.User|||pass|||Paul|||Allen|||PCM
+Submitter2|||class com.SAM2018.model.User|||pass|||Joanne|||Rowling|||
