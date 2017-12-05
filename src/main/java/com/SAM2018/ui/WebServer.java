@@ -4,13 +4,36 @@ import static spark.Spark.*;
 import com.SAM2018.appl.PaperManager;
 import spark.TemplateEngine;
 
-
 /**
  * The server that initializes the set of HTTP request handlers.
  * @author <a href='mailto:add5980@rit.edu'>Andrew DiStasi</a>
  */
 public class WebServer {
     // Constants
+    public static final String SUBMIT_PAPER_URL = "/submitPaper";
+    public static final String LOGIN_URL = "/login";
+    public static final String REGISTER_URL = "/register";
+    public static final String LOGOUT_URL = "/logout";
+    public static final String REQUEST_PAPER_URL = "/requestPaper";
+    public static final String MANAGE_REQUESTS_URL = "/manageRequests";
+    public static final String MANAGE_PAPERS_URL = "/managePapers";
+    public static final String MANAGE_SUBMISSIONS_URL = "/manageSubmissions";
+    public static final String EDIT_PAPER_URL = "/editPaper";
+    public static final String REVIEW_PAPERS_URL = "/reviewPapers";
+    public static final String REVIEW_PAPER_URL = "/reviewPaper";
+    public static final String RATE_PAPERS_URL = "/ratePapers";
+    public static final String RATE_PAPER_URL = "/ratePaper";
+    public static final String REVIEW_RATING_URL = "/reviewRating";
+    public static final String REREVIEW_PAPER_URL = "/rereviewPaper";
+    public static final String CREATE_NOTIFICATION_URL = "/createNotification";
+    public static final String VIEW_NOTIFICATIONS_URL = "/viewNotifications";
+    public static final String MARK_AS_READ_URL = "/markAsRead";
+    public static final String MANAGE_ACCOUNTS_URL = "/manageAccounts";
+    public static final String APPROVE_USER_URL = "/approveUser";
+    public static final String DENY_USER_URL = "/denyUser";
+    public static final String DELETE_USER_URL = "/deleteUser";
+    public static final String MANAGE_DEADLINES_URL = "/manageDeadlines";
+    public static final String CREATE_DEADLINE_URL = "/createDeadline";
 
     // Attributes
     private final TemplateEngine templateEngine;
@@ -38,63 +61,69 @@ public class WebServer {
         // Shows the SAM game Home page.
         get("/", new GetHomeRoute(paperManager), templateEngine);
 
-        //Show Submit Paper Page
-        get("/submitPaper", new GetSubmitPaperRoute(paperManager), templateEngine);
-        post("/submitPaper", new PostSubmitPaperRoute(paperManager), templateEngine);
+        //Shows & Posts the Submit Paper Page
+        get(SUBMIT_PAPER_URL, new GetSubmitPaperRoute(paperManager), templateEngine);
+        post(SUBMIT_PAPER_URL, new PostSubmitPaperRoute(paperManager), templateEngine);
 
-        // Shows the Login Page
-        get("/login", new GetLoginRoute(), templateEngine);
-        post("/login", new PostLoginRoute(paperManager), templateEngine);
+        // Shows & Posts the Login Page
+        get(LOGIN_URL, new GetLoginRoute(), templateEngine);
+        post(LOGIN_URL, new PostLoginRoute(paperManager), templateEngine);
 
-        // Shows the Registration Page
-        get("/register", new GetRegisterRoute(), templateEngine);
-        post("/register", new PostRegisterRoute(paperManager),templateEngine);
+        // Shows & Posts the Registration Page
+        get(REGISTER_URL, new GetRegisterRoute(), templateEngine);
+        post(REGISTER_URL, new PostRegisterRoute(paperManager),templateEngine);
 
         //Shows logout Route
-        get("/logout", new GetLogoutRoute(), templateEngine);
+        get(LOGOUT_URL, new GetLogoutRoute(), templateEngine);
 
         //Get & Submit Requests
-        get("/requestPaper", new GetRequestPaperRoute(paperManager), templateEngine);
-        post("/requestPaper",new PostRequestPaperRoute(paperManager),templateEngine);
+        get(REQUEST_PAPER_URL, new GetRequestPaperRoute(paperManager), templateEngine);
+        post(REQUEST_PAPER_URL,new PostRequestPaperRoute(paperManager),templateEngine);
 
-        //Manage requests
-        get("/manageRequests", new GetManageRequestsRoute(paperManager), templateEngine);
-        post("/manageRequests", new PostManageRequestsRoute(paperManager), templateEngine);
+        //Manage & submit requests
+        get(MANAGE_REQUESTS_URL, new GetManageRequestsRoute(paperManager), templateEngine);
+        post(MANAGE_REQUESTS_URL, new PostManageRequestsRoute(paperManager), templateEngine);
 
-        get("/managePapers", new GetManagePapersRoute(paperManager), templateEngine);
+        //Show "Home Page" for managing Papers
+        get(MANAGE_PAPERS_URL, new GetManagePapersRoute(paperManager), templateEngine);
 
-        get("/manageSubmissions", new GetManageSubmissionsRoute(paperManager), templateEngine);
+        //Show all submissions by a user
+        get(MANAGE_SUBMISSIONS_URL, new GetManageSubmissionsRoute(paperManager), templateEngine);
 
         //Lets a user edit a paper in the SAM System
-        get("/editPaper", new GetEditPaperRoute(paperManager), templateEngine);
-        post("/editPaper", new PostEditPaperRoute(paperManager), templateEngine);
+        get(EDIT_PAPER_URL, new GetEditPaperRoute(paperManager), templateEngine);
+        post(EDIT_PAPER_URL, new PostEditPaperRoute(paperManager), templateEngine);
 
-        get("/reviewPapers", new GetReviewPapersRoute(paperManager), templateEngine);
+        //View all Papers (or an individual paper that you can submit)
+        get(REVIEW_PAPERS_URL, new GetReviewPapersRoute(paperManager), templateEngine);
+        get(REVIEW_PAPER_URL, new GetReviewPaperRoute(paperManager), templateEngine);
+        post(REVIEW_PAPER_URL, new PostReviewPaperRoute(paperManager), templateEngine);
 
-        get("/reviewPaper", new GetReviewPaperRoute(paperManager), templateEngine);
-        post("/reviewPaper", new PostReviewPaperRoute(paperManager), templateEngine);
+        //View all Ratings (or view & submit a rating for an individual paper)
+        get(RATE_PAPERS_URL, new GetRatePapersRoute(paperManager), templateEngine);
+        get(RATE_PAPER_URL, new GetRatePaperRoute(paperManager), templateEngine);
+        post(RATE_PAPER_URL, new PostRatePaperRoute(paperManager), templateEngine);
 
-        get("/ratePapers", new GetRatePapersRoute(paperManager), templateEngine);
+        //Get a rating and trigger the PCMs needing to re-review with an AJAX call
+        get(REVIEW_RATING_URL, new GetReviewRatingRoute(paperManager), templateEngine);
+        post(REREVIEW_PAPER_URL, new PostRereviewPaperRoute(paperManager), JsonUtils.json());
 
-        get("/ratePaper", new GetRatePaperRoute(paperManager), templateEngine);
-        post("/ratePaper", new PostRatePaperRoute(paperManager), templateEngine);
+        //View & Post Notifications
+        get(CREATE_NOTIFICATION_URL, new GetCreateNotificationRoute(paperManager), templateEngine);
+        post(CREATE_NOTIFICATION_URL, new PostCreateNotificationRoute(paperManager), templateEngine);
 
-        get("/reviewRating", new GetReviewRatingRoute(paperManager), templateEngine);
+        //See all Notifications and mark them as read
+        get(VIEW_NOTIFICATIONS_URL, new GetViewNotificationsRoute(paperManager), templateEngine);
+        post(MARK_AS_READ_URL, new PostMarkAsReadRoute(paperManager), JsonUtils.json());
 
-        post("/rereviewPaper", new PostRereviewPaperRoute(paperManager), JsonUtils.json());
+        //Account management controls for Admin Users
+        get(MANAGE_ACCOUNTS_URL, new GetManageAccountsRoute(paperManager), templateEngine);
+        post(APPROVE_USER_URL, new PostApproveUserRoute(paperManager), JsonUtils.json());
+        post(DENY_USER_URL, new PostDenyUserRoute(paperManager), JsonUtils.json());
+        post(DELETE_USER_URL, new PostDeleteUserRoute(paperManager), JsonUtils.json());
 
-        get("/createNotification", new GetCreateNotificationRoute(paperManager), templateEngine);
-        post("/createNotification", new PostCreateNotificationRoute(paperManager), templateEngine);
-
-        get("/viewNotifications", new GetViewNotificationsRoute(paperManager), templateEngine);
-        post("/markAsRead", new PostMarkAsReadRoute(paperManager), JsonUtils.json());
-
-        get("/manageAccounts", new GetManageAccountsRoute(paperManager), templateEngine);
-        post("/approveUser", new PostApproveUserRoute(paperManager), JsonUtils.json());
-        post("/denyUser", new PostDenyUserRoute(paperManager), JsonUtils.json());
-        post("/deleteUser", new PostDeleteUserRoute(paperManager), JsonUtils.json());
-
-        get("/manageDeadlines", new GetManageDeadlinesRoute(paperManager), templateEngine);
-        post("/createDeadline", new PostCreateDeadlineRoute(paperManager), templateEngine);
+        //See & Submit Deadlines
+        get(MANAGE_DEADLINES_URL, new GetManageDeadlinesRoute(paperManager), templateEngine);
+        post(CREATE_DEADLINE_URL, new PostCreateDeadlineRoute(paperManager), templateEngine);
   }
 }
