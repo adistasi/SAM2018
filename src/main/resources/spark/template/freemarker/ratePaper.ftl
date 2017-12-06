@@ -9,7 +9,7 @@
 <body>
 <div class="page">
 
-    <h1>SAM 2018 PCM Paper Request Page</h1>
+    <h1>SAM 2018 - Rate Paper</h1>
 
     <div class="navigation">
     <#if username??>

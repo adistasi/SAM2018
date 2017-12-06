@@ -7,7 +7,7 @@
 <body>
 <div class="page">
 
-    <h1>SAM 2018 Home Page</h1>
+    <h1>SAM 2018 - Registration</h1>
 
     <div class="navigation">
         <#if username??>

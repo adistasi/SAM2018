@@ -8,7 +8,7 @@
 <body>
 <div class="page">
 
-    <h1>SAM 2018 Review Management</h1>
+    <h1>SAM 2018 - Review Management</h1>
 
     <div class="navigation">
     <#if username??>

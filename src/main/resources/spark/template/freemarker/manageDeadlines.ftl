@@ -7,7 +7,7 @@
 <body>
   <div class="page">
   
-    <h1>SAM 2018 Paper Management</h1>
+    <h1>SAM 2018 - Deadline Management</h1>
 
       <div class="navigation">
       <#if username??>
