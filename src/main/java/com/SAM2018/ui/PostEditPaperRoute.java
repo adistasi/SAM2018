@@ -81,13 +81,13 @@ public class PostEditPaperRoute implements TemplateViewRoute {
             String fileName = UIUtils.getSubmittedFileName(filePart);
 
             if(authors.size() == 0) { //Validate that they inputted authors
-                return UIUtils.error(vm, "A paper must have an author", "submitPaper.ftl");
-            } else if(rawAuthors.contains("|||") || rawAuthors.contains(",")) { //validate that no protected characters were used
-                return UIUtils.error(vm, "An author may not contain the characters '|||' or ','", "submitPaper.ftl");
+                return UIUtils.error(vm, "A paper must have an author", "editPaper.ftl");
+            } else if(rawAuthors.contains("|||")) { //validate that no protected characters were used
+                return UIUtils.error(vm, "An author may not contain the characters '|||' or ','", "editPaper.ftl");
             }
 
             if (UIUtils.validateInputText(title)) { //validate text inputs
-                return UIUtils.error(vm, "Paper information cannot be blank or contain the characters '|||", "submitPaper.ftl");
+                return UIUtils.error(vm, "Paper information cannot be blank or contain the characters '|||", "editPaper.ftl");
             }
 
             if(fileName.length() > 0) { //Only update the format and paper name if they've uploaded a new paper
